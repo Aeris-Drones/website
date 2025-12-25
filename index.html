@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AERIS | FIELD INTEL</title>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wght@100;400;700;900&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Archivo', 'sans-serif'],
+                        mono: ['JetBrains Mono', 'monospace'],
+                    },
+                    colors: {
+                        brutal: {
+                            bg: '#050505',
+                            fg: '#F0F0F0',
+                            accent: '#FF2A00', // Hyper-red/orange
+                            gray: '#1A1A1A',
+                            line: '#333333'
+                        }
+                    },
+                    fontSize: {
+                        'giant': '14vw',
+                        'mega': '8vw',
+                    },
+                    spacing: {
+                        '128': '32rem',
+                    },
+                    cursor: {
+                        'crosshair': 'crosshair',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #050505;
+            color: #F0F0F0;
+            overflow-x: hidden;
+        }
+
+        /* Brutalist Utilities */
+        .border-raw {
+            border: 1px solid #333;
+        }
+
+        .text-outline {
+            -webkit-text-stroke: 1px #333;
+            color: transparent;
+        }
+        
+        .hover-fill:hover {
+            background-color: #FF2A00;
+            color: #050505;
+            border-color: #FF2A00;
+        }
+
+        /* Marquee Animation */
+        .marquee-container {
+            overflow: hidden;
+            white-space: nowrap;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: marquee 20s linear infinite;
+        }
+        @keyframes marquee {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar { width: 0px; }
+        
+        /* Utility for outline text in architecture section if needed explicitly */
+        .outline-text {
+            -webkit-text-stroke: 1px white;
+        }
+    </style>
+<script type="importmap">
+{
+  "imports": {
+    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
+    "react/": "https://esm.sh/react@^19.2.3/",
+    "react": "https://esm.sh/react@^19.2.3",
+    "lucide-react": "https://esm.sh/lucide-react@^0.562.0"
+  }
+}
+</script>
+<link rel="stylesheet" href="/index.css">
+</head>
+<body class="antialiased selection:bg-brutal-accent selection:text-black cursor-crosshair">
+    <div id="root"></div>
+<script type="module" src="/index.tsx"></script>
+</body>
+</html>

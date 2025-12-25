@@ -6,7 +6,6 @@ import Solution from './components/Solution';
 import Architecture from './components/Architecture';
 import UseCases from './components/UseCases';
 import Comparison from './components/Comparison';
-import Team from './components/Team';
 import Video from './components/Video';
 import Contact from './components/Contact';
 
@@ -21,7 +20,6 @@ function App() {
         <Architecture />
         <UseCases />
         <Comparison />
-        <Team />
         <Video />
         <Contact />
       </main>

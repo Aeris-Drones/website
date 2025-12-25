@@ -1,20 +1,56 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Aeris Field Intelligence
 
-# Run and deploy your AI Studio app
+[![GHBanner](https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6)](https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6)
 
-This contains everything you need to run your app locally.
+## Overview
+Field intelligence for disaster response, infrastructure monitoring, and precision agriculture using autonomous swarm technology.
 
-View your app in AI Studio: https://ai.studio/apps/drive/1ayvp_5HJLqdMyoisWjKejM8a7MzfAVV3
+## Getting Started
 
-## Run Locally
+### Prerequisites
+- Node.js (v18+)
 
-**Prerequisites:**  Node.js
+### Installation
+```bash
+npm install
+```
 
+### Run Locally
+```bash
+npm run dev
+```
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+The app will be available at `http://localhost:5173`
+
+## Build for Production
+```bash
+npm run build
+```
+
+## Tech Stack
+- **React 19** - UI framework
+- **Vite** - Build tool and dev server
+- **TypeScript** - Type safety
+- **Tailwind CSS** - Styling
+- **Lucide React** - Icons
+
+## Project Structure
+\`\`\`
+├── components/
+│   ├── Architecture.tsx    # Technical architecture diagram
+│   ├── Comparison.tsx      # Capability comparison (The Stark Reality)
+│   ├── Contact.tsx          # Contact information
+│   ├── Hero.tsx             # Hero section
+│   ├── Navbar.tsx           # Navigation bar
+│   ├── Problem.tsx           # Mission problem statement
+│   ├── Solution.tsx          # Solution overview
+│   ├── Team.tsx             # Team section
+│   ├── UseCases.tsx         # Use cases (THE MISSION, Disaster Response, Infra Inspection, Precision Agriculture)
+│   └── Video.tsx            # Video showcase
+├── App.tsx                 # Main app component
+├── main.tsx                 # Entry point
+└── vite.config.ts          # Vite configuration
+\`\`\`
+
+## License
+MIT

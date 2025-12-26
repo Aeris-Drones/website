@@ -39,6 +39,9 @@
                     },
                     cursor: {
                         'crosshair': 'crosshair',
+                    },
+                    animation: {
+                        'spin-slow': 'spin 8s linear infinite',
                     }
                 }
             }
@@ -88,6 +91,13 @@
         /* Utility for outline text in architecture section if needed explicitly */
         .outline-text {
             -webkit-text-stroke: 1px white;
+        }
+        .animate-scanline {
+            animation: scanline 4s linear infinite;
+        }
+        @keyframes scanline {
+            0% { transform: translateY(-100%); }
+            100% { transform: translateY(100vh); }
         }
     </style>
 <script type="importmap">

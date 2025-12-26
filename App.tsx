@@ -1,7 +1,7 @@
 import React from 'react';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
-import Problem from './components/Problem';
+import ScrollyTelling from './components/ScrollyTelling';
 import Solution from './components/Solution';
 import Architecture from './components/Architecture';
 import UseCases from './components/UseCases';
@@ -15,7 +15,7 @@ function App() {
       <Navbar />
       <main className="pt-14">
         <Hero />
-        <Problem />
+        <ScrollyTelling />
         <Solution />
         <Architecture />
         <UseCases />

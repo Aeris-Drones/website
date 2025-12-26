@@ -15,7 +15,7 @@ const Hero: React.FC = () => {
       {/* Marquee Strip */}
       <div className="border-y border-brutal-line py-2 bg-white text-black font-mono text-sm uppercase overflow-hidden marquee-container">
         <div className="marquee-content">
-          Offline Native /// Edge Computing /// Modular Payloads /// Hierarchical Swarm /// No Cloud Dependency /// Offline Native /// Edge Computing /// Modular Payloads /// Hierarchical Swarm /// No Cloud Dependency ///
+          Funded by the 1517 Medici Fund /// Runners-Up for the 2025 Global Innovation SDGs Challenge /// Funded by the 1517 Medici Fund /// Runners-Up for the 2025 Global Innovation SDGs Challenge /// Funded by the 1517 Medici Fund /// Runners-Up for the 2025 Global Innovation SDGs Challenge ///
         </div>
       </div>
     </section>

@@ -35,11 +35,10 @@ const Contact: React.FC = () => {
 
         <div className="flex flex-col md:flex-row justify-between items-end border-t border-black pt-6 font-mono text-xs">
           <div>
-            © 2024 AERIS SYSTEMS<br />
+            © 2026 AERIS SYSTEMS<br />
             TOKYO / IOWA
           </div>
           <div className="flex gap-6 mt-4 md:mt-0">
-            <a href="#" className="hover:underline">LEGAL</a>
             <a href="#" className="hover:underline">PRIVACY</a>
           </div>
         </div>

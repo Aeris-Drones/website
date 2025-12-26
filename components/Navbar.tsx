@@ -11,12 +11,6 @@ const Navbar: React.FC = () => {
           <a href="#team" className="h-14 px-6 border-l border-brutal-line flex items-center font-mono text-xs hover:bg-white hover:text-black transition-colors uppercase">Teams</a>
           <a href="#story" className="h-14 px-6 border-l border-brutal-line flex items-center font-mono text-xs hover:bg-white hover:text-black transition-colors uppercase">Our Story</a>
           <a href="#timeline" className="h-14 px-6 border-l border-brutal-line flex items-center font-mono text-xs hover:bg-white hover:text-black transition-colors uppercase">Timeline</a>
-          <a
-            href="#contact"
-            className="h-14 px-8 border-l border-brutal-line flex items-center font-mono text-xs hover:bg-white hover:text-black transition-colors uppercase"
-          >
-            Get Intel -&gt;
-          </a>
         </div>
       </div>
     </nav>

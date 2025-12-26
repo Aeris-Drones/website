@@ -2,37 +2,65 @@ import React from 'react';
 
 const Solution: React.FC = () => {
   return (
-    <section className="border-b border-brutal-line">
-      <div className="grid grid-cols-1 lg:grid-cols-4">
-        <div className="col-span-1 lg:col-span-1 p-6 border-b lg:border-b-0 lg:border-r border-brutal-line">
-          <span className="font-mono text-xs text-brutal-accent">01 /// SOLUTION</span>
+    <section className="border-b border-brutal-line bg-brutal-bg text-brutal-fg">
+      <div className="grid grid-cols-1 lg:grid-cols-4 min-h-[80vh]">
+        {/* Sidebar Header Column */}
+        <div className="col-span-1 lg:col-span-1 p-8 md:p-12 border-b lg:border-b-0 lg:border-r border-brutal-line flex flex-col justify-center sticky top-0 h-auto lg:h-screen">
+          <div>
+            <h3 className="font-sans font-black text-4xl md:text-5xl uppercase tracking-tighter leading-none mb-6">
+              The<br/>Solution<span className="text-brutal-accent">.</span>
+            </h3>
+            <p className="font-mono text-gray-400 text-sm leading-relaxed border-l-2 border-brutal-accent pl-4">
+              Aeris replaces chaos with clarity. Fusing multi-spectral data at the edge to turn fragmented feeds into a single command map.
+            </p>
+          </div>
         </div>
+
+        {/* Features Column */}
         <div className="col-span-1 lg:col-span-3">
           {/* Feature 1 */}
-          <div className="group border-b border-brutal-line hover:bg-white hover:text-black transition-colors cursor-crosshair">
+          <div className="group border-b border-brutal-line min-h-[33vh] flex flex-col justify-center transition-colors cursor-crosshair hover:bg-white hover:text-black">
             <div className="p-12 lg:p-16 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-              <h3 className="font-sans font-black text-4xl md:text-6xl uppercase">One Map.</h3>
-              <p className="font-mono text-base max-w-md md:text-right group-hover:text-black text-gray-500">
-                Fuses thermal, LiDAR, and RGB into a single operational picture.
-              </p>
+                <h3 className="font-sans font-black text-4xl md:text-6xl uppercase">
+                    One Map.
+                </h3>
+                
+                <div className="flex flex-col items-end text-right">
+                    <span className="font-mono text-xs uppercase tracking-widest mb-2 text-brutal-accent opacity-0 group-hover:opacity-100 transition-opacity">01 /// FUSION</span>
+                    <p className="font-mono text-base max-w-md text-gray-400 group-hover:text-black">
+                        Fuses thermal, LiDAR, and RGB into a single operational picture.
+                    </p>
+                </div>
             </div>
           </div>
+
           {/* Feature 2 */}
-          <div className="group border-b border-brutal-line hover:bg-white hover:text-black transition-colors cursor-crosshair">
+          <div className="group border-b border-brutal-line min-h-[33vh] flex flex-col justify-center transition-colors cursor-crosshair hover:bg-white hover:text-black">
             <div className="p-12 lg:p-16 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-              <h3 className="font-sans font-black text-4xl md:text-6xl uppercase">No Cloud.</h3>
-              <p className="font-mono text-base max-w-md md:text-right group-hover:text-black text-gray-500">
-                Works when the internet is dead. Local mesh network.
-              </p>
+                <h3 className="font-sans font-black text-4xl md:text-6xl uppercase">
+                    No Cloud.
+                </h3>
+                <div className="flex flex-col items-end text-right">
+                    <span className="font-mono text-xs uppercase tracking-widest mb-2 text-brutal-accent opacity-0 group-hover:opacity-100 transition-opacity">02 /// OFFLINE</span>
+                    <p className="font-mono text-base max-w-md text-gray-400 group-hover:text-black">
+                        Works when the internet is dead. Local mesh network.
+                    </p>
+                </div>
             </div>
           </div>
+
           {/* Feature 3 */}
-          <div className="group hover:bg-white hover:text-black transition-colors cursor-crosshair">
+          <div className="group min-h-[33vh] flex flex-col justify-center transition-colors cursor-crosshair hover:bg-white hover:text-black">
             <div className="p-12 lg:p-16 flex flex-col md:flex-row justify-between items-start md:items-center gap-6">
-              <h3 className="font-sans font-black text-4xl md:text-6xl uppercase">Swarm IQ.</h3>
-              <p className="font-mono text-base max-w-md md:text-right group-hover:text-black text-gray-500">
-                Scouts search autonomously. Ranger relays the data.
-              </p>
+                <h3 className="font-sans font-black text-4xl md:text-6xl uppercase">
+                    Swarm IQ.
+                </h3>
+                <div className="flex flex-col items-end text-right">
+                    <span className="font-mono text-xs uppercase tracking-widest mb-2 text-brutal-accent opacity-0 group-hover:opacity-100 transition-opacity">03 /// AUTONOMY</span>
+                    <p className="font-mono text-base max-w-md text-gray-400 group-hover:text-black">
+                        Scouts search autonomously. Ranger relays the data.
+                    </p>
+                </div>
             </div>
           </div>
         </div>

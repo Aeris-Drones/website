@@ -1,4 +1,5 @@
 import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ScrollyTelling from './components/ScrollyTelling';
@@ -8,8 +9,9 @@ import UseCases from './components/UseCases';
 import Comparison from './components/Comparison';
 import Video from './components/Video';
 import Contact from './components/Contact';
+import Timeline from './components/Timeline';
 
-function App() {
+function MainPage() {
   return (
     <>
       <Navbar />
@@ -19,11 +21,21 @@ function App() {
         <Solution />
         <Architecture />
         <UseCases />
-        <Comparison />
         <Video />
         <Contact />
       </main>
     </>
+  );
+}
+
+function App() {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<MainPage />} />
+        <Route path="/timeline" element={<Timeline />} />
+      </Routes>
+    </Router>
   );
 }
 

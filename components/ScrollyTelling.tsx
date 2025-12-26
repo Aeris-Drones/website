@@ -107,13 +107,11 @@ const ScrollyTelling: React.FC = () => {
             <div className="relative w-full h-full border border-brutal-line bg-brutal-gray/20 rounded-sm overflow-hidden order-1 md:order-2 group">
                  {/* Placeholder for "Image" - Abstract Tech Visualization */}
                  <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-[80%] h-[1px] bg-brutal-accent/50 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
-                    <div className="h-[80%] w-[1px] bg-brutal-accent/50 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 animate-pulse"></div>
-                    <div className="w-32 h-32 border border-dashed border-brutal-fg/30 rounded-full animate-spin-slow"></div>
+                    <div className="w-[80%] h-[1px] bg-brutal-fg/20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+                    <div className="h-[80%] w-[1px] bg-brutal-fg/20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
+                    <div className="w-32 h-32 border border-dashed border-brutal-fg/30 rounded-full"></div>
                     <div className="absolute top-4 right-4 font-mono text-xs text-brutal-accent">ERROR: NO_SIGNAL</div>
                  </div>
-                 {/* Scanline effect */}
-                 <div className="absolute inset-0 bg-gradient-to-b from-transparent via-brutal-accent/5 to-transparent h-4 animate-scanline w-full"></div>
             </div>
         </div>
       </div>

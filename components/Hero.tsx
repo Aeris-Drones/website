@@ -2,7 +2,7 @@ import React from 'react';
 
 const Hero: React.FC = () => {
   return (
-    <section className="min-h-screen border-b border-brutal-line relative overflow-hidden">
+    <section id="hero" className="min-h-screen border-b border-brutal-line relative overflow-hidden">
       <div className="grid grid-cols-1 lg:grid-cols-12 h-full min-h-[90vh]">
         {/* Big Type Area */}
         <div className="lg:col-span-12 p-6 flex flex-col justify-end relative">

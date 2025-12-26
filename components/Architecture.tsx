@@ -14,9 +14,9 @@ const Architecture: React.FC = () => {
             <p>&gt; NAV: SLAM (GPS-DENIED)</p>
           </div>
         </div>
-        <div className="relative z-10 aspect-square border border-gray-800 rounded-full flex items-center justify-center animate-[spin_10s_linear_infinite]">
-          <div className="w-2/3 h-px bg-brutal-accent"></div>
-          <div className="h-2/3 w-px bg-brutal-accent"></div>
+        <div className="relative z-10 aspect-square border border-gray-800 rounded-full flex items-center justify-center">
+          <div className="w-full h-px bg-white/20"></div>
+          <div className="h-full w-px bg-white/20"></div>
         </div>
       </div>
 

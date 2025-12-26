@@ -8,10 +8,10 @@ const Contact: React.FC = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-24">
           <div>
             <h2 className="font-sans font-black text-6xl md:text-8xl leading-[0.85] mb-8">
-              DEPLOY<br />NOW.
+              CONTACT<br />US.
             </h2>
             <p className="font-mono text-sm max-w-sm border-l border-black pl-4">
-              We are selecting pilot partners for Q3 deployment. Fire departments and infrastructure operators priority.
+              Get in touch with our team. We're here to answer questions and discuss how Aeris can support your mission.
             </p>
           </div>
           

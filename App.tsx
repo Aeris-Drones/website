@@ -8,6 +8,7 @@ import Architecture from './components/Architecture';
 import UseCases from './components/UseCases';
 import Comparison from './components/Comparison';
 import Video from './components/Video';
+import Team from './components/Team';
 import Contact from './components/Contact';
 import Timeline from './components/Timeline';
 
@@ -22,6 +23,7 @@ function MainPage() {
         <Architecture />
         <UseCases />
         <Video />
+        <Team />
         <Contact />
       </main>
     </>

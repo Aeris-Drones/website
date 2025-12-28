@@ -202,8 +202,8 @@ const Timeline: React.FC = () => {
             --aeris-text-main: #f0f0f0;
             --aeris-text-muted: #666666;
             --aeris-accent: #ff4d00;
-            --aeris-font-head: 'Oswald', sans-serif;
-            --aeris-font-mono: 'Roboto Mono', monospace;
+            --aeris-font-head: 'Archivo', sans-serif;
+            --aeris-font-mono: 'JetBrains Mono', monospace;
             --timeline-lane-height: minmax(160px, auto);
         }
 
@@ -259,11 +259,17 @@ const Timeline: React.FC = () => {
             gap: 1rem;
         }
 
+        .section-header h2 .roadmap-title {
+            font-family: 'Archivo', sans-serif;
+            font-weight: 900;
+        }
+
         .section-header .accent-block {
             width: 16px;
             height: 16px;
             background-color: var(--aeris-accent);
         }
+
 
         .timeline-grid {
             display: grid;
@@ -713,7 +719,7 @@ const Timeline: React.FC = () => {
           <div className="section-header">
             <h2>
               <span className="accent-block"></span>
-              Strategic Roadmap
+              <span className="roadmap-title">Strategic Roadmap</span>
             </h2>
           </div>
 

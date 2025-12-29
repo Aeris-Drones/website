@@ -1,10 +1,90 @@
-import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
+import React, { useState, useRef, useEffect, useLayoutEffect, useCallback } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { X, Play } from 'lucide-react';
+import { motion, AnimatePresence } from 'framer-motion';
+import {
+    X, Play, Pause, SkipBack, SkipForward,
+    Activity, BoxSelect, Users, Cpu, Globe, Target, Wind
+} from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 import Navbar from './Navbar';
+
+// --- MILESTONES DATA ---
+const MILESTONES = [
+    {
+        id: 'M-01',
+        date: 'OCT 2024',
+        title: 'THE GENESIS',
+        subtitle: 'Skool Community Meeting',
+        desc: 'The core operatives met during a masterclass. We identified a critical gap: existing drones fail in high-wind disaster scenarios.',
+        details: 'Drafted the initial "Swarm" architecture on a napkin. The goal was infrastructure, not toys.',
+        visual: 'formation',
+        coords: '44.291, -102.1'
+    },
+    {
+        id: 'M-02',
+        date: 'MAY 2025',
+        title: 'UNIT EXPANSION',
+        subtitle: 'Roster Growth',
+        desc: 'Daniel and Lucas joined the squadron. Hardware architecture defined. First theoretical swarm logic mapped.',
+        details: 'Remote synchronization established. Two hardware engineers, one software architect, one ops lead.',
+        visual: 'schematic',
+        coords: '37.774, -122.4'
+    },
+    {
+        id: 'M-03',
+        date: 'JUL 2025',
+        title: 'THE CRUCIBLE',
+        subtitle: 'SDG Global Challenge',
+        desc: 'First public deployment of the concept. "Autonomous Response Swarms for Climate Resilience".',
+        details: 'Competed against 500+ global entries. Stress-tested the theoretical mesh network logic.',
+        visual: 'globe',
+        coords: '40.712, -74.00'
+    },
+    {
+        id: 'M-04',
+        date: 'AUG 2025',
+        title: 'VALIDATION',
+        subtitle: 'Global Runner-Up',
+        desc: 'Secured Runner-Up status. Judges noted the "brutally efficient" design compared to complex legacy systems.',
+        details: 'Proved that low-cost, expendable swarms outperform high-cost single units in simulation.',
+        visual: 'medal',
+        coords: '48.856, 2.3522'
+    },
+    {
+        id: 'M-05',
+        date: 'INTERSTITIAL',
+        title: 'JIN ABE',
+        subtitle: 'Inspiration Protocol',
+        desc: 'Honoring the legacy of Jin Abe. His philosophy on resilient infrastructure drives our safety protocols.',
+        details: 'Abe\'s work in early warning systems provided the foundational ethical framework for AERIS.',
+        visual: 'portrait',
+        coords: '35.676, 139.65'
+    },
+    {
+        id: 'M-06',
+        date: 'OCT 2025',
+        title: 'CAPITAL',
+        subtitle: '1517 Fund / Medici',
+        desc: 'Grant secured: $1,000. Resources allocated to prototype fabrication and propulsion testing.',
+        details: 'Validated by 1517 Fund\'s rigorous "sci-fi to reality" criteria. Not just money—operational validation.',
+        visual: 'chart',
+        coords: '34.052, -118.2'
+    },
+    {
+        id: 'M-07',
+        date: 'DEC 2025',
+        title: 'FIELD CONTACT',
+        subtitle: 'SAR Commander Briefing',
+        desc: 'Direct consultation with Search & Rescue leadership. "We don\'t need 4k video, we need location data."',
+        details: 'Pivoted strategy to thermal-first telemetry based on real-world trauma data.',
+        visual: 'thermal',
+        coords: '47.606, -122.3'
+    }
+];
+
+const cn = (...classes: (string | boolean | undefined)[]) => classes.filter(Boolean).join(' ');
 
 const AboutPage: React.FC = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -141,7 +221,7 @@ const AboutPage: React.FC = () => {
                         muted
                         loop
                         playsInline
-                        src="/AERIS%20Montage.mp4"
+                        src="/Copy%20of%20AERIS%20Montage.mp4"
                     />
                 </div>
 
@@ -231,6 +311,9 @@ const AboutPage: React.FC = () => {
 
             {/* Added: Plain Mission Section */}
             <PlainMissionSection />
+
+            {/* Added: Interactive Timeline Console */}
+            <TimelineConsole />
         </div>
     );
 };
@@ -290,4 +373,445 @@ const PlainMissionSection: React.FC = () => {
     );
 };
 
+// =============================================================================
+// PREMIUM COMMAND CENTER TIMELINE
+// =============================================================================
+
+// Animated floating particles
+const Particles: React.FC = () => {
+    const particles = Array.from({ length: 20 }, (_, i) => ({
+        id: i,
+        x: Math.random() * 100,
+        y: Math.random() * 100,
+        size: Math.random() * 3 + 1,
+        duration: Math.random() * 20 + 10,
+        delay: Math.random() * 5,
+    }));
+
+    return (
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
+            {particles.map((p) => (
+                <motion.div
+                    key={p.id}
+                    className="absolute rounded-full bg-[#ff3b00]/30"
+                    style={{ width: p.size, height: p.size, left: `${p.x}%`, top: `${p.y}%` }}
+                    animate={{
+                        y: [0, -100, 0],
+                        opacity: [0, 0.8, 0],
+                    }}
+                    transition={{
+                        duration: p.duration,
+                        repeat: Infinity,
+                        delay: p.delay,
+                        ease: "linear",
+                    }}
+                />
+            ))}
+        </div>
+    );
+};
+
+// Radar sweep animation
+const RadarSweep: React.FC = () => (
+    <div className="absolute inset-0 flex items-center justify-center pointer-events-none overflow-hidden opacity-30">
+        <div className="relative w-[500px] h-[500px]">
+            {[1, 2, 3].map((ring) => (
+                <div
+                    key={ring}
+                    className="absolute inset-0 border border-[#ff3b00]/20 rounded-full"
+                    style={{ transform: `scale(${ring * 0.33})` }}
+                />
+            ))}
+            <motion.div
+                className="absolute top-1/2 left-1/2 w-1/2 h-[2px] origin-left"
+                style={{ background: 'linear-gradient(90deg, #ff3b00 0%, transparent 100%)' }}
+                animate={{ rotate: 360 }}
+                transition={{ duration: 4, repeat: Infinity, ease: "linear" }}
+            />
+            <div className="absolute top-1/2 left-1/2 w-2 h-2 -translate-x-1/2 -translate-y-1/2 bg-[#ff3b00] rounded-full" />
+        </div>
+    </div>
+);
+
+// Simple text wrapper (glitch effect removed)
+const GlitchText: React.FC<{ children: string; className?: string }> = ({ children, className }) => (
+    <span className={className}>{children}</span>
+);
+
+// HUD Corner element
+const HUDCorner: React.FC<{ position: 'tl' | 'tr' | 'bl' | 'br' }> = ({ position }) => {
+    const corners = {
+        tl: 'top-0 left-0 border-t-2 border-l-2',
+        tr: 'top-0 right-0 border-t-2 border-r-2',
+        bl: 'bottom-0 left-0 border-b-2 border-l-2',
+        br: 'bottom-0 right-0 border-b-2 border-r-2',
+    };
+
+    return (
+        <motion.div
+            className={cn("absolute w-6 h-6 border-[#ff3b00]/40", corners[position])}
+            initial={{ opacity: 0, scale: 0.5 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ delay: 0.3 }}
+        />
+    );
+};
+
+// Progress ring
+const ProgressRing: React.FC<{ progress: number; size?: number }> = ({ progress, size = 56 }) => {
+    const strokeWidth = 2;
+    const radius = (size - strokeWidth) / 2;
+    const circumference = radius * 2 * Math.PI;
+    const offset = circumference - (progress / 100) * circumference;
+
+    return (
+        <svg width={size} height={size} className="transform -rotate-90">
+            <circle cx={size / 2} cy={size / 2} r={radius} stroke="rgba(255,59,0,0.15)" strokeWidth={strokeWidth} fill="none" />
+            <motion.circle
+                cx={size / 2}
+                cy={size / 2}
+                r={radius}
+                stroke="#ff3b00"
+                strokeWidth={strokeWidth}
+                fill="none"
+                strokeLinecap="round"
+                initial={{ strokeDashoffset: circumference }}
+                animate={{ strokeDashoffset: offset }}
+                transition={{ duration: 0.5 }}
+                style={{ strokeDasharray: circumference }}
+            />
+        </svg>
+    );
+};
+
+const TimelineConsole: React.FC = () => {
+    const [currentIndex, setCurrentIndex] = useState(0);
+    const [isPlayingTimeline, setIsPlayingTimeline] = useState(false);
+    const [modalOpen, setModalOpen] = useState(false);
+    const [isTransitioning, setIsTransitioning] = useState(false);
+    const currentData = MILESTONES[currentIndex];
+    const timerRef = useRef<NodeJS.Timeout | null>(null);
+    const progress = ((currentIndex + 1) / MILESTONES.length) * 100;
+
+    useEffect(() => {
+        const handleKeyDown = (e: KeyboardEvent) => {
+            if (e.key === 'ArrowRight') nextStep();
+            if (e.key === 'ArrowLeft') prevStep();
+            if (e.key === ' ') { e.preventDefault(); togglePlay(); }
+        };
+        window.addEventListener('keydown', handleKeyDown);
+        return () => window.removeEventListener('keydown', handleKeyDown);
+    }, [currentIndex, isPlayingTimeline]);
+
+    const nextStep = useCallback(() => {
+        setIsTransitioning(true);
+        setTimeout(() => {
+            setCurrentIndex((prev) => (prev + 1) % MILESTONES.length);
+            setIsTransitioning(false);
+        }, 150);
+    }, []);
+
+    const prevStep = useCallback(() => {
+        setIsTransitioning(true);
+        setTimeout(() => {
+            setCurrentIndex((prev) => (prev - 1 + MILESTONES.length) % MILESTONES.length);
+            setIsTransitioning(false);
+        }, 150);
+    }, []);
+
+    const togglePlay = useCallback(() => {
+        if (isPlayingTimeline) {
+            if (timerRef.current) clearInterval(timerRef.current);
+            setIsPlayingTimeline(false);
+        } else {
+            setIsPlayingTimeline(true);
+            timerRef.current = setInterval(() => {
+                setIsTransitioning(true);
+                setTimeout(() => {
+                    setCurrentIndex((prev) => (prev + 1) % MILESTONES.length);
+                    setIsTransitioning(false);
+                }, 150);
+            }, 5000);
+        }
+    }, [isPlayingTimeline]);
+
+    useEffect(() => {
+        return () => { if (timerRef.current) clearInterval(timerRef.current); };
+    }, []);
+
+    const jumpTo = (idx: number) => {
+        if (idx === currentIndex) return;
+        setIsTransitioning(true);
+        setTimeout(() => {
+            setCurrentIndex(idx);
+            setIsTransitioning(false);
+        }, 150);
+    };
+
+    return (
+        <section className="relative min-h-screen bg-[#030303] border-y border-white/5 overflow-hidden">
+
+            {/* Ambient Background */}
+            <div className="absolute inset-0">
+                <motion.div
+                    className="absolute inset-0 opacity-[0.02]"
+                    style={{
+                        backgroundImage: 'linear-gradient(#fff 1px, transparent 1px), linear-gradient(90deg, #fff 1px, transparent 1px)',
+                        backgroundSize: '50px 50px',
+                    }}
+                    animate={{ backgroundPosition: ['0px 0px', '50px 50px'] }}
+                    transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+                />
+                <Particles />
+                <RadarSweep />
+                <div className="absolute inset-0 opacity-[0.015] pointer-events-none"
+                    style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)' }} />
+                <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,transparent_0%,#030303_70%)]" />
+            </div>
+
+            <div className="relative z-10 max-w-7xl mx-auto px-6 py-16 lg:py-24">
+
+                {/* Header */}
+                <motion.div
+                    className="mb-12"
+                    initial={{ opacity: 0, y: 30 }}
+                    whileInView={{ opacity: 1, y: 0 }}
+                    viewport={{ once: true }}
+                    transition={{ duration: 0.8 }}
+                >
+                    <div className="flex items-center gap-3 mb-4">
+                        <motion.div
+                            className="w-2 h-2 bg-[#ff3b00] rounded-full"
+                            animate={{ opacity: [1, 0.3, 1] }}
+                            transition={{ duration: 2, repeat: Infinity }}
+                        />
+                        <span className="font-mono text-xs text-[#ff3b00] uppercase tracking-[0.3em]">Mission Chronology</span>
+                    </div>
+                    <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.85]">
+                        <GlitchText>OUR</GlitchText>
+                        <br />
+                        <span className="text-[#ff3b00]">STORY</span>
+                    </h2>
+                </motion.div>
+
+                {/* Main Display */}
+                <div className="relative">
+                    <motion.div
+                        className="relative aspect-[16/9] md:aspect-[21/9] w-full bg-black/80 backdrop-blur-sm border border-white/10 rounded-sm overflow-hidden"
+                        initial={{ opacity: 0, scale: 0.95 }}
+                        whileInView={{ opacity: 1, scale: 1 }}
+                        viewport={{ once: true }}
+                        transition={{ duration: 0.6, delay: 0.2 }}
+                    >
+                        <HUDCorner position="tl" />
+                        <HUDCorner position="tr" />
+                        <HUDCorner position="bl" />
+                        <HUDCorner position="br" />
+
+                        {/* Top Bar */}
+                        <div className="absolute top-0 left-0 right-0 h-10 bg-gradient-to-b from-black/90 to-transparent z-20 flex items-center justify-between px-6">
+                            <div className="flex items-center gap-4">
+                                <motion.div className="w-2 h-2 rounded-full bg-[#ff3b00]" animate={{ opacity: [1, 0.2, 1] }} transition={{ duration: 1, repeat: Infinity }} />
+                                <span className="font-mono text-[10px] text-white/50 uppercase tracking-widest">Log Playback</span>
+                            </div>
+                            <div className="flex items-center gap-6">
+                                <span className="font-mono text-[10px] text-white/30 uppercase">
+                                    {String(currentIndex + 1).padStart(2, '0')}/{String(MILESTONES.length).padStart(2, '0')}
+                                </span>
+                                <span className="font-mono text-[10px] text-[#ff3b00]">{currentData.coords}</span>
+                            </div>
+                        </div>
+
+                        {/* Visual Content */}
+                        <AnimatePresence mode="wait">
+                            <motion.div
+                                key={currentData.id}
+                                className="absolute inset-0 flex items-center justify-center"
+                                initial={{ opacity: 0, scale: 1.1, filter: 'blur(20px)' }}
+                                animate={{ opacity: isTransitioning ? 0 : 1, scale: 1, filter: 'blur(0px)' }}
+                                exit={{ opacity: 0, scale: 0.9, filter: 'blur(20px)' }}
+                                transition={{ duration: 0.4 }}
+                            >
+                                <div className="relative">
+                                    {currentData.visual === 'formation' && <Users className="text-[#ff3b00] w-36 h-36 md:w-56 md:h-56 opacity-10" strokeWidth={0.5} />}
+                                    {currentData.visual === 'schematic' && <Cpu className="text-[#ff3b00] w-36 h-36 md:w-56 md:h-56 opacity-10" strokeWidth={0.5} />}
+                                    {currentData.visual === 'globe' && <Globe className="text-[#ff3b00] w-36 h-36 md:w-56 md:h-56 opacity-10" strokeWidth={0.5} />}
+                                    {currentData.visual === 'medal' && <Target className="text-[#ff3b00] w-36 h-36 md:w-56 md:h-56 opacity-10" strokeWidth={0.5} />}
+                                    {currentData.visual === 'portrait' && (
+                                        <div className="w-36 h-36 md:w-56 md:h-56 border border-[#ff3b00]/20 flex items-center justify-center">
+                                            <span className="font-mono text-[#ff3b00]/30 text-xs uppercase">In Memoriam</span>
+                                        </div>
+                                    )}
+                                    {currentData.visual === 'chart' && <Activity className="text-[#ff3b00] w-36 h-36 md:w-56 md:h-56 opacity-10" strokeWidth={0.5} />}
+                                    {currentData.visual === 'thermal' && <Wind className="text-[#ff3b00] w-36 h-36 md:w-56 md:h-56 opacity-10" strokeWidth={0.5} />}
+
+                                    <motion.div
+                                        className="absolute inset-0 border border-[#ff3b00]/20 rounded-full"
+                                        animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0, 0.3] }}
+                                        transition={{ duration: 2.5, repeat: Infinity }}
+                                    />
+                                </div>
+                            </motion.div>
+                        </AnimatePresence>
+
+                        {/* Bottom Content */}
+                        <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black via-black/95 to-transparent pt-24 pb-8 px-8 md:px-12">
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={currentIndex}
+                                    initial={{ opacity: 0, y: 30 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ duration: 0.4 }}
+                                    className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6"
+                                >
+                                    <div className="max-w-xl">
+                                        <div className="flex items-center gap-4 mb-3">
+                                            <span className="px-3 py-1 bg-[#ff3b00] text-black font-mono font-bold text-xs">{currentData.date}</span>
+                                            <span className="font-mono text-xs text-[#ff3b00]/70 uppercase tracking-widest">{currentData.subtitle}</span>
+                                        </div>
+                                        <h3 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-4 leading-[0.9]">
+                                            <GlitchText>{currentData.title}</GlitchText>
+                                        </h3>
+                                        <p className="text-gray-400 text-base md:text-lg leading-relaxed">{currentData.desc}</p>
+                                    </div>
+
+                                    <motion.button
+                                        onClick={() => setModalOpen(true)}
+                                        className="group flex items-center gap-3 px-6 py-4 bg-[#ff3b00]/10 border border-[#ff3b00]/30 hover:bg-[#ff3b00] hover:border-[#ff3b00] transition-all"
+                                        whileHover={{ scale: 1.02 }}
+                                        whileTap={{ scale: 0.98 }}
+                                    >
+                                        <span className="font-mono text-xs uppercase text-white group-hover:text-black tracking-widest">Access Briefing</span>
+                                        <BoxSelect className="w-4 h-4 text-[#ff3b00] group-hover:text-black" />
+                                    </motion.button>
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
+                    </motion.div>
+
+                    {/* Controls */}
+                    <motion.div
+                        className="mt-8 flex flex-col lg:flex-row items-center gap-8"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: 0.4 }}
+                    >
+                        <div className="flex items-center gap-6">
+                            <div className="relative">
+                                <ProgressRing progress={progress} />
+                                <div className="absolute inset-0 flex items-center justify-center">
+                                    <span className="font-mono text-[10px] text-[#ff3b00]">{Math.round(progress)}%</span>
+                                </div>
+                            </div>
+
+                            <div className="flex items-center gap-2">
+                                <motion.button onClick={prevStep} className="p-3 border border-white/10 hover:border-[#ff3b00] text-white transition-all" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                    <SkipBack className="w-4 h-4" />
+                                </motion.button>
+                                <motion.button
+                                    onClick={togglePlay}
+                                    className={cn("p-4 border transition-all", isPlayingTimeline ? "border-[#ff3b00] bg-[#ff3b00] text-black" : "border-[#ff3b00]/50 bg-[#ff3b00]/10 text-white hover:bg-[#ff3b00] hover:text-black")}
+                                    whileHover={{ scale: 1.05 }}
+                                    whileTap={{ scale: 0.95 }}
+                                >
+                                    {isPlayingTimeline ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
+                                </motion.button>
+                                <motion.button onClick={nextStep} className="p-3 border border-white/10 hover:border-[#ff3b00] text-white transition-all" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                    <SkipForward className="w-4 h-4" />
+                                </motion.button>
+                            </div>
+                        </div>
+
+                        {/* Scrubber */}
+                        <div className="flex-1 w-full">
+                            <div className="relative h-16 flex items-center">
+                                <div className="absolute left-0 right-0 top-1/2 h-px bg-white/10" />
+                                <motion.div
+                                    className="absolute left-0 top-1/2 h-[2px] bg-gradient-to-r from-[#ff3b00] to-[#ff3b00]/50"
+                                    initial={false}
+                                    animate={{ width: `${(currentIndex / (MILESTONES.length - 1)) * 100}%` }}
+                                    transition={{ type: "spring", stiffness: 200, damping: 25 }}
+                                />
+
+                                <div className="relative w-full flex justify-between">
+                                    {MILESTONES.map((m, idx) => (
+                                        <motion.button
+                                            key={idx}
+                                            onClick={() => jumpTo(idx)}
+                                            className="group relative flex flex-col items-center focus:outline-none"
+                                            whileHover={{ scale: 1.1 }}
+                                        >
+                                            <motion.div
+                                                className={cn(
+                                                    "w-3 h-3 rotate-45 border-2 transition-all relative",
+                                                    idx === currentIndex ? "bg-[#ff3b00] border-[#ff3b00] scale-125" : idx < currentIndex ? "bg-[#ff3b00]/50 border-[#ff3b00]/50" : "bg-black border-white/20 group-hover:border-[#ff3b00]"
+                                                )}
+                                                animate={idx === currentIndex ? { boxShadow: ['0 0 0px #ff3b00', '0 0 15px #ff3b00', '0 0 0px #ff3b00'] } : {}}
+                                                transition={{ duration: 1.5, repeat: Infinity }}
+                                            />
+                                            <span className={cn(
+                                                "absolute top-6 font-mono text-[9px] uppercase tracking-wider whitespace-nowrap transition-all",
+                                                idx === currentIndex ? "text-[#ff3b00] opacity-100" : "text-white/30 opacity-0 group-hover:opacity-100"
+                                            )}>
+                                                {m.date}
+                                            </span>
+                                        </motion.button>
+                                    ))}
+                                </div>
+                            </div>
+                        </div>
+                    </motion.div>
+
+                    <div className="mt-4 flex justify-center">
+                        <span className="font-mono text-[10px] text-white/20 uppercase tracking-widest">← → Navigate • Space Play/Pause</span>
+                    </div>
+                </div>
+            </div>
+
+            {/* Modal */}
+            <AnimatePresence>
+                {modalOpen && (
+                    <motion.div className="fixed inset-0 z-[100] flex items-center justify-center p-4" initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}>
+                        <motion.div className="absolute inset-0 bg-black/95 backdrop-blur-md" onClick={() => setModalOpen(false)} />
+                        <motion.div
+                            className="relative max-w-2xl w-full bg-[#0a0a0a] border border-[#ff3b00]/30 overflow-hidden"
+                            initial={{ opacity: 0, scale: 0.9, y: 40 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 40 }}
+                            transition={{ type: "spring", damping: 25 }}
+                        >
+                            <div className="absolute inset-0 opacity-[0.02] pointer-events-none" style={{ backgroundImage: 'repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px)' }} />
+
+                            <div className="relative p-6 border-b border-white/10">
+                                <button onClick={() => setModalOpen(false)} className="absolute top-4 right-4 p-2 text-white/40 hover:text-[#ff3b00] transition-colors"><X className="w-5 h-5" /></button>
+                                <div className="flex items-center gap-3 mb-2">
+                                    <motion.div className="w-2 h-2 bg-[#ff3b00] rounded-full" animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1, repeat: Infinity }} />
+                                    <span className="font-mono text-[10px] text-[#ff3b00] uppercase tracking-[0.2em]">Classified // {currentData.id}</span>
+                                </div>
+                                <h3 className="text-3xl font-black text-white uppercase tracking-tight">{currentData.title}</h3>
+                                <p className="font-mono text-xs text-white/40 mt-1">{currentData.date} • {currentData.subtitle}</p>
+                            </div>
+
+                            <div className="p-6">
+                                <p className="text-white/80 leading-relaxed text-lg">{currentData.details}</p>
+                            </div>
+
+                            <div className="px-6 py-4 border-t border-white/10 flex justify-between items-center bg-black/50">
+                                <div className="flex items-center gap-2">
+                                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
+                                    <span className="font-mono text-[10px] text-white/40 uppercase tracking-widest">Encrypted</span>
+                                </div>
+                                <span className="font-mono text-[10px] text-[#ff3b00] uppercase tracking-widest">Authorized</span>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </section>
+    );
+};
+
 export default AboutPage;
+

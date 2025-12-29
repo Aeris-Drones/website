@@ -105,13 +105,11 @@ const ScrollyTelling: React.FC = () => {
 
             {/* Visual Side */}
             <div className="relative w-full h-full border border-brutal-line bg-brutal-gray/20 rounded-sm overflow-hidden order-1 md:order-2 group">
-                 {/* Placeholder for "Image" - Abstract Tech Visualization */}
-                 <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-[80%] h-[1px] bg-brutal-fg/20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-                    <div className="h-[80%] w-[1px] bg-brutal-fg/20 absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"></div>
-                    <div className="w-32 h-32 border border-dashed border-brutal-fg/30 rounded-full"></div>
-                    <div className="absolute top-4 right-4 font-mono text-xs text-brutal-accent">ERROR: NO_SIGNAL</div>
-                 </div>
+                 <img 
+                   src="/date_dark.jpg" 
+                   alt="Data in the dark" 
+                   className="w-full h-full object-cover"
+                 />
             </div>
         </div>
       </div>
@@ -124,13 +122,11 @@ const ScrollyTelling: React.FC = () => {
          <div className="grid grid-cols-1 md:grid-cols-2 w-full max-w-7xl h-[60vh] gap-8 md:gap-16 items-center">
             {/* Visual Side */}
             <div className="relative w-full h-full border border-brutal-accent/30 bg-brutal-accent/5 rounded-sm overflow-hidden order-1">
-                {/* Placeholder for "Image" - Abstract Tech Visualization */}
-                <div className="absolute inset-0 flex items-center justify-center">
-                    <div className="w-full h-full bg-[repeating-linear-gradient(45deg,transparent,transparent_10px,rgba(255,42,0,0.1)_10px,rgba(255,42,0,0.1)_20px)]"></div>
-                    <div className="absolute font-sans font-black text-9xl text-brutal-accent/20 select-none">!!!</div>
-                </div>
-                 {/* Red Glow */}
-                 <div className="absolute bottom-0 w-full h-1/2 bg-gradient-to-t from-brutal-accent/20 to-transparent"></div>
+                <img 
+                  src="/mistake.jpg" 
+                  alt="Mistakes" 
+                  className="w-full h-full object-cover"
+                />
             </div>
 
             {/* Text Side */}

@@ -1,0 +1,11 @@
+Model Information:
+* title:	Iranian Shahed-136 military drone
+* source:	https://sketchfab.com/3d-models/iranian-shahed-136-military-drone-af8ac3d45ade494fb280c99922513ae2
+* author:	Chenzoss (https://sketchfab.com/Chenzoss)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Iranian Shahed-136 military drone" (https://sketchfab.com/3d-models/iranian-shahed-136-military-drone-af8ac3d45ade494fb280c99922513ae2) by Chenzoss (https://sketchfab.com/Chenzoss) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)

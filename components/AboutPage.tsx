@@ -4,11 +4,13 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     X, Play, Pause, SkipBack, SkipForward,
-    Activity, BoxSelect, Users, Cpu, Globe, Target, Wind
+    Activity, BoxSelect, Users, Cpu, Globe, Target, Wind,
+    ChevronRight, Mail, ExternalLink, Plus
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 import Navbar from './Navbar';
+import Contact from './Contact';
 
 // --- MILESTONES DATA ---
 const MILESTONES = [
@@ -67,7 +69,7 @@ const MILESTONES = [
         date: 'OCT 2025',
         title: 'CAPITAL',
         subtitle: '1517 Fund / Medici',
-        desc: 'Grant secured: $1,000. Resources allocated to prototype fabrication and propulsion testing.',
+        desc: 'Grant secured: $50,000+. Resources allocated to prototype fabrication and propulsion testing.',
         details: 'Validated by 1517 Fund\'s rigorous "sci-fi to reality" criteria. Not just money—operational validation.',
         visual: 'chart',
         coords: '34.052, -118.2'
@@ -81,6 +83,130 @@ const MILESTONES = [
         details: 'Pivoted strategy to thermal-first telemetry based on real-world trauma data.',
         visual: 'thermal',
         coords: '47.606, -122.3'
+    }
+];
+
+// --- TEAM DATA (The Founders) ---
+const TEAM = [
+    {
+        id: 'T-01',
+        name: 'Aahan Batra',
+        role: 'Operations & Finance',
+        initials: 'AB',
+        image: '/aahan.png',
+        bio: 'Leads operations and finance, ensuring the project\'s financial sustainability and outreach. Connected with Saketh through the Skool community, united by a shared concern about natural disaster response.',
+        responsibilities: ['Operations', 'Finance', 'Outreach']
+    },
+    {
+        id: 'T-02',
+        name: 'Saketh Baddam',
+        role: 'Software Lead',
+        initials: 'S',
+        image: '/saketh.png',
+        bio: 'Builds the complex software that powers the drone\'s mission capabilities. Develops Aeris OS, the edge-native software stack that runs the entire system.',
+        responsibilities: ['Software Architecture', 'Aeris OS', 'AI/ML Systems']
+    },
+    {
+        id: 'T-03',
+        name: 'Daniel Umemezie',
+        role: 'Systems Design',
+        initials: 'D',
+        image: '/daniel.png',
+        bio: 'Designs the core systems that allow drones to function intelligently and reliably. Responsible for coordination, deconfliction, and system architecture.',
+        responsibilities: ['Systems Design', 'Coordination Logic', 'Integration']
+    },
+    {
+        id: 'T-04',
+        name: 'Lucas Halvorsen',
+        role: 'Hardware Lead',
+        initials: 'L',
+        image: '/lucas.png',
+        bio: 'Develops the drone\'s physical design and field-ready structure. Focuses on ruggedized platforms that can withstand extreme conditions.',
+        responsibilities: ['Hardware Design', 'Airframe', 'Manufacturing']
+    }
+];
+
+// --- ADVISORS DATA ---
+const ADVISORS = [
+    {
+        id: 'A-01',
+        name: 'Jin Abe',
+        role: 'In Memoriam — Inspiration',
+        image: '/Mr. Jin Abe.png',
+        note: 'If such a system had existed—if that kind of information had been available—we could have been far better prepared. The drone can enter rubble, create maps, and provide vital information to rescue teams.'
+    },
+    {
+        id: 'A-02',
+        name: 'Jeremy Wilkinson',
+        role: 'Firefighter / Paramedic',
+        image: '/Mr. Jeremy Wilkinson.jpg',
+        bio: 'Firefighter/Paramedic at the Plano Fire Department in Plano, Texas. Brings direct field experience in rapid response and emergency operations to the AERIS mission.'
+    },
+    {
+        id: 'A-03',
+        name: 'Joe Cieslik',
+        role: 'Defense Tech Entrepreneur',
+        image: '/Mr. Joe Cieslik.png',
+        bio: 'Serial defense technology entrepreneur and self-taught software engineer. Previously at LaunchDarkly and COO of Modern Intelligence. Founder of Aeon and Longinus. Advisor to Foratus and AERIS Drones.'
+    },
+    {
+        id: 'A-04',
+        name: 'Alex Schwarzkopf',
+        role: 'Venture Partner, 1517 Fund',
+        image: '/Mr. Alex Schwarzkopf.jpg',
+        bio: 'Venture Partner at 1517 Fund, backing early-stage founders. Co-founded Pillar Technologies (construction sensors). Facilitated AERIS Drones\' first investment—a grant from the 1517 Medici Fund.'
+    },
+    {
+        id: 'A-05',
+        name: 'Brandon Turk',
+        role: 'Co-Founder, Rocket Drones',
+        image: '/Mr. Brandon Turk.jpg',
+        bio: 'Community Engagement Director and Co-founder of Rocket Drones. Self-taught aviation professional specializing in drone infrastructure inspections. Revolutionizing hands-on drone education.'
+    },
+    {
+        id: 'A-06',
+        name: 'Christopher Boyer',
+        role: 'Exec. Director, NASAR',
+        image: '/unnamed (3).webp',
+        bio: 'Executive Director of the National Association for Search and Rescue (NASAR). 30+ years in SAR and emergency management. Court-recognized expert on scent behavior for search dogs.'
+    }
+];
+
+// --- QUOTES DATA ---
+const QUOTES = [
+    {
+        id: 'Q-01',
+        text: '"I definitely see this as highly beneficial—having eyes on the scene beforehand. Before the fire department even arrives, the drone is already there."',
+        author: 'Jeremy Wilkinson',
+        context: 'Chief of USAR, Iowa'
+    },
+    {
+        id: 'Q-02',
+        text: '"If such a system had existed—if that kind of information had been available—we could have been far better prepared."',
+        author: 'Jin Abe',
+        context: 'March 11th Tsunami Survivor'
+    },
+    {
+        id: 'Q-03',
+        text: '"From a helping people perspective, search and rescue is certainly it. Nobody\'s getting hurt, you\'re saving somebody\'s life, this is good."',
+        author: 'Joe Cieslik',
+        context: 'Aerospace Entrepreneur'
+    }
+];
+
+// --- VALUES DATA ---
+const VALUES = [
+    {
+        title: 'MISSION CRITICAL',
+        desc: 'We do not build toys. We build infrastructure for the worst days of your life.'
+    },
+    {
+        title: 'SPEED IS SAFETY',
+        desc: 'In disaster, uncertainty is the enemy. We trade perfect data for fast, actionable intelligence.'
+    },
+    {
+        title: 'EDGE NATIVE',
+        desc: 'The swarm is the server. Intelligent autonomy that persists when the connection dies.'
     }
 ];
 
@@ -156,10 +282,10 @@ const AboutPage: React.FC = () => {
                     y: 0,
                     opacity: 1,
                     filter: "blur(0px)",
-                    duration: 1.5,
-                    stagger: 0.05,
-                    ease: "power4.out",
-                    delay: 0.5
+                    duration: 0.6,
+                    ease: "power2.out",
+                    stagger: 0.03,
+                    delay: 0.2
                 }
             );
 
@@ -309,11 +435,24 @@ const AboutPage: React.FC = () => {
                 )}
             </section>
 
+
             {/* Added: Plain Mission Section */}
             <PlainMissionSection />
 
             {/* Added: Interactive Timeline Console */}
             <TimelineConsole />
+
+            {/* Team Section (includes Advisors) */}
+            <TeamSection />
+
+            {/* Values Section */}
+            <ValuesSection />
+
+            {/* Testimonials Section */}
+            <TestimonialsSection />
+
+            {/* Contact Section */}
+            <Contact />
         </div>
     );
 };
@@ -579,14 +718,7 @@ const TimelineConsole: React.FC = () => {
                     viewport={{ once: true }}
                     transition={{ duration: 0.8 }}
                 >
-                    <div className="flex items-center gap-3 mb-4">
-                        <motion.div
-                            className="w-2 h-2 bg-[#ff3b00] rounded-full"
-                            animate={{ opacity: [1, 0.3, 1] }}
-                            transition={{ duration: 2, repeat: Infinity }}
-                        />
-                        <span className="font-mono text-xs text-[#ff3b00] uppercase tracking-[0.3em]">Mission Chronology</span>
-                    </div>
+
                     <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter leading-[0.85]">
                         <GlitchText>OUR</GlitchText>
                         <br />
@@ -601,6 +733,7 @@ const TimelineConsole: React.FC = () => {
                         initial={{ opacity: 0, scale: 0.95 }}
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
+                        style={{ willChange: 'transform, opacity' }}
                         transition={{ duration: 0.6, delay: 0.2 }}
                     >
                         <HUDCorner position="tl" />
@@ -608,17 +741,65 @@ const TimelineConsole: React.FC = () => {
                         <HUDCorner position="bl" />
                         <HUDCorner position="br" />
 
+                        {/* Background Images for All Slides */}
+                        {currentData.visual === 'formation' && (
+                            <div className="absolute inset-0 opacity-35">
+                                <div className="flex h-full">
+                                    <img src="/aahan.png" alt="Aahan" className="w-1/2 h-full object-cover grayscale" />
+                                    <img src="/saketh.png" alt="Saketh" className="w-1/2 h-full object-cover grayscale" />
+                                </div>
+                            </div>
+                        )}
+                        {currentData.visual === 'schematic' && (
+                            <div className="absolute inset-0 opacity-35">
+                                <div className="flex h-full">
+                                    <img src="/daniel.png" alt="Daniel" className="w-1/2 h-full object-cover grayscale" style={{ objectPosition: 'center 15%' }} />
+                                    <img src="/lucas.png" alt="Lucas" className="w-1/2 h-full object-cover grayscale" style={{ objectPosition: 'center 15%' }} />
+                                </div>
+                            </div>
+                        )}
+                        {currentData.visual === 'globe' && (
+                            <div className="absolute inset-0 opacity-35">
+                                <img
+                                    src="/Comm. Material.png"
+                                    alt="SDG Challenge Background"
+                                    className="w-full h-full object-cover grayscale"
+                                />
+                            </div>
+                        )}
+                        {currentData.visual === 'medal' && (
+                            <div className="absolute inset-0 opacity-35">
+                                <img
+                                    src="/validate.png"
+                                    alt="Validation Background"
+                                    className="w-full h-full object-cover grayscale"
+                                />
+                            </div>
+                        )}
+                        {currentData.visual === 'portrait' && (
+                            <div className="absolute inset-0 opacity-35">
+                                <img
+                                    src="/jan abe.png"
+                                    alt="Jin Abe Background"
+                                    className="w-full h-full object-cover grayscale"
+                                />
+                            </div>
+                        )}
+                        {currentData.visual === 'chart' && (
+                            <div className="absolute inset-0 opacity-35">
+                                <img
+                                    src="/1517.jpg"
+                                    alt="1517 Fund Background"
+                                    className="w-full h-full object-cover grayscale"
+                                />
+                            </div>
+                        )}
+
                         {/* Top Bar */}
                         <div className="absolute top-0 left-0 right-0 h-10 bg-gradient-to-b from-black/90 to-transparent z-20 flex items-center justify-between px-6">
                             <div className="flex items-center gap-4">
                                 <motion.div className="w-2 h-2 rounded-full bg-[#ff3b00]" animate={{ opacity: [1, 0.2, 1] }} transition={{ duration: 1, repeat: Infinity }} />
                                 <span className="font-mono text-[10px] text-white/50 uppercase tracking-widest">Log Playback</span>
-                            </div>
-                            <div className="flex items-center gap-6">
-                                <span className="font-mono text-[10px] text-white/30 uppercase">
-                                    {String(currentIndex + 1).padStart(2, '0')}/{String(MILESTONES.length).padStart(2, '0')}
-                                </span>
-                                <span className="font-mono text-[10px] text-[#ff3b00]">{currentData.coords}</span>
                             </div>
                         </div>
 
@@ -632,25 +813,7 @@ const TimelineConsole: React.FC = () => {
                                 exit={{ opacity: 0, scale: 0.9, filter: 'blur(20px)' }}
                                 transition={{ duration: 0.4 }}
                             >
-                                <div className="relative">
-                                    {currentData.visual === 'formation' && <Users className="text-[#ff3b00] w-36 h-36 md:w-56 md:h-56 opacity-10" strokeWidth={0.5} />}
-                                    {currentData.visual === 'schematic' && <Cpu className="text-[#ff3b00] w-36 h-36 md:w-56 md:h-56 opacity-10" strokeWidth={0.5} />}
-                                    {currentData.visual === 'globe' && <Globe className="text-[#ff3b00] w-36 h-36 md:w-56 md:h-56 opacity-10" strokeWidth={0.5} />}
-                                    {currentData.visual === 'medal' && <Target className="text-[#ff3b00] w-36 h-36 md:w-56 md:h-56 opacity-10" strokeWidth={0.5} />}
-                                    {currentData.visual === 'portrait' && (
-                                        <div className="w-36 h-36 md:w-56 md:h-56 border border-[#ff3b00]/20 flex items-center justify-center">
-                                            <span className="font-mono text-[#ff3b00]/30 text-xs uppercase">In Memoriam</span>
-                                        </div>
-                                    )}
-                                    {currentData.visual === 'chart' && <Activity className="text-[#ff3b00] w-36 h-36 md:w-56 md:h-56 opacity-10" strokeWidth={0.5} />}
-                                    {currentData.visual === 'thermal' && <Wind className="text-[#ff3b00] w-36 h-36 md:w-56 md:h-56 opacity-10" strokeWidth={0.5} />}
-
-                                    <motion.div
-                                        className="absolute inset-0 border border-[#ff3b00]/20 rounded-full"
-                                        animate={{ scale: [1, 1.15, 1], opacity: [0.3, 0, 0.3] }}
-                                        transition={{ duration: 2.5, repeat: Infinity }}
-                                    />
-                                </div>
+                                {/* Visual content removed - backgrounds are now displayed */}
                             </motion.div>
                         </AnimatePresence>
 
@@ -798,12 +961,8 @@ const TimelineConsole: React.FC = () => {
                                 <p className="text-white/80 leading-relaxed text-lg">{currentData.details}</p>
                             </div>
 
-                            <div className="px-6 py-4 border-t border-white/10 flex justify-between items-center bg-black/50">
-                                <div className="flex items-center gap-2">
-                                    <div className="w-1.5 h-1.5 bg-green-500 rounded-full animate-pulse" />
-                                    <span className="font-mono text-[10px] text-white/40 uppercase tracking-widest">Encrypted</span>
-                                </div>
-                                <span className="font-mono text-[10px] text-[#ff3b00] uppercase tracking-widest">Authorized</span>
+                            <div className="px-6 py-4 border-t border-white/10 flex justify-end items-center bg-black/50">
+                                <span className="font-mono text-[10px] text-[#ff3b00] uppercase tracking-widest">Authorized Access</span>
                             </div>
                         </motion.div>
                     </motion.div>
@@ -813,5 +972,258 @@ const TimelineConsole: React.FC = () => {
     );
 };
 
-export default AboutPage;
+// =============================================================================
+// TEAM SECTION (Original Brutalist Style)
+// =============================================================================
+// =============================================================================
+// TEAM SECTION (Interactive Brutalist Style)
+// =============================================================================
+const TeamSection: React.FC = () => {
+    const [selectedMember, setSelectedMember] = useState<any | null>(null);
 
+    return (
+        <section className="border-t border-white/10 bg-[#050505] relative">
+            {/* Section Header */}
+            <div className="border-b border-white/10 p-8 md:p-12">
+                <h2 className="font-sans font-black text-4xl md:text-5xl uppercase tracking-tight text-white">
+                    Team<span className="text-[#ff3b00]">.</span>
+                </h2>
+            </div>
+
+            {/* Core Team Grid */}
+            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-b border-white/10">
+                {TEAM.map((member, idx) => (
+                    <motion.div
+                        key={member.id}
+                        className={cn(
+                            "group relative overflow-hidden border-b md:border-b-0 border-white/10 hover:bg-white/5 transition-colors cursor-pointer",
+                            idx < TEAM.length - 1 && "lg:border-r"
+                        )}
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: idx * 0.1 }}
+                        onClick={() => setSelectedMember(member)}
+                    >
+                        {/* Image */}
+                        <div className="aspect-square overflow-hidden bg-black relative">
+                            <img
+                                src={member.image}
+                                alt={member.name}
+                                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                                style={
+                                    member.name === 'Daniel Umemezie' || member.name === 'Lucas Halvorsen' || member.name === 'Aahan Batra'
+                                        ? { objectPosition: 'center 15%' }
+                                        : {}
+                                }
+                            />
+                            <div className="absolute inset-0 bg-[#ff3b00]/20 opacity-0 group-hover:opacity-100 transition-opacity mix-blend-overlay" />
+                        </div>
+                        {/* Info */}
+                        <div className="p-6 md:p-8 relative">
+                            <span className="font-mono text-xs text-gray-500 block mb-2 uppercase tracking-widest">{member.role}</span>
+                            <span className="font-sans font-black text-xl uppercase text-white">{member.name}</span>
+                            <Plus className="absolute top-8 right-8 w-4 h-4 text-white/20 group-hover:text-[#ff3b00] opacity-0 group-hover:opacity-100 transition-all" />
+                        </div>
+                    </motion.div>
+                ))}
+            </div>
+
+            {/* Advisors Header */}
+            <div className="border-b border-white/10 p-8 md:p-12 bg-white/[0.02]">
+                <h3 className="font-sans font-black text-2xl md:text-3xl uppercase tracking-tight text-white">
+                    Advisors<span className="text-[#ff3b00]">.</span>
+                </h3>
+                <p className="font-mono text-sm text-gray-500 mt-2">Industry experts guiding our mission</p>
+            </div>
+
+            {/* Advisors Grid */}
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+                {ADVISORS.map((advisor, index) => (
+                    <motion.div
+                        key={advisor.id}
+                        className={cn(
+                            "group relative overflow-hidden border-b lg:border-b-0 border-white/10 hover:bg-white/5 transition-colors cursor-pointer",
+                            index < ADVISORS.length - 1 && "lg:border-r"
+                        )}
+                        initial={{ opacity: 0, y: 30 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: index * 0.1 }}
+                        onClick={() => setSelectedMember(advisor)}
+                    >
+                        {/* Image */}
+                        <div className="aspect-square overflow-hidden bg-black relative">
+                            <img
+                                src={advisor.image}
+                                alt={advisor.name}
+                                className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                            />
+                            <div className="absolute inset-0 bg-[#ff3b00]/20 opacity-0 group-hover:opacity-100 transition-opacity mix-blend-overlay" />
+                        </div>
+                        {/* Info */}
+                        <div className="p-6 md:p-8 relative">
+                            <span className="font-mono text-xs text-[#ff3b00] block mb-2 uppercase tracking-widest">{advisor.role}</span>
+                            <span className="font-sans font-bold text-lg block text-white">{advisor.name}</span>
+                            <Plus className="absolute top-8 right-8 w-4 h-4 text-white/20 group-hover:text-[#ff3b00] opacity-0 group-hover:opacity-100 transition-all" />
+                        </div>
+                    </motion.div>
+                ))}
+            </div>
+
+            {/* Unified Modal */}
+            <AnimatePresence>
+                {selectedMember && (
+                    <motion.div
+                        className="fixed inset-0 z-[100] flex items-center justify-center p-4"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        exit={{ opacity: 0 }}
+                    >
+                        <motion.div
+                            className="absolute inset-0 bg-black/95 backdrop-blur-md"
+                            onClick={() => setSelectedMember(null)}
+                        />
+                        <motion.div
+                            className="relative max-w-4xl w-full bg-[#0a0a0a] border border-[#ff3b00]/30 overflow-hidden"
+                            initial={{ opacity: 0, scale: 0.9, y: 40 }}
+                            animate={{ opacity: 1, scale: 1, y: 0 }}
+                            exit={{ opacity: 0, scale: 0.9, y: 40 }}
+                        >
+                            <button
+                                onClick={() => setSelectedMember(null)}
+                                className="absolute top-4 right-4 p-2 text-white/40 hover:text-[#ff3b00] transition-colors z-10"
+                            >
+                                <X className="w-5 h-5" />
+                            </button>
+
+                            <div className="flex flex-col md:flex-row">
+                                <div className="md:w-1/3 bg-black border-r border-white/10 relative min-h-[250px] md:min-h-full">
+                                    {selectedMember.image ? (
+                                        <img
+                                            src={selectedMember.image}
+                                            alt={selectedMember.name}
+                                            className="w-full h-full object-cover grayscale"
+                                        />
+                                    ) : (
+                                        <div className="w-full h-full bg-gradient-to-br from-[#ff3b00]/20 to-black flex items-center justify-center">
+                                            <span className="text-8xl font-black text-[#ff3b00]/40 uppercase">{selectedMember.initials || selectedMember.name.charAt(0)}</span>
+                                        </div>
+                                    )}
+                                </div>
+                                <div className="md:w-2/3 p-8">
+                                    <p className="font-mono text-[10px] text-[#ff3b00] uppercase tracking-widest mb-2">{selectedMember.role}</p>
+                                    <h3 className="text-3xl font-black text-white uppercase mb-6">{selectedMember.name}</h3>
+
+                                    {selectedMember.bio && (
+                                        <p className="text-white/70 leading-relaxed mb-6 border-l-2 border-[#ff3b00]/30 pl-4">{selectedMember.bio}</p>
+                                    )}
+
+                                    {selectedMember.note && (
+                                        <p className="text-white/70 leading-relaxed mb-6 italic border-l-2 border-[#ff3b00]/30 pl-4">"{selectedMember.note}"</p>
+                                    )}
+
+                                    {selectedMember.responsibilities && (
+                                        <div className="border-t border-white/10 pt-6">
+                                            <p className="font-mono text-[10px] text-white/40 uppercase tracking-widest mb-3">Focus Areas</p>
+                                            <div className="flex flex-wrap gap-2">
+                                                {selectedMember.responsibilities.map((r: string, i: number) => (
+                                                    <span key={i} className="px-3 py-1 bg-[#ff3b00]/10 border border-[#ff3b00]/30 font-mono text-[10px] text-[#ff3b00] uppercase">
+                                                        {r}
+                                                    </span>
+                                                ))}
+                                            </div>
+                                        </div>
+                                    )}
+                                </div>
+                            </div>
+                        </motion.div>
+                    </motion.div>
+                )}
+            </AnimatePresence>
+        </section>
+    );
+};
+
+// =============================================================================
+// VALUES SECTION
+// =============================================================================
+const ValuesSection: React.FC = () => (
+    <section className="py-24 lg:py-32 bg-[#050505] border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+            <motion.div
+                className="mb-16"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+            >
+                <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter">
+                    CORE <span className="text-[#ff3b00]">DOCTRINE</span>
+                </h2>
+                <p className="font-mono text-sm text-white/40 mt-4 uppercase tracking-widest">Operating Principles</p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+                {VALUES.map((value, idx) => (
+                    <motion.div
+                        key={idx}
+                        className="bg-white/[0.02] border border-white/10 p-8 hover:border-[#ff3b00]/30 transition-colors group"
+                        initial={{ opacity: 0, y: 20 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: idx * 0.1 }}
+                    >
+                        <div className="w-12 h-1 bg-[#ff3b00] mb-6 group-hover:w-24 transition-all" />
+                        <h3 className="text-2xl font-black text-white uppercase mb-4">{value.title}</h3>
+                        <p className="text-white/60 leading-relaxed font-mono text-sm">{value.desc}</p>
+                    </motion.div>
+                ))}
+            </div>
+        </div>
+    </section>
+);
+
+// =============================================================================
+// TESTIMONIALS SECTION
+// =============================================================================
+const TestimonialsSection: React.FC = () => (
+    <section className="py-24 lg:py-32 bg-[#050505] border-t border-white/5">
+        <div className="max-w-7xl mx-auto px-6">
+            <motion.div
+                className="mb-16"
+                initial={{ opacity: 0, y: 30 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                viewport={{ once: true }}
+            >
+                <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter">
+                    FIELD <span className="text-[#ff3b00]">NOTES</span>
+                </h2>
+                <p className="font-mono text-sm text-white/40 mt-4 uppercase tracking-widest">What They Said</p>
+            </motion.div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                {QUOTES.map((quote, idx) => (
+                    <motion.div
+                        key={quote.id}
+                        className="bg-black border border-white/10 p-8 hover:border-[#ff3b00]/30 transition-colors"
+                        initial={{ opacity: 0, y: 40 }}
+                        whileInView={{ opacity: 1, y: 0 }}
+                        viewport={{ once: true }}
+                        transition={{ delay: idx * 0.1 }}
+                    >
+                        <p className="text-white/80 text-lg leading-relaxed mb-6 italic">{quote.text}</p>
+                        <div className="border-t border-white/10 pt-4">
+                            <p className="font-mono text-xs text-[#ff3b00] uppercase tracking-widest">{quote.author}</p>
+                            <p className="font-mono text-[10px] text-white/40 mt-1">{quote.context}</p>
+                        </div>
+                    </motion.div>
+                ))}
+            </div>
+        </div>
+    </section>
+);
+
+// =============================================================================
+
+
+export default AboutPage;

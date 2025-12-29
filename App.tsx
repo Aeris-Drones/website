@@ -5,9 +5,11 @@ import Hero from './components/Hero';
 import ScrollyTelling from './components/ScrollyTelling';
 import Solution from './components/Solution';
 import Architecture from './components/Architecture';
-import AboutUs from './components/AboutUs';
+import MissionKinetic from './components/MissionKinetic';
 import UseCases from './components/UseCases';
+import Comparison from './components/Comparison';
 import Video from './components/Video';
+import Team from './components/Team';
 import Contact from './components/Contact';
 import Timeline from './components/Timeline';
 import KineticLab from './components/KineticLab';
@@ -22,9 +24,10 @@ function MainPage() {
         <ScrollyTelling />
         <Solution />
         <Architecture />
+        <MissionKinetic />
         <UseCases />
         <Video />
-        <AboutUs />
+        <Team />
         <Contact />
       </main>
     </>

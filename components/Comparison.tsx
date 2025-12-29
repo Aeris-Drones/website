@@ -21,7 +21,7 @@ const Comparison: React.FC = () => {
           pinSpacing: true,
         });
       });
-      
+
     }, componentRef);
 
     return () => ctx.revert();
@@ -36,7 +36,7 @@ const Comparison: React.FC = () => {
           <thead>
             <tr className="border-b border-brutal-line text-gray-500">
               <th className="py-4 uppercase font-normal">Metric</th>
-              <th className="py-4 uppercase font-normal text-brutal-accent">AERIS SWARM</th>
+              <th className="py-4 uppercase font-normal text-brutal-accent">AERIS ALPHA</th>
               <th className="py-4 uppercase font-normal">Competitors</th>
               <th className="py-4 uppercase font-normal">Consumer Drones</th>
             </tr>

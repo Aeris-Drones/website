@@ -59,8 +59,8 @@ const MILESTONES = [
         date: 'INTERSTITIAL',
         title: 'JIN ABE',
         subtitle: 'Inspiration Protocol',
-        desc: 'Honoring the legacy of Jin Abe. His philosophy on resilient infrastructure drives our safety protocols.',
-        details: 'Abe\'s work in early warning systems provided the foundational ethical framework for AERIS.',
+        desc: ' Inspired by the philosophy of Jin Abe. His approach to resilient infrastructure drives our safety protocols.',
+        details: 'Abe\'s work in early warning systems provides the foundational ethical framework for AERIS.',
         visual: 'portrait',
         coords: '35.676, 139.65'
     },
@@ -131,7 +131,7 @@ const ADVISORS = [
     {
         id: 'A-01',
         name: 'Jin Abe',
-        role: 'In Memoriam — Inspiration',
+        role: 'Honorary Advisor',
         image: '/Mr. Jin Abe.png',
         note: 'If such a system had existed—if that kind of information had been available—we could have been far better prepared. The drone can enter rubble, create maps, and provide vital information to rescue teams.'
     },

@@ -2,9 +2,15 @@ import React, { useState, useRef, useEffect, useLayoutEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { X, Play } from 'lucide-react';
+import Navbar from './Navbar';
+import PlainMission from './PlainMission';
+import StoryTimeline from './StoryTimeline';
+import TeamGrid from './TeamGrid';
+import Advisors from './Advisors';
+import Testimonials from './Testimonials';
+import Contact from './Contact';
 
 gsap.registerPlugin(ScrollTrigger);
-import Navbar from './Navbar';
 
 const AboutPage: React.FC = () => {
     const [isPlaying, setIsPlaying] = useState(false);
@@ -68,8 +74,6 @@ const AboutPage: React.FC = () => {
     // 3. Staggered Text Reveal for the Quote
     useLayoutEffect(() => {
         const ctx = gsap.context(() => {
-            // Split text animation logic would go here if we had SplitText, 
-            // but for now we'll do a simple opacity/y fade up
             gsap.fromTo(".quote-word",
                 { y: 20, opacity: 0, filter: "blur(10px)" },
                 {
@@ -126,14 +130,15 @@ const AboutPage: React.FC = () => {
     };
 
     return (
-        <div className="bg-black text-white min-h-screen relative overflow-hidden">
+        <div className="bg-black text-white min-h-screen relative overflow-x-hidden">
             <Navbar />
 
+            {/* HERO SECTION */}
             <section
                 ref={containerRef}
                 className="relative h-screen w-full flex flex-col items-center border-b border-[#333] pt-14"
             >
-                {/* 1. Background Video Layer (Video is masked by Layer 2) */}
+                {/* 1. Background Video Layer (Masked) */}
                 <div className="absolute inset-0 z-0 top-14">
                     <video
                         className="w-full h-full object-cover opacity-90"
@@ -145,12 +150,7 @@ const AboutPage: React.FC = () => {
                     />
                 </div>
 
-                {/* 2. Mask Layer (Black BG + Multiply to create video-text effect) */}
-                {/* 
-                    Logic: This layer covers the video with black. 
-                    The 'AERIS' text is transparent (white with multiply), letting video show through.
-                    This layer MUST NOT contain standard white text elements, or they will also become transparent/video-masked.
-                */}
+                {/* 2. Mask Layer */}
                 <div
                     className="absolute inset-0 top-14 z-10 bg-black mix-blend-multiply flex flex-col items-center justify-start pt-[12vh] select-none"
                 >
@@ -164,12 +164,7 @@ const AboutPage: React.FC = () => {
                     </h1>
                 </div>
 
-                {/* 3. The Quote - Separate Layer (Sitting ON TOP of the black mask) */}
-                {/* 
-                    Since Layer 2 is black (blocked), this layer sits at Z-20 to be visible.
-                    It has no mix-blend-mode, so it renders as solid white pixels.
-                    Positioned absolutely to sit visually underneath the title area.
-                */}
+                {/* 3. The Quote */}
                 <div className="absolute w-full top-[65vh] md:top-[70vh] z-20 flex justify-center pointer-events-none px-6">
                     <div ref={quoteRef} className="max-w-5xl text-center font-mono text-lg md:text-2xl lg:text-3xl leading-relaxed tracking-widest text-white/90 uppercase">
                         <p>
@@ -177,9 +172,6 @@ const AboutPage: React.FC = () => {
                         </p>
                     </div>
                 </div>
-
-                {/* 4. High-End Technical Details Overlay */}
-                {/* 4. High-End Technical Details Overlay - REMOVED */}
 
                 {/* 5. Custom Cursor (Z-30) */}
                 <div
@@ -221,72 +213,27 @@ const AboutPage: React.FC = () => {
                         </div>
                     </div>
                 )}
-
-                {/* Footer / Scroll Indicator */}
-                {!isPlaying && (
-                    <div className="absolute bottom-8 w-full flex justify-between px-8 z-20 pointer-events-none mix-blend-difference text-white opacity-60 font-mono text-xs uppercase tracking-widest">
-                    </div>
-                )}
             </section>
 
-            {/* Added: Plain Mission Section */}
-            <PlainMissionSection />
+            {/* MISSION */}
+            <PlainMission />
+
+            {/* STORY TIMELINE */}
+            <StoryTimeline />
+
+            {/* TEAM & FOUNDERS */}
+            <TeamGrid />
+
+            {/* ADVISORS */}
+            <Advisors />
+
+            {/* TESTIMONIALS */}
+            <Testimonials />
+
+            {/* CTA */}
+            <Contact />
+
         </div>
-    );
-};
-
-// Internal Component for the Mission Section
-const PlainMissionSection: React.FC = () => {
-    const containerRef = useRef<HTMLDivElement>(null);
-    const textRef = useRef<HTMLHeadingElement>(null);
-    const subRef = useRef<HTMLParagraphElement>(null);
-
-    useLayoutEffect(() => {
-        const ctx = gsap.context(() => {
-            const tl = gsap.timeline({
-                scrollTrigger: {
-                    trigger: containerRef.current,
-                    start: "top 80%",
-                    toggleActions: "play none none reverse"
-                }
-            });
-
-            tl.fromTo(textRef.current,
-                { opacity: 0, y: 30 },
-                { opacity: 1, y: 0, duration: 1, ease: "power3.out" }
-            )
-                .fromTo(subRef.current,
-                    { opacity: 0, y: 20 },
-                    { opacity: 1, y: 0, duration: 1, ease: "power3.out" },
-                    "-=0.6"
-                );
-
-        }, containerRef);
-        return () => ctx.revert();
-    }, []);
-
-    return (
-        <section ref={containerRef} className="py-32 md:py-48 bg-brutal-bg text-white border-t border-brutal-line flex items-center justify-center relative z-10">
-            <div className="container mx-auto px-6 max-w-5xl text-center">
-
-                {/* Main Headline */}
-                <h2
-                    ref={textRef}
-                    className="font-sans font-bold text-3xl md:text-5xl lg:text-6xl leading-tight md:leading-none tracking-tight mb-8"
-                >
-                    Aeris is a team of drones that helps responders <span className="text-brutal-accent">see everything at once</span>.
-                </h2>
-
-                {/* Plain English Subs */}
-                <p
-                    ref={subRef}
-                    className="font-mono text-base md:text-xl text-gray-400 max-w-3xl mx-auto leading-relaxed"
-                >
-                    Instead of scattered video feeds, Aeris merges them into <span className="text-white">one live map</span> and highlights what matters.
-                </p>
-
-            </div>
-        </section>
     );
 };
 

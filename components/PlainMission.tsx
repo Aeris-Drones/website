@@ -34,7 +34,7 @@ const PlainMission: React.FC = () => {
     }, []);
 
     return (
-        <section ref={containerRef} className="py-32 md:py-48 bg-brutal-bg text-white border-b border-brutal-line flex items-center justify-center">
+        <section ref={containerRef} className="py-32 md:py-48 bg-brutal-bg text-white border-t border-brutal-line flex items-center justify-center relative z-10">
             <div className="container mx-auto px-6 max-w-5xl text-center">
 
                 {/* Main Headline */}

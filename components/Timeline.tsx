@@ -240,12 +240,13 @@ const Timeline: React.FC = () => {
         }
 
         .section-header {
-            margin-bottom: 3rem;
+            margin-bottom: 1rem;
             display: flex;
             align-items: center;
             justify-content: space-between;
-            border-bottom: 2px solid var(--aeris-text-main);
-            padding-bottom: 1rem;
+            border-bottom: none;
+            padding-bottom: 0.5rem;
+            margin-top: 2rem;
         }
 
         .section-header h2 {
@@ -325,7 +326,7 @@ const Timeline: React.FC = () => {
 
         .phase-header {
             grid-row: 1;
-            padding: 1.5rem;
+            padding: 3.5rem 1.5rem 1.5rem 1.5rem;
             font-family: var(--aeris-font-head);
             position: relative;
             background: rgba(0,0,0,0.4);
@@ -347,6 +348,36 @@ const Timeline: React.FC = () => {
             border: 1px solid var(--aeris-grid-line);
             padding: 4px 8px;
             width: fit-content;
+        }
+
+        .current-phase-badge {
+            position: absolute;
+            top: 1.5rem;
+            left: 1.5rem;
+            display: inline-flex;
+            align-items: center;
+            background: rgba(255, 77, 0, 0.1);
+            border: 1px solid var(--aeris-accent);
+            color: var(--aeris-accent);
+            font-family: var(--aeris-font-mono);
+            font-size: 0.65rem;
+            padding: 4px 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            width: fit-content;
+        }
+
+        .current-phase-badge::before {
+            content: '●';
+            margin-right: 8px;
+            font-size: 0.8em;
+            animation: aerisPulse 2s infinite;
+        }
+
+        @keyframes aerisPulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.3; }
+            100% { opacity: 1; }
         }
 
 
@@ -511,7 +542,19 @@ const Timeline: React.FC = () => {
             align-items: center;
             justify-content: center;
             background: var(--aeris-bg);
-            border-bottom: 2px solid var(--aeris-text-main) !important;
+            position: relative;
+        }
+        
+        .timeline-track-cell::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 50%;
+            height: 2px;
+            background-color: var(--aeris-text-main);
+            transform: translateY(-50%);
+            z-index: 1;
         }
         
         .timeline-track-cell::before {
@@ -663,6 +706,15 @@ const Timeline: React.FC = () => {
                 margin-bottom: 0.5rem;
                 text-transform: uppercase;
             }
+
+            .current-phase-badge {
+                position: static;
+                margin-bottom: 0.5rem;
+            }
+
+            .section-header h2 {
+                font-size: 1.5rem;
+            }
         }
 
         .hidden-desktop { display: none; }
@@ -719,7 +771,7 @@ const Timeline: React.FC = () => {
           <div className="section-header">
             <h2>
               <span className="accent-block"></span>
-              <span className="roadmap-title">Strategic Roadmap</span>
+              <span className="roadmap-title">Roadmap</span>
             </h2>
           </div>
 
@@ -739,6 +791,7 @@ const Timeline: React.FC = () => {
             {/* PHASE I */}
             <div className="phase-group phase-1">
               <div className="phase-header">
+                <div className="current-phase-badge">Current Phase</div>
                 <h3>Phase I</h3>
                 <span className="date-range">2026.01 — 2028.12</span>
               </div>

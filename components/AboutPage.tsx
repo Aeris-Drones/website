@@ -202,11 +202,11 @@ const VALUES = [
     },
     {
         title: 'SPEED IS SAFETY',
-        desc: 'In disaster, uncertainty is the enemy. We trade perfect data for fast, actionable intelligence.'
+        desc: 'Fast decisions save lives. We get you intel in seconds, not minutes.'
     },
     {
         title: 'EDGE NATIVE',
-        desc: 'The swarm is the server. Intelligent autonomy that persists when the connection dies.'
+        desc: 'Works offline. No internet? No problem. The drones think for themselves.'
     }
 ];
 

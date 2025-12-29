@@ -61,9 +61,9 @@ const Architecture: React.FC = () => {
           <div>
             <h3 className="font-sans font-black text-6xl outline-text text-transparent stroke-white" style={{ WebkitTextStroke: '1px white' }}>SCOUT</h3>
             <div className="font-mono text-xs mt-4 space-y-2 text-white/80">
-              <p>&gt; ROLE: PENETRATION</p>
-              <p>&gt; SENSOR: THERMAL/RGB/LIDAR</p>
-              <p>&gt; NAV: SLAM (GPS-DENIED)</p>
+              <p>&gt; Goes into buildings</p>
+              <p>&gt; Sees heat, video, and depth</p>
+              <p>&gt; Works without GPS</p>
             </div>
           </div>
 
@@ -95,9 +95,9 @@ const Architecture: React.FC = () => {
           <div className="text-right">
             <h3 className="font-sans font-black text-6xl text-white">RANGER</h3>
             <div className="font-mono text-xs mt-4 space-y-2 ml-auto inline-block text-left text-white/80">
-              <p>&gt; ROLE: OVERWATCH</p>
-              <p>&gt; SENSOR: DATA FUSION HUB</p>
-              <p>&gt; COMMS: MESH RELAY</p>
+              <p>&gt; Watches from above</p>
+              <p>&gt; Combines all data</p>
+              <p>&gt; Keeps drones connected</p>
             </div>
           </div>
 

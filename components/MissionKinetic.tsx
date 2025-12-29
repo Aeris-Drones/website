@@ -7,7 +7,7 @@ gsap.registerPlugin(ScrollTrigger);
 // --- DATA ---
 const MISSION = {
   headline: ["DECISIONS", "FASTER", "SAFER", "SMARTER"],
-  sub: "When seconds matter and infrastructure fails.",
+  sub: "Real-time intel when you need it most.",
 };
 
 const MissionKinetic: React.FC = () => {

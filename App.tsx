@@ -14,10 +14,8 @@ import Contact from './components/Contact';
 import Timeline from './components/Timeline';
 import KineticLab from './components/KineticLab';
 import ProblemLab from './components/ProblemLab';
-
+import FAQ from './components/FAQ';
 import AboutPage from './components/AboutPage';
-
-// import PlainMission from './components/PlainMission'; // Removed
 
 function MainPage() {
   return (
@@ -29,8 +27,11 @@ function MainPage() {
         <ScrollyTelling />
         <Solution />
         <Architecture />
+        <MissionKinetic />
+        <Comparison />
         <UseCases />
         <Video />
+        <FAQ />
         <Contact />
       </main>
     </>

@@ -387,7 +387,7 @@ const ScrollyTelling: React.FC = () => {
             </div>
 
             {/* Title - Focus Reveal */}
-            <h2 className="problem-title font-sans font-black text-[12vw] md:text-8xl lg:text-[10vw] leading-[0.85] tracking-tighter mb-4 md:mb-8">
+            <h2 className="problem-title font-sans font-black text-5xl sm:text-6xl md:text-8xl lg:text-9xl leading-[0.85] tracking-tighter mb-4 md:mb-8">
               <span className="block">DATA IN</span>
               <span className="block text-brutal-accent">THE DARK.</span>
             </h2>

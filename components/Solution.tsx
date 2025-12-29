@@ -8,22 +8,22 @@ const features = [
   {
     title: 'One Map.',
     tag: '01 /// FUSION',
-    description: 'Fuses thermal, LiDAR, and RGB into a single operational picture.',
+    description: 'See thermal, depth, and video in one live view.',
   },
   {
     title: 'No Cloud.',
     tag: '02 /// OFFLINE',
-    description: 'Works when the internet is dead. Local mesh network.',
+    description: 'Works without internet. Drones talk to each other directly.',
   },
   {
     title: 'Swarm IQ.',
     tag: '03 /// AUTONOMY',
-    description: 'Scouts search autonomously. Ranger relays the data.',
+    description: 'Drones search on their own. You focus on the mission.',
   },
   {
     title: 'Modular Pods.',
     tag: '04 /// HOT-SWAP',
-    description: 'Universal frame. Mission-specific pods. Click in, auto-configure, fly.',
+    description: 'Swap sensors in seconds. One drone, many missions.',
   },
 ];
 
@@ -81,7 +81,7 @@ const Solution: React.FC = () => {
               The<br />Solution<span className="text-brutal-accent">.</span>
             </h3>
             <p className="font-mono text-lg leading-tight max-w-sm border-l-2 border-brutal-accent pl-4">
-              Aeris replaces chaos with clarity. Fusing multi-spectral data at the edge to turn fragmented feeds into a single command map.
+              Aeris gives you the full picture. All your drone feeds combined into one simple map.
             </p>
           </div>
         </div>

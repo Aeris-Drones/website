@@ -17,7 +17,7 @@ const UseCases: React.FC = () => {
         >
           <h4 className="font-mono text-sm md:text-base font-bold uppercase">01. Disaster Response</h4>
           <p className="font-sans text-lg leading-tight max-w-sm">
-            Rapid deployment in chaotic environments with autonomous swarm coordination for real-time situational awareness.
+            Find survivors faster. See through smoke and debris. Give responders a live map when the internet is down.
           </p>
         </a>
         <a
@@ -30,7 +30,7 @@ const UseCases: React.FC = () => {
         >
           <h4 className="font-mono text-sm md:text-base font-bold uppercase">02. Infra Inspection</h4>
           <p className="font-sans text-lg leading-tight max-w-sm">
-            AI-powered asset monitoring and automated threat detection for critical infrastructure at scale.
+            Check bridges and roads automatically. Spot cracks and defects early. Repeat exact flight paths every time.
           </p>
         </a>
         <a
@@ -43,7 +43,7 @@ const UseCases: React.FC = () => {
         >
           <h4 className="font-mono text-sm md:text-base font-bold uppercase">03. Precision Agriculture</h4>
           <p className="font-sans text-lg leading-tight max-w-sm">
-            Computer vision and sensor fusion for automated crop health monitoring and yield optimization.
+            Scout thousands of acres quickly. Find sick crops before they spread. Turn aerial data into clear action.
           </p>
         </a>
       </div>

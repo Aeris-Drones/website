@@ -176,7 +176,7 @@ const ADVISORS = [
 const QUOTES = [
     {
         id: 'Q-01',
-        text: '"I definitely see this as highly beneficial—having eyes on the scene beforehand. Before the fire department even arrives, the drone is already there."',
+        text: '"AERIS can make things safer for everyone—the public, because we can reach them faster, and the fire department, because we know exactly what we’re walking into."',
         author: 'Jeremy Wilkinson',
         context: 'Chief of USAR, Iowa'
     },

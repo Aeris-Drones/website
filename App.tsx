@@ -3,8 +3,10 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ScrollyTelling from './components/ScrollyTelling';
-import Solution from './components/Solution';
-import Architecture from './components/Architecture';
+import SolutionCinematic from './components/SolutionCinematic';
+// Legacy components kept for reference:
+// import Solution from './components/Solution';
+// import Architecture from './components/Architecture';
 import MissionKinetic from './components/MissionKinetic';
 import UseCases from './components/UseCases';
 import Comparison from './components/Comparison';

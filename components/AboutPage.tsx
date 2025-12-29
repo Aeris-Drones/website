@@ -19,8 +19,8 @@ const MILESTONES = [
         date: 'OCT 2024',
         title: 'THE GENESIS',
         subtitle: 'Skool Community Meeting',
-        desc: 'The core operatives met during a masterclass. We identified a critical gap: existing drones fail in high-wind disaster scenarios.',
-        details: 'Drafted the initial "Swarm" architecture on a napkin. The goal was infrastructure, not toys.',
+        desc: 'Aahan and Saketh connected through the Skool community. We identified a critical gap: existing drones fail in high-wind disaster scenarios.',
+        details: 'Drafted the initial \"Swarm\" architecture on a napkin. The goal was infrastructure, not toys.',
         visual: 'formation',
         coords: '44.291, -102.1'
     },

@@ -15,14 +15,7 @@ const FAQ_DATA = [
         question: "How does the technology work?",
         answer: "It's a hierarchical swarm. Small 'Scout' drones enter buildings or fly low, using SLAM to map without GPS. A larger 'Ranger' drone hovers high above, acting as a comms relay and data hub. Our edge-native software, Aeris OS, runs on the drones themselves, meaning they keep working even if connection to the ground is lost."
     },
-    {
-        question: "Who is this for?",
-        answer: "Primary customers are Public Safety and USAR (Urban Search and Rescue) task forces who need tools that work when the internet fails. The system is also modular: swap the sensor pod, and it becomes a tool for Infrastructure Inspection (bridges/roads) or Precision Agriculture (crop health)."
-    },
-    {
-        question: "How is Aeris different from DJI?",
-        answer: "DJI makes great general-purpose drones. Aeris is a specialized system for chaotic environments. Unlike competitors, our 'Scout-and-Ranger' swarm architecture separates roles for efficiency, and our offline mesh network ensures operation without WiFi or cell service. We don't just give you video; we give you a live hazard map."
-    }
+
 ];
 
 const FAQ: React.FC = () => {

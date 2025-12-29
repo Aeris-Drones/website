@@ -4,6 +4,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { OrbitControls, useGLTF, Environment } from '@react-three/drei';
 import * as THREE from 'three';
+import DroneExplorer from './DroneExplorer';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -15,23 +16,27 @@ gsap.registerPlugin(ScrollTrigger);
 function ScoutModel({ isHovered }: { isHovered: boolean }) {
   const meshRef = useRef<THREE.Group>(null);
   const { scene } = useGLTF('/quad-copter-drone/source/model.glb');
+  // Clone scene to avoid sharing with DroneExplorer
+  const clonedScene = React.useMemo(() => scene.clone(), [scene]);
 
   useFrame((state) => {
     if (meshRef.current) {
       meshRef.current.rotation.y += 0.003;
       // Subtle hover scale effect
-      const targetScale = isHovered ? 2.3 : 2.0;
+      const targetScale = isHovered ? 1.8 : 1.5;
       meshRef.current.scale.lerp(new THREE.Vector3(targetScale, targetScale, targetScale), 0.1);
     }
   });
 
-  return <primitive ref={meshRef} object={scene} scale={2.0} rotation={[0.2, 0, 0]} position={[0, 0, 0]} />;
+  return <primitive ref={meshRef} object={clonedScene} scale={1.5} rotation={[0.2, 0, 0]} position={[0, 0, 0]} />;
 }
 
 // Ranger 3D Model (Fixed-Wing)
 function RangerModel({ isHovered }: { isHovered: boolean }) {
   const meshRef = useRef<THREE.Group>(null);
   const { scene } = useGLTF('/80-followers-iranian-shahed-136-drone/source/scene.gltf');
+  // Clone scene to avoid sharing with DroneExplorer
+  const clonedScene = React.useMemo(() => scene.clone(), [scene]);
 
   useFrame((state) => {
     if (meshRef.current) {
@@ -43,7 +48,7 @@ function RangerModel({ isHovered }: { isHovered: boolean }) {
     }
   });
 
-  return <primitive ref={meshRef} object={scene} scale={2.5} rotation={[0.2, Math.PI, 0]} position={[0, 0, 0]} />;
+  return <primitive ref={meshRef} object={clonedScene} scale={2.5} rotation={[0.2, Math.PI, 0]} position={[0, 0, 0]} />;
 }
 
 // ============================================
@@ -131,7 +136,7 @@ const SolutionCinematic: React.FC = () => {
         scrollTrigger: {
           trigger: componentRef.current,
           start: "top top",
-          end: "+=900%",
+          end: "+=1200%",
           scrub: 1,
           pin: true,
           anticipatePin: 1,
@@ -279,16 +284,16 @@ const SolutionCinematic: React.FC = () => {
         3.5
       );
 
-      // Ranger (top) flies in from above
+      // Ranger (top) flies in from left
       tl.fromTo('.drone-ranger',
         {
           opacity: 0,
-          y: -100,
+          x: -100,
           scale: 0.8,
         },
         {
           opacity: 1,
-          y: 0,
+          x: 0,
           scale: 1,
           duration: 1.2,
           ease: "expo.out",
@@ -296,37 +301,21 @@ const SolutionCinematic: React.FC = () => {
         3.8
       );
 
-      // Scouts fly in from sides
+      // Scout flies in from right
       tl.fromTo('.drone-scout-left',
         {
           opacity: 0,
-          x: -150,
+          x: 100,
           scale: 0.8,
         },
         {
           opacity: 1,
           x: 0,
           scale: 1,
-          duration: 1.0,
+          duration: 1.2,
           ease: "expo.out",
         },
         4.2
-      );
-
-      tl.fromTo('.drone-scout-right',
-        {
-          opacity: 0,
-          x: 150,
-          scale: 0.8,
-        },
-        {
-          opacity: 1,
-          x: 0,
-          scale: 1,
-          duration: 1.0,
-          ease: "expo.out",
-        },
-        4.3
       );
 
       // Connection lines draw between drones
@@ -348,7 +337,7 @@ const SolutionCinematic: React.FC = () => {
 
       // Scene 3 exits
       tl.to(scene3Ref.current, {
-        opacity: 0,
+        autoAlpha: 0,
         scale: 0.95,
         duration: 0.6,
         ease: "power2.in",
@@ -393,30 +382,40 @@ const SolutionCinematic: React.FC = () => {
         6.4
       );
 
+      tl.fromTo('.feature1-btn',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
+        6.4
+      );
+
       tl.fromTo('.feature1-accent',
         { scaleX: 0, transformOrigin: "left" },
         { scaleX: 1, duration: 0.6, ease: "expo.inOut" },
         6.2
       );
 
+      // Hold Scene 4
+      tl.to({}, { duration: 0.8 });
+
       tl.to(scene4Ref.current, {
         x: '-100%',
-        opacity: 0,
+        autoAlpha: 0,
         duration: 0.6,
         ease: "power2.in",
-      }, 6.8);
+      }, ">"); // Append relative to end of hold
 
       // --- SCENE 5: NO CLOUD ---
+      // Start after Scene 4 exit
       tl.fromTo(scene5Ref.current,
         { autoAlpha: 0, x: '50%' },
         { autoAlpha: 1, x: 0, duration: 0.6, ease: "expo.out" },
-        6.8
+        ">-=0.2" // Overlap slightly with S4 exit
       );
 
       tl.fromTo('.feature2-tag',
         { opacity: 0, x: 30 },
         { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" },
-        7.0
+        "<+0.2"
       );
 
       tl.fromTo('.feature2-title',
@@ -432,34 +431,43 @@ const SolutionCinematic: React.FC = () => {
           duration: 1.0,
           ease: "expo.out",
         },
-        7.1
+        "<+0.1"
       );
 
       tl.fromTo('.feature2-desc',
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
-        7.4
+        "<+0.3"
       );
+
+      tl.fromTo('.feature2-btn',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
+        "<"
+      );
+
+      // Hold Scene 5
+      tl.to({}, { duration: 0.8 });
 
       tl.to(scene5Ref.current, {
         scale: 1.1,
         filter: "blur(10px)",
-        opacity: 0,
+        autoAlpha: 0,
         duration: 0.5,
         ease: "power2.in",
-      }, 7.6);
+      }, ">");
 
       // --- SCENE 6: SWARM IQ ---
       tl.fromTo(scene6Ref.current,
         { autoAlpha: 0, scale: 0.9 },
         { autoAlpha: 1, scale: 1, duration: 0.5, ease: "expo.out" },
-        7.6
+        ">-=0.2"
       );
 
       tl.fromTo('.feature3-tag',
-        { opacity: 0, y: -20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
-        7.8
+        { opacity: 0, x: -30 },
+        { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" },
+        "<+0.2"
       );
 
       tl.fromTo('.feature3-title',
@@ -475,33 +483,42 @@ const SolutionCinematic: React.FC = () => {
           duration: 1.0,
           ease: "expo.out",
         },
-        7.9
+        "<+0.1"
       );
 
       tl.fromTo('.feature3-desc',
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
-        8.2
+        "<+0.3"
       );
+
+      tl.fromTo('.feature3-btn',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
+        "<"
+      );
+
+      // Hold Scene 6
+      tl.to({}, { duration: 0.8 });
 
       tl.to(scene6Ref.current, {
         y: '-50%',
-        opacity: 0,
+        autoAlpha: 0,
         duration: 0.5,
         ease: "power2.in",
-      }, 8.4);
+      }, ">");
 
       // --- SCENE 7: MODULAR PODS (Final, holds longer) ---
       tl.fromTo(scene7Ref.current,
         { autoAlpha: 0, y: '30%' },
         { autoAlpha: 1, y: 0, duration: 0.6, ease: "expo.out" },
-        8.4
+        ">-=0.2"
       );
 
       tl.fromTo('.feature4-tag',
-        { opacity: 0, x: -30 },
+        { opacity: 0, x: 30 },
         { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" },
-        8.6
+        "<+0.2"
       );
 
       tl.fromTo('.feature4-title',
@@ -517,7 +534,7 @@ const SolutionCinematic: React.FC = () => {
           duration: 1.2,
           ease: "expo.out",
         },
-        8.7
+        "<+0.1"
       );
 
       // Title color shift to accent for emphasis
@@ -525,22 +542,28 @@ const SolutionCinematic: React.FC = () => {
         color: '#FF2A00',
         duration: 0.4,
         ease: "power2.inOut",
-      }, 9.2);
+      }, ">+0.5");
 
       tl.fromTo('.feature4-desc',
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
-        9.0
+        "<"
+      );
+
+      tl.fromTo('.feature4-btn',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
+        "<"
       );
 
       tl.fromTo('.feature4-accent',
         { scaleY: 0, transformOrigin: "top" },
         { scaleY: 1, duration: 0.8, ease: "expo.inOut" },
-        8.9
+        "<"
       );
 
-      // Final hold
-      tl.to({}, { duration: 0.5 });
+      // Final hold - extra long
+      tl.to({}, { duration: 2.0 });
 
     }, componentRef);
 
@@ -555,7 +578,7 @@ const SolutionCinematic: React.FC = () => {
           ======================================== */}
       <div
         ref={scene1Ref}
-        className="absolute inset-0 flex items-center justify-center z-40"
+        className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none"
       >
         <h2 className="scene1-title font-sans font-black text-6xl md:text-8xl lg:text-[12vw] leading-none text-center tracking-tighter">
           OUR SOLUTION<span className="scene1-question">?</span>
@@ -567,7 +590,8 @@ const SolutionCinematic: React.FC = () => {
           ======================================== */}
       <div
         ref={scene2Ref}
-        className="absolute inset-0 flex flex-col items-center justify-center z-30 opacity-0 invisible"
+        className="absolute inset-0 flex flex-col items-center justify-center z-30 pointer-events-none"
+        style={{ opacity: 0, visibility: 'hidden' }}
       >
         <div className="text-center">
           <div className="scene2-line w-24 h-[2px] bg-brutal-accent mx-auto mb-8" />
@@ -586,7 +610,8 @@ const SolutionCinematic: React.FC = () => {
           ======================================== */}
       <div
         ref={scene3Ref}
-        className="absolute inset-0 z-20 opacity-0 invisible"
+        className="absolute inset-0 z-20 pointer-events-auto"
+        style={{ opacity: 0, visibility: 'hidden' }}
       >
         {/* Technical Grid Background */}
         <div className="scene3-grid absolute inset-0 opacity-0">
@@ -601,7 +626,7 @@ const SolutionCinematic: React.FC = () => {
         </div>
 
         {/* Header */}
-        <div className="scene3-header absolute top-12 left-1/2 -translate-x-1/2 text-center z-20">
+        <div className="scene3-header absolute top-16 md:top-20 left-1/2 -translate-x-1/2 text-center z-20 px-4">
           <span className="font-mono text-xs text-brutal-accent uppercase tracking-[0.3em]">
             // SYSTEM ARCHITECTURE
           </span>
@@ -611,16 +636,16 @@ const SolutionCinematic: React.FC = () => {
         </div>
 
         {/* Drone Layout Container */}
-        <div className="relative h-full flex flex-col items-center justify-center px-8 pt-24 pb-12">
+        <div className="relative h-full flex flex-col md:flex-row items-center justify-center px-8 pt-32 md:pt-40 pb-12 gap-8 md:gap-12">
 
-          {/* RANGER (Top Center) */}
+          {/* RANGER (Left) */}
           <div
-            className="drone-ranger relative w-full max-w-md h-48 md:h-64 cursor-pointer group"
+            className="drone-ranger relative w-full md:w-1/2 max-w-xl h-80 md:h-[500px] group cursor-pointer flex-1"
             onMouseEnter={() => setHoveredDrone('ranger')}
             onMouseLeave={() => setHoveredDrone(null)}
             onClick={() => setActiveDrone(activeDrone === 'ranger' ? null : 'ranger')}
           >
-            <div className={`absolute inset-0 transition-all duration-300 ${hoveredDrone === 'ranger' ? 'ring-2 ring-brutal-accent/50' : ''}`}>
+            <div className={`absolute inset-0 transition-all duration-300 ${hoveredDrone === 'ranger' ? 'ring-4 ring-brutal-accent/50 rounded-lg' : ''}`} style={{ pointerEvents: 'none' }}>
               <Canvas camera={{ position: [0, 2, 7], fov: 45 }}>
                 <ambientLight intensity={0.5} />
                 <directionalLight position={[-5, 10, -5]} intensity={2} />
@@ -632,69 +657,37 @@ const SolutionCinematic: React.FC = () => {
                 <OrbitControls enableZoom={false} enablePan={false} maxPolarAngle={Math.PI / 1.5} minPolarAngle={Math.PI / 3} />
               </Canvas>
             </div>
-            <div className="drone-label absolute -bottom-2 left-1/2 -translate-x-1/2 text-center">
-              <span className="font-sans font-black text-2xl md:text-3xl tracking-tight">RANGER</span>
+            <div className="drone-label absolute -bottom-8 left-1/2 -translate-x-1/2 text-center pointer-events-none">
+              <span className="font-sans font-black text-3xl md:text-4xl tracking-tight">RANGER</span>
               <span className="block font-mono text-xs text-gray-500 mt-1">FIXED-WING</span>
             </div>
           </div>
 
-          {/* Connection Lines */}
-          <div className="relative w-full max-w-2xl h-12 flex items-center justify-center">
-            <div className="connection-line absolute left-1/4 w-[2px] h-12 bg-brutal-accent/40" />
-            <div className="connection-line absolute right-1/4 w-[2px] h-12 bg-brutal-accent/40" />
-            <div className="absolute top-1/2 left-1/4 right-1/4 h-[2px] bg-brutal-accent/40" />
-          </div>
+          {/* Connection Line */}
+          <div className="connection-line relative w-[2px] h-32 md:h-64 bg-brutal-accent/40 hidden md:block" />
 
-          {/* SCOUTS (Bottom Row) */}
-          <div className="flex gap-8 md:gap-16 w-full max-w-4xl justify-center">
-            {/* Scout Left */}
-            <div
-              className="drone-scout-left relative w-40 md:w-56 h-40 md:h-48 cursor-pointer group"
-              onMouseEnter={() => setHoveredDrone('scout-left')}
-              onMouseLeave={() => setHoveredDrone(null)}
-              onClick={() => setActiveDrone(activeDrone === 'scout-left' ? null : 'scout-left')}
-            >
-              <div className={`absolute inset-0 transition-all duration-300 ${hoveredDrone === 'scout-left' ? 'ring-2 ring-white/50' : ''}`}>
-                <Canvas camera={{ position: [0, 2, 5], fov: 45 }}>
-                  <ambientLight intensity={0.5} />
-                  <directionalLight position={[5, 10, 5]} intensity={2} />
-                  <spotLight position={[-5, 5, 5]} intensity={1} color="#ffffff" />
-                  <Environment preset="city" />
-                  <Suspense fallback={null}>
-                    <ScoutModel isHovered={hoveredDrone === 'scout-left'} />
-                  </Suspense>
-                  <OrbitControls enableZoom={false} enablePan={false} maxPolarAngle={Math.PI / 1.5} minPolarAngle={Math.PI / 3} />
-                </Canvas>
-              </div>
-              <div className="drone-label absolute -bottom-2 left-1/2 -translate-x-1/2 text-center">
-                <span className="font-sans font-black text-xl md:text-2xl tracking-tight">SCOUT</span>
-                <span className="block font-mono text-xs text-gray-500 mt-1">QUADCOPTER</span>
-              </div>
+          {/* SCOUT (Right) */}
+          <div
+            className="drone-scout-left relative w-full md:w-1/2 max-w-xl h-80 md:h-[500px] group cursor-pointer flex-1"
+            onMouseEnter={() => setHoveredDrone('scout')}
+            onMouseLeave={() => setHoveredDrone(null)}
+            onClick={() => setActiveDrone(activeDrone === 'scout' ? null : 'scout')}
+          >
+            <div className={`absolute inset-0 transition-all duration-300 ${hoveredDrone === 'scout' ? 'ring-4 ring-white/50 rounded-lg' : ''}`} style={{ pointerEvents: 'none' }}>
+              <Canvas camera={{ position: [0, 2, 5], fov: 45 }}>
+                <ambientLight intensity={0.5} />
+                <directionalLight position={[5, 10, 5]} intensity={2} />
+                <spotLight position={[-5, 5, 5]} intensity={1} color="#ffffff" />
+                <Environment preset="city" />
+                <Suspense fallback={null}>
+                  <ScoutModel isHovered={hoveredDrone === 'scout'} />
+                </Suspense>
+                <OrbitControls enableZoom={false} enablePan={false} maxPolarAngle={Math.PI / 1.5} minPolarAngle={Math.PI / 3} />
+              </Canvas>
             </div>
-
-            {/* Scout Right */}
-            <div
-              className="drone-scout-right relative w-40 md:w-56 h-40 md:h-48 cursor-pointer group"
-              onMouseEnter={() => setHoveredDrone('scout-right')}
-              onMouseLeave={() => setHoveredDrone(null)}
-              onClick={() => setActiveDrone(activeDrone === 'scout-right' ? null : 'scout-right')}
-            >
-              <div className={`absolute inset-0 transition-all duration-300 ${hoveredDrone === 'scout-right' ? 'ring-2 ring-white/50' : ''}`}>
-                <Canvas camera={{ position: [0, 2, 5], fov: 45 }}>
-                  <ambientLight intensity={0.5} />
-                  <directionalLight position={[5, 10, 5]} intensity={2} />
-                  <spotLight position={[-5, 5, 5]} intensity={1} color="#ffffff" />
-                  <Environment preset="city" />
-                  <Suspense fallback={null}>
-                    <ScoutModel isHovered={hoveredDrone === 'scout-right'} />
-                  </Suspense>
-                  <OrbitControls enableZoom={false} enablePan={false} maxPolarAngle={Math.PI / 1.5} minPolarAngle={Math.PI / 3} />
-                </Canvas>
-              </div>
-              <div className="drone-label absolute -bottom-2 left-1/2 -translate-x-1/2 text-center">
-                <span className="font-sans font-black text-xl md:text-2xl tracking-tight">SCOUT</span>
-                <span className="block font-mono text-xs text-gray-500 mt-1">QUADCOPTER</span>
-              </div>
+            <div className="drone-label absolute -bottom-8 left-1/2 -translate-x-1/2 text-center pointer-events-none">
+              <span className="font-sans font-black text-3xl md:text-4xl tracking-tight">SCOUT</span>
+              <span className="block font-mono text-xs text-gray-500 mt-1">QUADCOPTER</span>
             </div>
           </div>
 
@@ -710,14 +703,24 @@ const SolutionCinematic: React.FC = () => {
             <p className="text-brutal-accent">&gt; SWARM READY</p>
           </div>
         </div>
+
       </div>
+
+      {/* Full-screen Drone Explorer Modal */}
+      {activeDrone && (
+        <DroneExplorer
+          droneType={activeDrone as 'ranger' | 'scout'}
+          onClose={() => setActiveDrone(null)}
+        />
+      )}
 
       {/* ========================================
           SCENE 4: ONE MAP
           ======================================== */}
       <div
         ref={scene4Ref}
-        className="absolute inset-0 z-10 flex items-center opacity-0 invisible"
+        className="absolute inset-0 z-10 flex items-center pointer-events-auto"
+        style={{ opacity: 0, visibility: 'hidden' }}
       >
         <div className="w-full px-8 md:px-16 lg:px-24">
           <div className="max-w-4xl">
@@ -733,6 +736,9 @@ const SolutionCinematic: React.FC = () => {
             <p className="feature1-desc font-inter text-xl md:text-2xl text-gray-400 max-w-2xl">
               {FEATURES[0].description}
             </p>
+            <button className="feature1-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors">
+              Learn More
+            </button>
           </div>
         </div>
       </div>
@@ -742,7 +748,8 @@ const SolutionCinematic: React.FC = () => {
           ======================================== */}
       <div
         ref={scene5Ref}
-        className="absolute inset-0 z-10 flex items-center justify-end opacity-0 invisible"
+        className="absolute inset-0 z-10 flex items-center justify-end pointer-events-auto"
+        style={{ opacity: 0, visibility: 'hidden' }}
       >
         <div className="w-full px-8 md:px-16 lg:px-24 text-right">
           <div className="max-w-4xl ml-auto">
@@ -758,31 +765,39 @@ const SolutionCinematic: React.FC = () => {
             <p className="feature2-desc font-inter text-xl md:text-2xl text-gray-400 max-w-2xl ml-auto">
               {FEATURES[1].description}
             </p>
+            <button className="feature2-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors">
+              Learn More
+            </button>
           </div>
         </div>
       </div>
 
       {/* ========================================
-          SCENE 6: SWARM IQ
+          SCENE 6: SWARM IQ (No image - centered)
           ======================================== */}
       <div
         ref={scene6Ref}
-        className="absolute inset-0 z-10 flex items-center justify-center opacity-0 invisible"
+        className="absolute inset-0 z-10 flex items-center pointer-events-auto"
+        style={{ opacity: 0, visibility: 'hidden' }}
       >
-        <div className="text-center px-8">
-          <div className="feature3-tag flex items-center justify-center gap-4 mb-6">
-            <div className="w-8 h-[2px] bg-brutal-accent" />
-            <span className="font-mono text-xs text-brutal-accent uppercase tracking-[0.2em]">
-              {FEATURES[2].tag}
-            </span>
-            <div className="w-8 h-[2px] bg-brutal-accent" />
+        <div className="w-full px-8 md:px-16 lg:px-24">
+          <div className="max-w-4xl">
+            <div className="feature3-tag flex items-center gap-4 mb-6">
+              <div className="w-12 h-[2px] bg-brutal-accent" />
+              <span className="font-mono text-xs text-brutal-accent uppercase tracking-[0.2em]">
+                {FEATURES[2].tag}
+              </span>
+            </div>
+            <h2 className="feature3-title font-sans font-black text-6xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tighter mb-6">
+              {FEATURES[2].title}
+            </h2>
+            <p className="feature3-desc font-inter text-xl md:text-2xl text-gray-400 max-w-2xl">
+              {FEATURES[2].description}
+            </p>
+            <button className="feature3-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors">
+              Learn More
+            </button>
           </div>
-          <h2 className="feature3-title font-sans font-black text-6xl md:text-8xl lg:text-[10vw] leading-[0.9] tracking-tighter mb-6">
-            {FEATURES[2].title}
-          </h2>
-          <p className="feature3-desc font-inter text-xl md:text-2xl text-gray-400 max-w-2xl mx-auto">
-            {FEATURES[2].description}
-          </p>
         </div>
       </div>
 
@@ -791,12 +806,12 @@ const SolutionCinematic: React.FC = () => {
           ======================================== */}
       <div
         ref={scene7Ref}
-        className="absolute inset-0 z-10 flex items-center opacity-0 invisible"
+        className="absolute inset-0 z-10 flex items-center justify-end pointer-events-auto"
+        style={{ opacity: 0, visibility: 'hidden' }}
       >
-        <div className="w-full px-8 md:px-16 lg:px-24">
-          <div className="max-w-4xl">
-            <div className="flex items-start gap-6">
-              <div className="feature4-accent w-[2px] h-32 bg-brutal-accent mt-2" />
+        <div className="w-full px-8 md:px-16 lg:px-24 text-right">
+          <div className="max-w-4xl ml-auto">
+            <div className="flex items-start justify-end gap-6">
               <div>
                 <div className="feature4-tag mb-4">
                   <span className="font-mono text-xs text-brutal-accent uppercase tracking-[0.2em]">
@@ -806,10 +821,14 @@ const SolutionCinematic: React.FC = () => {
                 <h2 className="feature4-title font-sans font-black text-6xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tighter mb-6 text-brutal-fg">
                   {FEATURES[3].title}
                 </h2>
-                <p className="feature4-desc font-inter text-xl md:text-2xl text-gray-400 max-w-2xl">
+                <p className="feature4-desc font-inter text-xl md:text-2xl text-gray-400 max-w-2xl ml-auto">
                   {FEATURES[3].description}
                 </p>
+                <button className="feature4-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors">
+                  Learn More
+                </button>
               </div>
+              <div className="feature4-accent w-[2px] h-32 bg-brutal-accent mt-2" />
             </div>
           </div>
         </div>

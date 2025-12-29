@@ -66,24 +66,7 @@ const Comparison: React.FC = () => {
               <td className="py-6 text-gray-500">GPS-Denied Capable</td>
               <td className="py-6 text-gray-500">GPS-Dependent</td>
             </tr>
-            <tr className="border-b border-gray-800">
-              <td className="py-6 font-bold">Payload</td>
-              <td className="py-6 text-brutal-accent">MODULAR / HOT-SWAP</td>
-              <td className="py-6 text-gray-500">Fixed</td>
-              <td className="py-6 text-gray-500">Fixed</td>
-            </tr>
-            <tr className="border-b border-gray-800">
-              <td className="py-6 font-bold">Output</td>
-              <td className="py-6 text-brutal-accent">ACTIONABLE AI ALERTS</td>
-              <td className="py-6 text-gray-500">Autonomous Nav Data</td>
-              <td className="py-6 text-gray-500">Raw Video</td>
-            </tr>
-            <tr>
-              <td className="py-6 font-bold">Scalability</td>
-              <td className="py-6 text-brutal-accent">EXPONENTIAL SWARM</td>
-              <td className="py-6 text-gray-500">Linear Addition</td>
-              <td className="py-6 text-gray-500">Linear Addition</td>
-            </tr>
+
           </tbody>
         </table>
       </div>

@@ -27,8 +27,7 @@ function MainPage() {
         <Hero />
         {/* PlainMission removed from here */}
         <ScrollyTelling />
-        <Solution />
-        <Architecture />
+        <SolutionCinematic />
         <MissionKinetic />
         <Comparison />
         <UseCases />

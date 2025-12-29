@@ -11,7 +11,7 @@ const Hero: React.FC = () => {
           </h1>
         </div>
       </div>
-      
+
       {/* Marquee Strip */}
       <div className="border-y border-brutal-line py-2 bg-white text-black font-mono text-sm uppercase overflow-hidden marquee-container">
         <div className="marquee-content">

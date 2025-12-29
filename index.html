@@ -103,6 +103,13 @@
             0% { transform: translateY(-100%); }
             100% { transform: translateY(100vh); }
         }
+
+        /* Custom Video Caption Styling */
+        video::cue {
+            background-color: transparent !important;
+            text-shadow: 2px 2px 2px black; /* Add shadow for readability since background is gone */
+            font-family: 'JetBrains Mono', monospace; /* Match site font */
+        }
     </style>
 <script type="importmap">
 {

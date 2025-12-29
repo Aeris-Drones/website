@@ -15,19 +15,22 @@ import Timeline from './components/Timeline';
 import KineticLab from './components/KineticLab';
 import ProblemLab from './components/ProblemLab';
 
+import AboutPage from './components/AboutPage';
+
+// import PlainMission from './components/PlainMission'; // Removed
+
 function MainPage() {
   return (
     <>
       <Navbar />
       <main className="pt-14">
         <Hero />
+        {/* PlainMission removed from here */}
         <ScrollyTelling />
         <Solution />
         <Architecture />
-        <MissionKinetic />
         <UseCases />
         <Video />
-        <Team />
         <Contact />
       </main>
     </>
@@ -39,6 +42,7 @@ function App() {
     <Router>
       <Routes>
         <Route path="/" element={<MainPage />} />
+        <Route path="/about" element={<AboutPage />} />
         <Route path="/timeline" element={<Timeline />} />
         <Route path="/design-lab" element={<KineticLab />} />
         <Route path="/problem-lab" element={<ProblemLab />} />

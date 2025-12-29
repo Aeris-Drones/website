@@ -52,7 +52,7 @@ const MissionKinetic: React.FC = () => {
   }, []);
 
   return (
-    <section ref={containerRef} className="bg-white text-black min-h-screen relative overflow-hidden flex flex-col justify-center py-24">
+    <section id="about" ref={containerRef} className="bg-white text-black min-h-screen relative overflow-hidden flex flex-col justify-center py-24">
 
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         {MISSION.headline.map((word, i) => (

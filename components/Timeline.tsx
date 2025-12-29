@@ -73,9 +73,9 @@ const Timeline: React.FC = () => {
     };
     checkMobile();
     window.addEventListener('resize', checkMobile);
-    
+
     const items = document.querySelectorAll('.timeline-card, .phase-header, .lane-badge');
-    
+
     const observer = new IntersectionObserver((entries) => {
       entries.forEach(entry => {
         if (entry.isIntersecting) {
@@ -127,7 +127,7 @@ const Timeline: React.FC = () => {
     const viewportWidth = window.innerWidth;
     const viewportHeight = window.innerHeight;
     const padding = 20; // Minimum distance from viewport edges
-    
+
     // Calculate optimal x position (centered on element, but keep within viewport)
     let x = rect.left + rect.width / 2;
     if (x - tooltipWidth / 2 < padding) {
@@ -135,13 +135,13 @@ const Timeline: React.FC = () => {
     } else if (x + tooltipWidth / 2 > viewportWidth - padding) {
       x = viewportWidth - tooltipWidth / 2 - padding;
     }
-    
+
     // Determine if tooltip should go above or below based on available space
     // Ensure we have enough space for the tooltip
     const spaceAbove = rect.top - padding;
     const spaceBelow = viewportHeight - rect.bottom - padding;
     const minSpaceNeeded = tooltipHeight + 20;
-    
+
     let placement: 'above' | 'below';
     if (spaceAbove >= minSpaceNeeded) {
       placement = 'above';
@@ -151,7 +151,7 @@ const Timeline: React.FC = () => {
       // Choose the side with more space
       placement = spaceAbove > spaceBelow ? 'above' : 'below';
     }
-    
+
     let y: number;
     if (placement === 'above') {
       y = rect.top - 10;
@@ -166,7 +166,7 @@ const Timeline: React.FC = () => {
         y = viewportHeight - tooltipHeight - padding;
       }
     }
-    
+
     setTooltipPosition({
       x: x,
       y: y,
@@ -741,7 +741,7 @@ const Timeline: React.FC = () => {
 
       <Navbar />
       {hoveredCard && tooltipPosition && cardDescriptions[hoveredCard] && (
-        <div 
+        <div
           className={`phase-tooltip placement-${tooltipPosition.placement} ${hoveredCard ? 'visible' : ''}`}
           style={{
             left: isMobile ? undefined : `${tooltipPosition.x}px`,
@@ -750,7 +750,7 @@ const Timeline: React.FC = () => {
           }}
         >
           {isMobile && (
-            <button 
+            <button
               className="tooltip-close"
               onClick={() => {
                 setHoveredCard(null);
@@ -765,9 +765,9 @@ const Timeline: React.FC = () => {
           <div className="tooltip-description">{cardDescriptions[hoveredCard]?.detailedExplanation}</div>
         </div>
       )}
-      <section className="aeris-timeline-section" style={{paddingTop: '3.5rem'}}>
+      <section className="aeris-timeline-section" style={{ paddingTop: '3.5rem' }}>
         <div className="aeris-container">
-          
+
           <div className="section-header">
             <h2>
               <span className="accent-block"></span>
@@ -793,12 +793,12 @@ const Timeline: React.FC = () => {
               <div className="phase-header">
                 <div className="current-phase-badge">Current Phase</div>
                 <h3>Phase I</h3>
-                <span className="date-range">2026.01 — 2028.12</span>
+                <span className="date-range">2026.01 to 2028.12</span>
               </div>
               <div className="timeline-track-cell"></div>
-              
+
               <div className="timeline-item-container lane-disaster">
-                <div 
+                <div
                   className="timeline-card"
                   onMouseEnter={(e) => !isMobile && handleCardHover('phase1-disaster', e)}
                   onMouseLeave={handleCardLeave}
@@ -819,12 +819,12 @@ const Timeline: React.FC = () => {
             <div className="phase-group phase-2">
               <div className="phase-header">
                 <h3>Phase II</h3>
-                <span className="date-range">2029.01 — 2033.12</span>
+                <span className="date-range">2029.01 to 2033.12</span>
               </div>
               <div className="timeline-track-cell"></div>
 
               <div className="timeline-item-container lane-disaster">
-                <div 
+                <div
                   className="timeline-card"
                   onMouseEnter={(e) => !isMobile && handleCardHover('phase2-disaster', e)}
                   onMouseLeave={handleCardLeave}
@@ -839,7 +839,7 @@ const Timeline: React.FC = () => {
               </div>
 
               <div className="timeline-item-container lane-infra">
-                <div 
+                <div
                   className="timeline-card"
                   onMouseEnter={(e) => !isMobile && handleCardHover('phase2-infra', e)}
                   onMouseLeave={handleCardLeave}
@@ -854,7 +854,7 @@ const Timeline: React.FC = () => {
               </div>
 
               <div className="timeline-item-container lane-agri">
-                <div 
+                <div
                   className="timeline-card"
                   onMouseEnter={(e) => !isMobile && handleCardHover('phase2-agri', e)}
                   onMouseLeave={handleCardLeave}
@@ -873,12 +873,12 @@ const Timeline: React.FC = () => {
             <div className="phase-group phase-3">
               <div className="phase-header">
                 <h3>Phase III</h3>
-                <span className="date-range">2034.01 — 2039.05</span>
+                <span className="date-range">2034.01 to 2039.05</span>
               </div>
               <div className="timeline-track-cell"></div>
 
               <div className="timeline-item-container lane-disaster">
-                <div 
+                <div
                   className="timeline-card"
                   onMouseEnter={(e) => !isMobile && handleCardHover('phase3-disaster', e)}
                   onMouseLeave={handleCardLeave}
@@ -893,7 +893,7 @@ const Timeline: React.FC = () => {
               </div>
 
               <div className="timeline-item-container lane-infra">
-                <div 
+                <div
                   className="timeline-card"
                   onMouseEnter={(e) => !isMobile && handleCardHover('phase3-infra', e)}
                   onMouseLeave={handleCardLeave}
@@ -908,7 +908,7 @@ const Timeline: React.FC = () => {
               </div>
 
               <div className="timeline-item-container lane-agri">
-                <div 
+                <div
                   className="timeline-card"
                   onMouseEnter={(e) => !isMobile && handleCardHover('phase3-agri', e)}
                   onMouseLeave={handleCardLeave}
@@ -927,12 +927,12 @@ const Timeline: React.FC = () => {
             <div className="phase-group phase-4">
               <div className="phase-header">
                 <h3>Phase IV</h3>
-                <span className="date-range">2040 — Beyond</span>
+                <span className="date-range">2040 to Beyond</span>
               </div>
               <div className="timeline-track-cell"></div>
 
               <div className="timeline-item-container lane-disaster">
-                <div 
+                <div
                   className="timeline-card"
                   onMouseEnter={(e) => !isMobile && handleCardHover('phase4-disaster', e)}
                   onMouseLeave={handleCardLeave}
@@ -947,7 +947,7 @@ const Timeline: React.FC = () => {
               </div>
 
               <div className="timeline-item-container lane-infra">
-                <div 
+                <div
                   className="timeline-card"
                   onMouseEnter={(e) => !isMobile && handleCardHover('phase4-infra', e)}
                   onMouseLeave={handleCardLeave}
@@ -962,7 +962,7 @@ const Timeline: React.FC = () => {
               </div>
 
               <div className="timeline-item-container lane-agri">
-                <div 
+                <div
                   className="timeline-card"
                   onMouseEnter={(e) => !isMobile && handleCardHover('phase4-agri', e)}
                   onMouseLeave={handleCardLeave}

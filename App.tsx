@@ -23,13 +23,37 @@ import NoCloudPage from './components/features/NoCloudPage';
 import SwarmIQPage from './components/features/SwarmIQPage';
 import ModularPodsPage from './components/features/ModularPodsPage';
 
-// Scroll to top on route change
+// Scroll to top on route change, with scroll position restoration for feature pages
 function ScrollToTop() {
-  const { pathname } = useLocation();
+  const { pathname, hash } = useLocation();
 
   useEffect(() => {
-    window.scrollTo(0, 0);
-  }, [pathname]);
+    // Check if we're returning from a feature page
+    const savedPosition = sessionStorage.getItem('scrollPosition');
+    const returnToFeatures = sessionStorage.getItem('returnToFeatures');
+
+    if (pathname === '/' && returnToFeatures === 'true' && savedPosition) {
+      // Restore the saved scroll position
+      const position = parseInt(savedPosition, 10);
+      sessionStorage.removeItem('returnToFeatures');
+      sessionStorage.removeItem('scrollPosition');
+      // Small delay to ensure the page has rendered
+      setTimeout(() => {
+        window.scrollTo({ top: position, behavior: 'instant' });
+      }, 50);
+    } else if (hash) {
+      // If there's a hash, scroll to that element
+      const element = document.querySelector(hash);
+      if (element) {
+        setTimeout(() => {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }, 100);
+      }
+    } else {
+      // No hash and not restoring, scroll to top
+      window.scrollTo(0, 0);
+    }
+  }, [pathname, hash]);
 
   return null;
 }

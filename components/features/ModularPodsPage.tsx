@@ -1,8 +1,9 @@
 import React, { useLayoutEffect, useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ArrowLeft } from 'lucide-react';
 import Navbar from '../Navbar';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -10,43 +11,55 @@ gsap.registerPlugin(ScrollTrigger);
 const ModularPodsPage: React.FC = () => {
   const heroRef = useRef<HTMLDivElement>(null);
   const contentRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+
+  // Handle back to features navigation
+  const handleBackToFeatures = () => {
+    sessionStorage.setItem('returnToFeatures', 'true');
+    navigate('/');
+  };
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Hero title animation
+      // Simple fade-in animations without vertical movement
       gsap.fromTo('.hero-title',
-        { opacity: 0, y: 100, filter: 'blur(20px)' },
-        { opacity: 1, y: 0, filter: 'blur(0px)', duration: 1.2, ease: 'expo.out', delay: 0.3 }
+        { opacity: 0, filter: 'blur(10px)' },
+        { opacity: 1, filter: 'blur(0px)', duration: 0.6, ease: 'power2.out', delay: 0.1 }
       );
 
       gsap.fromTo('.hero-tagline',
-        { opacity: 0, y: 50 },
-        { opacity: 1, y: 0, duration: 1, ease: 'expo.out', delay: 0.6 }
+        { opacity: 0 },
+        { opacity: 1, duration: 0.5, ease: 'power2.out', delay: 0.2 }
       );
 
       gsap.fromTo('.hero-line',
         { scaleX: 0 },
-        { scaleX: 1, duration: 0.8, ease: 'expo.inOut', delay: 0.8 }
+        { scaleX: 1, duration: 0.5, ease: 'power2.inOut', delay: 0.3 }
       );
 
       gsap.fromTo('.scroll-indicator',
         { opacity: 0 },
-        { opacity: 1, duration: 0.6, delay: 1.2 }
+        { opacity: 1, duration: 0.4, delay: 0.5 }
+      );
+
+      gsap.fromTo('.back-button',
+        { opacity: 0 },
+        { opacity: 1, duration: 0.4, delay: 0.2 }
       );
 
       // Content sections scroll animations
       const sections = gsap.utils.toArray('.content-section');
       sections.forEach((section: any) => {
         gsap.fromTo(section,
-          { opacity: 0, y: 60 },
+          { opacity: 0, y: 40 },
           {
             opacity: 1,
             y: 0,
-            duration: 1,
-            ease: 'power3.out',
+            duration: 0.8,
+            ease: 'power2.out',
             scrollTrigger: {
               trigger: section,
-              start: 'top 80%',
+              start: 'top 85%',
               toggleActions: 'play none none reverse'
             }
           }
@@ -92,6 +105,15 @@ const ModularPodsPage: React.FC = () => {
 
       {/* Hero Section */}
       <section className="relative h-screen flex flex-col items-center justify-center border-b border-white/10 overflow-hidden">
+        {/* Back Button - Top Left */}
+        <button
+          onClick={handleBackToFeatures}
+          className="back-button absolute top-20 left-6 md:left-12 z-20 flex items-center gap-2 px-4 py-2 border border-white/20 font-mono text-xs uppercase tracking-widest hover:bg-white hover:text-black transition-colors group"
+        >
+          <ArrowLeft className="w-4 h-4 group-hover:transform group-hover:-translate-x-1 transition-transform" />
+          Back to Features
+        </button>
+
         {/* Geometric Background */}
         <div className="absolute inset-0 opacity-[0.05]">
           <svg className="w-full h-full" viewBox="0 0 800 600" xmlns="http://www.w3.org/2000/svg">
@@ -102,7 +124,7 @@ const ModularPodsPage: React.FC = () => {
               return (
                 <polygon
                   key={i}
-                  points={`${x},${y-40} ${x+35},${y-20} ${x+35},${y+20} ${x},${y+40} ${x-35},${y+20} ${x-35},${y-20}`}
+                  points={`${x},${y - 40} ${x + 35},${y - 20} ${x + 35},${y + 20} ${x},${y + 40} ${x - 35},${y + 20} ${x - 35},${y - 20}`}
                   fill="none"
                   stroke="#FF2A00"
                   strokeWidth="1"
@@ -314,12 +336,12 @@ const ModularPodsPage: React.FC = () => {
               Every mission<span className="text-[#FF2A00]">.</span>
             </h2>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-              <Link
-                to="/"
+              <button
+                onClick={handleBackToFeatures}
                 className="px-8 py-4 border border-white/20 font-mono text-sm uppercase tracking-widest hover:bg-white hover:text-black transition-colors"
               >
-                Back to Home
-              </Link>
+                Back to Features
+              </button>
               <Link
                 to="/#contact"
                 className="px-8 py-4 bg-[#FF2A00] text-black font-mono text-sm uppercase tracking-widest hover:bg-white transition-colors"

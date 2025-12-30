@@ -133,6 +133,12 @@ const SolutionCinematic: React.FC = () => {
   // Navigation
   const navigate = useNavigate();
 
+  // Helper to save scroll position before navigating to feature pages
+  const navigateToFeature = (path: string) => {
+    sessionStorage.setItem('scrollPosition', window.scrollY.toString());
+    navigate(path);
+  };
+
   // Custom cursor for drone hover
   const cursorRef = useRef<HTMLDivElement>(null);
   const xTo = useRef<gsap.QuickToFunc>();
@@ -650,7 +656,7 @@ const SolutionCinematic: React.FC = () => {
   }, []);
 
   return (
-    <div ref={componentRef} className="relative h-screen bg-brutal-bg text-brutal-fg overflow-hidden">
+    <div id="features" ref={componentRef} className="relative h-screen bg-brutal-bg text-brutal-fg overflow-hidden">
 
       {/* Custom cursor for drone hover - hidden on touch devices */}
       <div
@@ -832,7 +838,7 @@ const SolutionCinematic: React.FC = () => {
               {FEATURES[0].description}
             </p>
             <button
-              onClick={() => navigate('/one-map')}
+              onClick={() => navigateToFeature('/one-map')}
               className="feature1-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors"
             >
               Learn More
@@ -864,7 +870,7 @@ const SolutionCinematic: React.FC = () => {
               {FEATURES[1].description}
             </p>
             <button
-              onClick={() => navigate('/no-cloud')}
+              onClick={() => navigateToFeature('/no-cloud')}
               className="feature2-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors"
             >
               Learn More
@@ -896,7 +902,7 @@ const SolutionCinematic: React.FC = () => {
               {FEATURES[2].description}
             </p>
             <button
-              onClick={() => navigate('/swarm-iq')}
+              onClick={() => navigateToFeature('/swarm-iq')}
               className="feature3-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors"
             >
               Learn More
@@ -929,7 +935,7 @@ const SolutionCinematic: React.FC = () => {
                   {FEATURES[3].description}
                 </p>
                 <button
-                  onClick={() => navigate('/modular-pods')}
+                  onClick={() => navigateToFeature('/modular-pods')}
                   className="feature4-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors"
                 >
                   Learn More

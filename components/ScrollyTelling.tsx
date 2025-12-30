@@ -33,12 +33,23 @@ const ScrollyTelling: React.FC = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      // Use matchMedia to set different scroll lengths for mobile vs desktop
+      const mm = gsap.matchMedia();
+      let scrollEnd = "+=800%";
+
+      // Reduce scroll length on mobile for snappier experience
+      mm.add("(max-width: 768px)", () => {
+        scrollEnd = "+=500%";
+      });
+      mm.add("(min-width: 769px)", () => {
+        scrollEnd = "+=800%";
+      });
 
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: componentRef.current,
           start: "top top",
-          end: "+=800%",
+          end: scrollEnd,
           scrub: 1.5,
           pin: true,
           anticipatePin: 1,

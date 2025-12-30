@@ -303,16 +303,16 @@ export default function DroneExplorer({ droneType, onClose }: DroneExplorerProps
   }, [onClose]);
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-4 md:p-8" onClick={onClose}>
+    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-sm flex items-center justify-center p-0 md:p-4 lg:p-8" onClick={onClose}>
 
       <div
-        className="relative w-full max-w-7xl h-[85vh] bg-brutal-bg border border-brutal-line flex flex-col md:flex-row shadow-2xl overflow-hidden"
+        className="relative w-full max-w-7xl h-[100dvh] md:h-[85vh] bg-brutal-bg md:border border-brutal-line flex md:flex-row shadow-2xl overflow-hidden"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Large X Close button - Top Right */}
         <button
           onClick={onClose}
-          className="absolute top-4 right-4 z-50 w-10 h-10 flex items-center justify-center group bg-black/20 hover:bg-black/50 transition-colors backdrop-blur-md rounded-full"
+          className="absolute top-6 right-6 md:top-4 md:right-4 z-50 w-12 h-12 md:w-10 md:h-10 flex items-center justify-center group bg-black/40 hover:bg-black/80 transition-colors backdrop-blur-md rounded-full border border-white/10"
           aria-label="Close"
         >
           <div className="relative w-6 h-6">
@@ -321,104 +321,8 @@ export default function DroneExplorer({ droneType, onClose }: DroneExplorerProps
           </div>
         </button>
 
-        {/* Left Panel - Info */}
-        <div className="w-full md:w-[400px] h-full bg-brutal-bg border-r border-brutal-line p-8 flex flex-col overflow-y-auto">
-          {/* Header */}
-          <div className="mb-8">
-            <div className="flex items-center gap-3 mb-4">
-              <div className="w-8 h-[2px] bg-brutal-accent" />
-              <span className="font-mono text-xs text-brutal-accent uppercase tracking-[0.2em]">
-              // SYSTEM EXPLORER
-              </span>
-            </div>
-            <h2 className="font-sans font-black text-5xl md:text-6xl tracking-tight mb-2">
-              {meta.name}
-            </h2>
-            <p className="font-mono text-sm text-gray-500 uppercase tracking-wider">
-              {meta.type}
-            </p>
-            <p className="font-inter text-base text-gray-400 mt-4">
-              {meta.tagline}
-            </p>
-          </div>
-
-          {/* Hotspot Info */}
-          {activeHotspotData ? (
-            <div className="flex-1">
-              <div className="border-l-2 border-brutal-accent pl-4 mb-6">
-                <h3 className="font-sans font-black text-2xl mb-2">
-                  {activeHotspotData.label}
-                </h3>
-                <p className="font-inter text-gray-400 text-sm leading-relaxed">
-                  {activeHotspotData.description}
-                </p>
-              </div>
-
-              {activeHotspotData.specs && (
-                <div className="space-y-3">
-                  <span className="font-mono text-xs text-brutal-accent uppercase tracking-wider">
-                    Specifications
-                  </span>
-                  {activeHotspotData.specs.map((spec, i) => (
-                    <div
-                      key={i}
-                      className="font-mono text-sm text-gray-300 flex items-center gap-3"
-                    >
-                      <span className="text-brutal-accent">&gt;</span>
-                      {spec}
-                    </div>
-                  ))}
-                </div>
-              )}
-            </div>
-          ) : (
-            <div className="flex-1 flex flex-col justify-center">
-              <div className="text-center text-gray-600">
-                <div className="font-mono text-xs uppercase tracking-wider mb-4">
-                  Click on a data point to explore
-                </div>
-                <div className="flex items-center justify-center gap-2">
-                  <div className="w-3 h-3 rounded-full bg-brutal-accent animate-pulse" />
-                  <span className="font-mono text-xs text-gray-500">
-                    {hotspots.length} points available
-                  </span>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {/* Hotspot List */}
-          <div className="mt-8 pt-6 border-t border-brutal-line">
-            <span className="font-mono text-xs text-gray-600 uppercase tracking-wider block mb-4">
-              Components
-            </span>
-            <div className="space-y-2">
-              {hotspots.map((hotspot) => (
-                <button
-                  key={hotspot.id}
-                  onClick={() => setActiveHotspot(activeHotspot === hotspot.id ? null : hotspot.id)}
-                  className={`w-full text-left px-3 py-2 font-mono text-sm transition-all ${activeHotspot === hotspot.id
-                    ? 'bg-brutal-accent text-black'
-                    : 'text-gray-400 hover:text-white hover:bg-white/5'
-                    }`}
-                >
-                  {hotspot.label}
-                </button>
-              ))}
-            </div>
-          </div>
-
-          {/* Instructions */}
-          <div className="mt-8 pt-6 border-t border-brutal-line">
-            <div className="font-mono text-xs text-gray-600 space-y-2">
-              <p><span className="text-brutal-accent">DRAG</span> to rotate model</p>
-              <p><span className="text-brutal-accent">CLICK</span> on markers to explore</p>
-            </div>
-          </div>
-        </div>
-
-        {/* Right Panel - 3D Model */}
-        <div className="flex-1 relative">
+        {/* 3D Model Panel (Full Screen on Mobile) */}
+        <div className="absolute inset-0 md:relative md:flex-1 h-full z-0 md:z-auto">
           {/* Technical grid overlay */}
           <div className="absolute inset-0 opacity-10 pointer-events-none">
             <svg className="w-full h-full" xmlns="http://www.w3.org/2000/svg">
@@ -431,7 +335,6 @@ export default function DroneExplorer({ droneType, onClose }: DroneExplorerProps
             </svg>
           </div>
 
-          {/* 3D Canvas */}
           <Canvas camera={{ position: [0, 1, 5], fov: 50 }}>
             <color attach="background" args={['#0a0a0a']} />
             <ambientLight intensity={0.4} />
@@ -443,8 +346,7 @@ export default function DroneExplorer({ droneType, onClose }: DroneExplorerProps
             />
             <Environment preset="city" />
 
-            {/* Camera controller for hotspot focus */}
-            <CameraController targetPosition={targetPosition} />
+            <CameraController targetPosition={activeHotspotData?.position || null} />
 
             <Suspense fallback={null}>
               {droneType === 'ranger' ? (
@@ -471,8 +373,18 @@ export default function DroneExplorer({ droneType, onClose }: DroneExplorerProps
             />
           </Canvas>
 
-          {/* Drone name overlay */}
-          <div className="absolute bottom-8 right-8 text-right pointer-events-none">
+          {/* Drone name overlay (Mobile Background) */}
+          <div className="absolute top-24 left-0 w-full text-center pointer-events-none md:hidden">
+            <h3
+              className="font-sans font-black text-[20vw] leading-none tracking-tighter opacity-10 blur-[1px]"
+              style={{ WebkitTextStroke: '1px rgba(255,255,255,0.2)' }}
+            >
+              {meta.name}
+            </h3>
+          </div>
+
+          {/* Drone name overlay (Desktop Corner) */}
+          <div className="absolute bottom-8 right-8 text-right pointer-events-none hidden md:block">
             <h3
               className="font-sans font-black text-[15vw] leading-none tracking-tighter opacity-5"
               style={{ WebkitTextStroke: '1px rgba(255,255,255,0.1)' }}
@@ -481,6 +393,144 @@ export default function DroneExplorer({ droneType, onClose }: DroneExplorerProps
             </h3>
           </div>
         </div>
+
+        {/* Left Panel / Bottom Sheet - Info */}
+        <div
+          className={`
+            absolute bottom-0 left-0 w-full md:relative md:w-[400px] 
+            bg-black/85 backdrop-blur-xl md:bg-brutal-bg md:backdrop-blur-none
+            border-t border-white/20 md:border-t-0 md:border-r border-brutal-line 
+            flex flex-col
+            transition-all duration-500 ease-[cubic-bezier(0.23,1,0.32,1)]
+            z-20
+            ${activeHotspot ? 'h-[60dvh]' : 'h-[35dvh]'} 
+            md:h-full md:max-h-full
+          `}
+        >
+          {/* Drag Handle (Mobile Only) */}
+          <div className="w-full flex justify-center pt-3 pb-1 md:hidden" onClick={() => setActiveHotspot(null)}>
+            <div className="w-12 h-1.5 bg-white/20 rounded-full" />
+          </div>
+
+          <div className="p-6 md:p-8 flex flex-col h-full overflow-y-auto">
+            {/* Header */}
+            <div className="mb-4 md:mb-8 shrink-0">
+              <div className="flex items-center gap-3 mb-2 md:mb-4">
+                <div className="w-6 md:w-8 h-[2px] bg-brutal-accent" />
+                <span className="font-mono text-xs text-brutal-accent uppercase tracking-[0.2em]">
+                // SYSTEM EXPLORER
+                </span>
+              </div>
+              <h2 className="font-sans font-black text-3xl md:text-5xl lg:text-6xl tracking-tight mb-1 md:mb-2 text-white">
+                {meta.name}
+              </h2>
+              <p className="font-mono text-xs md:text-sm text-gray-400 uppercase tracking-wider">
+                {meta.type}
+              </p>
+              <p className="font-inter text-sm md:text-base text-gray-500 mt-2 md:mt-4 hidden md:block">
+                {meta.tagline}
+              </p>
+            </div>
+
+            {/* Hotspot Info */}
+            {activeHotspotData ? (
+              <div className="flex-1 overflow-y-auto pb-8 md:pb-0 custom-scrollbar">
+                <div className="border-l-2 border-brutal-accent pl-4 mb-6">
+                  <h3 className="font-sans font-black text-2xl mb-2 text-white">
+                    {activeHotspotData.label}
+                  </h3>
+                  <p className="font-inter text-gray-300 text-sm leading-relaxed">
+                    {activeHotspotData.description}
+                  </p>
+                </div>
+
+                {activeHotspotData.specs && (
+                  <div className="space-y-3">
+                    <span className="font-mono text-xs text-brutal-accent uppercase tracking-wider">
+                      Specifications
+                    </span>
+                    {activeHotspotData.specs.map((spec, i) => (
+                      <div
+                        key={i}
+                        className="font-mono text-xs md:text-sm text-gray-300 flex items-center gap-3"
+                      >
+                        <span className="text-brutal-accent">&gt;</span>
+                        {spec}
+                      </div>
+                    ))}
+                  </div>
+                )}
+
+                {/* Mobile: Close Details Button */}
+                <button
+                  onClick={() => setActiveHotspot(null)}
+                  className="mt-6 w-full py-3 border border-white/20 text-white font-mono text-xs uppercase md:hidden active:bg-white/10"
+                >
+                  Close Details
+                </button>
+              </div>
+            ) : (
+              <div className="flex-1 flex flex-col justify-start md:justify-center">
+                <div className="text-gray-400 md:text-center">
+                  <p className="text-sm md:hidden mb-4 font-inter leading-relaxed">{meta.tagline}</p>
+
+                  <div className="font-mono text-xs uppercase tracking-wider mb-4 hidden md:block">
+                    Click on a data point to explore
+                  </div>
+                  <div className="flex items-center md:justify-center gap-2">
+                    <div className="w-2 h-2 rounded-full bg-brutal-accent animate-pulse" />
+                    <span className="font-mono text-xs text-gray-500">
+                      Select a hotspot on the model
+                    </span>
+                  </div>
+                </div>
+
+                {/* Mobile Hotspot Chips */}
+                <div className="mt-4 flex flex-wrap gap-2 md:hidden">
+                  {hotspots.map(h => (
+                    <button
+                      key={h.id}
+                      onClick={() => setActiveHotspot(h.id)}
+                      className="px-3 py-1.5 border border-white/10 bg-white/5 rounded-full text-xs font-mono text-gray-300"
+                    >
+                      {h.label}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+
+            {/* Desktop Hotspot List */}
+            <div className="mt-8 pt-6 border-t border-brutal-line hidden md:block">
+              <span className="font-mono text-xs text-gray-600 uppercase tracking-wider block mb-4">
+                Components
+              </span>
+              <div className="space-y-2">
+                {hotspots.map((hotspot) => (
+                  <button
+                    key={hotspot.id}
+                    onClick={() => setActiveHotspot(activeHotspot === hotspot.id ? null : hotspot.id)}
+                    className={`w-full text-left px-3 py-2 font-mono text-sm transition-all ${activeHotspot === hotspot.id
+                      ? 'bg-brutal-accent text-black'
+                      : 'text-gray-400 hover:text-white hover:bg-white/5'
+                      }`}
+                  >
+                    {hotspot.label}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            {/* Instructions */}
+            <div className="mt-auto pt-6 border-t border-brutal-line hidden md:block">
+              <div className="font-mono text-xs text-gray-600 space-y-2">
+                <p><span className="text-brutal-accent">DRAG</span> to rotate model</p>
+                <p><span className="text-brutal-accent">CLICK</span> on markers to explore</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
       </div>
     </div>
   );

@@ -365,7 +365,7 @@ const AboutPage: React.FC = () => {
                     className="absolute inset-0 top-14 z-10 bg-black mix-blend-multiply flex flex-col items-center justify-start pt-[12vh] select-none"
                 >
                     <h1
-                        className="font-black text-[23vw] leading-[0.8] tracking-tighter text-white cursor-none transition-transform duration-700 hover:scale-[1.01] active:scale-95 origin-top"
+                        className="font-black text-[18vw] md:text-[23vw] leading-[0.8] tracking-tighter text-white cursor-none transition-transform duration-700 hover:scale-[1.01] active:scale-95 origin-top"
                         onMouseEnter={() => setIsHovering(true)}
                         onMouseLeave={() => setIsHovering(false)}
                         onClick={handleOpenVideo}
@@ -382,9 +382,9 @@ const AboutPage: React.FC = () => {
                 */}
                 <div className="absolute w-full top-[65vh] md:top-[70vh] z-20 flex justify-center pointer-events-none px-6">
                     <div ref={quoteRef} className="max-w-5xl text-center font-mono text-lg md:text-2xl lg:text-3xl leading-relaxed tracking-widest text-white/90 uppercase">
-                        <p>
+                        <div>
                             {renderQuote()}
-                        </p>
+                        </div>
                     </div>
                 </div>
 
@@ -898,27 +898,27 @@ const TimelineConsole: React.FC = () => {
                                 </div>
                             </div>
 
-                            <div className="flex items-center gap-2">
-                                <motion.button onClick={prevStep} className="p-3 border border-white/10 hover:border-[#ff3b00] text-white transition-all" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                    <SkipBack className="w-4 h-4" />
+                            <div className="flex items-center gap-2 md:gap-4">
+                                <motion.button onClick={prevStep} className="p-3 md:p-4 border border-white/10 hover:border-[#ff3b00] text-white transition-all" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                    <SkipBack className="w-4 h-4 md:w-5 md:h-5" />
                                 </motion.button>
                                 <motion.button
                                     onClick={togglePlay}
-                                    className={cn("p-4 border transition-all", isPlayingTimeline ? "border-[#ff3b00] bg-[#ff3b00] text-black" : "border-[#ff3b00]/50 bg-[#ff3b00]/10 text-white hover:bg-[#ff3b00] hover:text-black")}
+                                    className={cn("p-4 md:p-5 border transition-all", isPlayingTimeline ? "border-[#ff3b00] bg-[#ff3b00] text-black" : "border-[#ff3b00]/50 bg-[#ff3b00]/10 text-white hover:bg-[#ff3b00] hover:text-black")}
                                     whileHover={{ scale: 1.05 }}
                                     whileTap={{ scale: 0.95 }}
                                 >
-                                    {isPlayingTimeline ? <Pause className="w-5 h-5" /> : <Play className="w-5 h-5" />}
+                                    {isPlayingTimeline ? <Pause className="w-5 h-5 md:w-6 md:h-6" /> : <Play className="w-5 h-5 md:w-6 md:h-6" />}
                                 </motion.button>
-                                <motion.button onClick={nextStep} className="p-3 border border-white/10 hover:border-[#ff3b00] text-white transition-all" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                                    <SkipForward className="w-4 h-4" />
+                                <motion.button onClick={nextStep} className="p-3 md:p-4 border border-white/10 hover:border-[#ff3b00] text-white transition-all" whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                    <SkipForward className="w-4 h-4 md:w-5 md:h-5" />
                                 </motion.button>
                             </div>
                         </div>
 
                         {/* Scrubber */}
-                        <div className="flex-1 w-full">
-                            <div className="relative h-16 flex items-center">
+                        <div className="flex-1 w-full overflow-x-auto pb-4 md:pb-0 scrollbar-hide">
+                            <div className="relative h-16 flex items-center min-w-[600px] md:min-w-0 px-4 md:px-0">
                                 <div className="absolute left-0 right-0 top-1/2 h-px bg-white/10" />
                                 <motion.div
                                     className="absolute left-0 top-1/2 h-[2px] bg-gradient-to-r from-[#ff3b00] to-[#ff3b00]/50"
@@ -1020,12 +1020,12 @@ const TeamSection: React.FC = () => {
             </div>
 
             {/* Core Team Grid */}
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 border-b border-white/10">
+            <div className="flex overflow-x-auto snap-x mandatory md:grid md:grid-cols-2 lg:grid-cols-4 border-b border-white/10 pb-4 md:pb-0">
                 {TEAM.map((member, idx) => (
                     <motion.div
                         key={member.id}
                         className={cn(
-                            "group relative overflow-hidden border-b md:border-b-0 border-white/10 hover:bg-white/5 transition-colors cursor-pointer",
+                            "min-w-[85vw] md:min-w-0 snap-center group relative overflow-hidden border-r border-white/10 md:border-r-0 border-b md:border-b-0 hover:bg-white/5 transition-colors cursor-pointer",
                             idx < TEAM.length - 1 && "lg:border-r"
                         )}
                         initial={{ opacity: 0, y: 20 }}
@@ -1067,12 +1067,12 @@ const TeamSection: React.FC = () => {
             </div>
 
             {/* Advisors Grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="flex overflow-x-auto snap-x mandatory sm:grid sm:grid-cols-2 lg:grid-cols-3 pb-4 sm:pb-0">
                 {ADVISORS.map((advisor, index) => (
                     <motion.div
                         key={advisor.id}
                         className={cn(
-                            "group relative overflow-hidden border-b lg:border-b-0 border-white/10 hover:bg-white/5 transition-colors cursor-pointer",
+                            "min-w-[85vw] sm:min-w-0 snap-center group relative overflow-hidden border-r border-white/10 sm:border-r-0 border-b sm:border-b-0 hover:bg-white/5 transition-colors cursor-pointer",
                             index < ADVISORS.length - 1 && "lg:border-r"
                         )}
                         initial={{ opacity: 0, y: 30 }}

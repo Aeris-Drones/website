@@ -7,7 +7,7 @@ const Contact: React.FC = () => {
       <div className="max-w-7xl mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-24 mb-24">
           <div>
-            <h2 className="font-sans font-black text-6xl md:text-8xl leading-[0.85] mb-8">
+            <h2 className="font-sans font-black text-5xl md:text-8xl leading-[0.85] mb-8">
               CONTACT<br />US.
             </h2>
             <p className="font-mono text-sm max-w-sm border-l border-black pl-4">

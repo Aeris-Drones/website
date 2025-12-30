@@ -27,37 +27,40 @@ const FAQ: React.FC = () => {
 
     return (
         <section className="bg-black text-white border-t border-white/20">
-            <div className="grid grid-cols-1 lg:grid-cols-3">
+            <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 lg:gap-24">
                 {/* Header */}
-                <div className="col-span-1 p-8 md:p-12 border-b lg:border-b-0 lg:border-r border-white/20 bg-white/5">
-                    <h3 className="font-sans font-black text-4xl md:text-5xl uppercase tracking-tighter mb-4 text-[#ff3b00]">
-                        FAQ
-                    </h3>
-                    <p className="font-mono text-sm text-gray-400 max-w-sm">
-                        Answers to critical questions about the Aeris platform.
+                <div className="mb-8 lg:mb-0">
+                    <h2 className="font-sans font-black text-4xl md:text-8xl leading-[0.85] mb-4 md:mb-8 text-white">
+                        FAQ<span className="text-[#ff3b00]">+</span>
+                    </h2>
+                    <p className="font-mono text-sm text-gray-500 border-l border-white/20 pl-4 uppercase tracking-widest">
+                        Common Inquiries
                     </p>
                 </div>
 
-                {/* Questions List */}
-                <div className="col-span-1 lg:col-span-2">
-                    {FAQ_DATA.map((item, index) => (
+                {/* Questions */}
+                <div className="lg:col-span-2 space-y-4">
+                    {FAQ_DATA.map((faq, idx) => (
                         <div
-                            key={index}
-                            className="border-b border-white/20 last:border-b-0"
+                            key={idx}
+                            className="border-b border-white/10"
                         >
                             <button
-                                onClick={() => setOpenIndex(openIndex === index ? null : index)}
-                                className="w-full flex items-center justify-between p-8 md:p-10 hover:bg-white/5 transition-colors text-left group"
+                                onClick={() => setOpenIndex(openIndex === idx ? null : idx)}
+                                className="w-full py-5 md:py-8 flex items-start justify-between text-left group"
                             >
-                                <span className="font-sans font-bold text-xl md:text-2xl uppercase group-hover:text-[#ff3b00] transition-colors pr-8">
-                                    {item.question}
-                                </span>
-                                <div className="shrink-0 text-[#ff3b00]">
-                                    {openIndex === index ? <Minus /> : <Plus />}
+                                <div className="pr-4 md:pr-8">
+                                    <span className="font-mono text-[10px] md:text-xs text-[#ff3b00] block mb-2 uppercase tracking-widest">0{idx + 1} //</span>
+                                    <h3 className="font-sans font-bold text-lg md:text-2xl text-white group-hover:text-[#ff3b00] transition-colors uppercase leading-tight">
+                                        {faq.question}
+                                    </h3>
+                                </div>
+                                <div className={`mt-1 transform transition-transform duration-300 ${openIndex === idx ? 'rotate-45' : 'rotate-0'}`}>
+                                    <Plus className="w-5 h-5 md:w-6 md:h-6 text-white/40 group-hover:text-[#ff3b00]" />
                                 </div>
                             </button>
                             <AnimatePresence>
-                                {openIndex === index && (
+                                {openIndex === idx && (
                                     <motion.div
                                         initial={{ height: 0, opacity: 0 }}
                                         animate={{ height: "auto", opacity: 1 }}
@@ -65,7 +68,7 @@ const FAQ: React.FC = () => {
                                         className="overflow-hidden"
                                     >
                                         <div className="p-8 md:p-10 pt-0 text-gray-400 font-mono text-sm md:text-base leading-relaxed max-w-3xl">
-                                            {item.answer}
+                                            {faq.answer}
                                         </div>
                                     </motion.div>
                                 )}

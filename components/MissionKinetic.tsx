@@ -58,10 +58,10 @@ const MissionKinetic: React.FC = () => {
         {MISSION.headline.map((word, i) => (
           <div key={i} className="relative">
             <div ref={el => lineRefs.current[i] = el} className="h-[2px] bg-black w-full absolute top-0 left-0"></div>
-            <div className="overflow-hidden py-2 md:py-4">
+            <div className="overflow-hidden py-1 md:py-2 lg:py-4">
               <h2
                 ref={el => textRefs.current[i] = el}
-                className="text-6xl md:text-9xl font-black uppercase tracking-tighter leading-none kinetic-highlight origin-bottom-left will-change-transform"
+                className="text-5xl md:text-8xl lg:text-9xl font-black uppercase tracking-tighter leading-none kinetic-highlight origin-bottom-left will-change-transform"
               >
                 {word}
               </h2>
@@ -70,12 +70,12 @@ const MissionKinetic: React.FC = () => {
         ))}
         <div ref={el => lineRefs.current[MISSION.headline.length] = el} className="h-[2px] bg-black w-full"></div>
 
-        <div className="mt-12 grid grid-cols-1 md:grid-cols-2 gap-12">
-          <p className="font-mono text-sm md:text-lg max-w-md uppercase tracking-wide">
+        <div className="mt-8 md:mt-12 grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12">
+          <p className="font-mono text-xs md:text-lg max-w-md uppercase tracking-wide">
             {MISSION.sub}
           </p>
-          <div className="flex justify-end">
-            <div className="w-16 h-16 bg-black animate-spin-slow flex items-center justify-center">
+          <div className="flex justify-start md:justify-end">
+            <div className="w-12 h-12 md:w-16 md:h-16 bg-black animate-spin-slow flex items-center justify-center">
               <div className="w-2 h-2 bg-[#EAEAEA] rounded-full"></div>
             </div>
           </div>

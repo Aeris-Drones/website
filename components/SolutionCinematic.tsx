@@ -166,12 +166,24 @@ const SolutionCinematic: React.FC = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
+      // Use matchMedia to set different scroll lengths for mobile vs desktop
+      const mm = gsap.matchMedia();
+      let scrollEnd = "+=1200%";
+
+      // Reduce scroll length on mobile for snappier experience
+      mm.add("(max-width: 768px)", () => {
+        scrollEnd = "+=700%";
+      });
+      mm.add("(min-width: 769px)", () => {
+        scrollEnd = "+=1200%";
+      });
+
       // Main timeline - normalized scroll for consistent feel
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: componentRef.current,
           start: "top top",
-          end: "+=1200%",
+          end: scrollEnd,
           scrub: 1.5,
           pin: true,
           anticipatePin: 1,
@@ -626,10 +638,10 @@ const SolutionCinematic: React.FC = () => {
   return (
     <div ref={componentRef} className="relative h-screen bg-brutal-bg text-brutal-fg overflow-hidden">
 
-      {/* Custom cursor for drone hover */}
+      {/* Custom cursor for drone hover - hidden on touch devices */}
       <div
         ref={cursorRef}
-        className="fixed top-0 left-0 w-28 h-28 bg-[#FF2A00] rounded-full z-[60] pointer-events-none flex items-center justify-center opacity-0 scale-50"
+        className="fixed top-0 left-0 w-28 h-28 bg-[#FF2A00] rounded-full z-[60] pointer-events-none flex items-center justify-center opacity-0 scale-50 hidden md:flex"
       >
         <div className="flex flex-col items-center justify-center gap-1 text-center">
           <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
@@ -646,7 +658,7 @@ const SolutionCinematic: React.FC = () => {
         ref={scene1Ref}
         className="absolute inset-0 flex items-center justify-center z-40 pointer-events-none"
       >
-        <h2 className="scene1-title font-sans font-black text-6xl md:text-8xl lg:text-[12vw] leading-none text-center tracking-tighter">
+        <h2 className="scene1-title font-sans font-black text-5xl md:text-8xl lg:text-[12vw] leading-none text-center tracking-tighter px-4">
           OUR SOLUTION<span className="scene1-question">?</span>
         </h2>
       </div>
@@ -659,9 +671,9 @@ const SolutionCinematic: React.FC = () => {
         className="absolute inset-0 flex flex-col items-center justify-center z-30 pointer-events-none"
         style={{ opacity: 0, visibility: 'hidden' }}
       >
-        <div className="text-center max-w-4xl px-8">
-          <div className="scene2-line w-24 h-[2px] bg-brutal-accent mx-auto mb-8" />
-          <h2 className="scene2-title font-sans font-black text-7xl md:text-9xl lg:text-[14vw] leading-none tracking-tighter mb-6">
+        <div className="text-center max-w-4xl px-4 md:px-8">
+          <div className="scene2-line w-16 md:w-24 h-[2px] bg-brutal-accent mx-auto mb-6 md:mb-8" />
+          <h2 className="scene2-title font-sans font-black text-5xl md:text-9xl lg:text-[14vw] leading-none tracking-tighter mb-4 md:mb-6">
             AERIS<br />
             <span className="text-brutal-accent">ALPHA</span>
           </h2>
@@ -705,11 +717,11 @@ const SolutionCinematic: React.FC = () => {
         </div>
 
         {/* Drone Layout Container */}
-        <div className="relative h-full flex flex-col md:flex-row items-center justify-center px-16 lg:px-24 pt-32 md:pt-40 pb-12 gap-12 md:gap-24">
+        <div className="relative h-full flex flex-col md:flex-row items-center justify-center px-4 md:px-16 lg:px-24 pt-28 md:pt-40 pb-8 md:pb-12 gap-4 md:gap-12 lg:gap-24">
 
           {/* RANGER (Left) */}
           <div
-            className="drone-ranger relative w-full md:w-[45%] max-w-2xl h-80 md:h-[550px] group cursor-pointer"
+            className="drone-ranger relative w-full md:w-[45%] max-w-2xl h-48 md:h-80 lg:h-[550px] group cursor-pointer"
             onMouseEnter={() => setHoveredDrone('ranger')}
             onMouseLeave={() => setHoveredDrone(null)}
             onClick={() => setActiveDrone(activeDrone === 'ranger' ? null : 'ranger')}
@@ -737,7 +749,7 @@ const SolutionCinematic: React.FC = () => {
 
           {/* SCOUT (Right) */}
           <div
-            className="drone-scout-left relative w-full md:w-[45%] max-w-2xl h-80 md:h-[550px] group cursor-pointer"
+            className="drone-scout-left relative w-full md:w-[45%] max-w-2xl h-48 md:h-80 lg:h-[550px] group cursor-pointer"
             onMouseEnter={() => setHoveredDrone('scout')}
             onMouseLeave={() => setHoveredDrone(null)}
             onClick={() => setActiveDrone(activeDrone === 'scout' ? null : 'scout')}

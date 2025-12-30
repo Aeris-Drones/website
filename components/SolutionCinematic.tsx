@@ -695,11 +695,11 @@ const SolutionCinematic: React.FC = () => {
         </div>
 
         {/* Header */}
-        <div className="scene3-header absolute top-16 md:top-20 left-1/2 -translate-x-1/2 w-full text-center z-20 px-4">
+        <div className="scene3-header absolute top-16 md:top-20 left-0 right-0 flex flex-col items-center justify-center z-20 px-4">
           <span className="font-mono text-xs text-brutal-accent uppercase tracking-[0.3em]">
             // SYSTEM ARCHITECTURE
           </span>
-          <h3 className="font-sans font-black text-4xl md:text-5xl mt-2 tracking-tight text-center">
+          <h3 className="font-sans font-black text-4xl md:text-5xl mt-2 tracking-tight">
             THE SWARM
           </h3>
         </div>

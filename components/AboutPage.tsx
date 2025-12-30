@@ -5,7 +5,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import {
     X, Play, Pause, SkipBack, SkipForward,
     Activity, BoxSelect, Users, Cpu, Globe, Target, Wind,
-    ChevronRight, Mail, ExternalLink, Plus
+    ChevronRight, Mail, ExternalLink, Plus, Info
 } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
@@ -70,7 +70,8 @@ const MILESTONES = [
         date: 'OCT 2025',
         title: 'CAPITAL',
         subtitle: '1517 Fund / Medici',
-        desc: 'Grant secured: $50,000+. Resources allocated to prototype fabrication and propulsion testing.',
+        desc: 'Grant secured: $1,000 + Lambda credits. Resources allocated to prototype fabrication and propulsion testing.',
+        lambdaCredits: '$50k in Lambda credits',
         details: 'Validated by 1517 Fund\'s rigorous "sci-fi to reality" criteria. Not just money—operational validation.',
         visual: 'chart',
         coords: '34.052, -118.2'
@@ -854,7 +855,17 @@ const TimelineConsole: React.FC = () => {
                                         <h3 className="text-3xl md:text-5xl font-black text-white uppercase tracking-tight mb-4 leading-[0.9]">
                                             <GlitchText>{currentData.title}</GlitchText>
                                         </h3>
-                                        <p className="text-gray-400 text-base md:text-lg leading-relaxed">{currentData.desc}</p>
+                                        <p className="text-gray-400 text-base md:text-lg leading-relaxed">
+                                            {currentData.desc}
+                                            {currentData.lambdaCredits && (
+                                                <span className="relative inline-block ml-2 group/info">
+                                                    <Info className="w-4 h-4 inline text-[#ff3b00] cursor-help" />
+                                                    <span className="absolute bottom-full left-1/2 -translate-x-1/2 mb-2 px-3 py-1.5 bg-[#ff3b00] text-black text-xs font-mono whitespace-nowrap opacity-0 group-hover/info:opacity-100 transition-opacity pointer-events-none">
+                                                        {currentData.lambdaCredits}
+                                                    </span>
+                                                </span>
+                                            )}
+                                        </p>
                                     </div>
 
                                     <motion.button

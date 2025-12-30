@@ -4,15 +4,23 @@ import { Plus, Minus } from 'lucide-react';
 
 const FAQ_DATA = [
     {
-        question: "What problem does it solve?",
-        answer: "In disasters, decisions are often made with incomplete, delayed, and fragmented info. Teams lose time stitching together partial views. Aeris solves this 'coordination gap' by using multiple drones for multipoint coverage and a unified map, reducing wasted time and lowering human risk."
-    },
-    {
         question: "How does the technology work?",
         answer: "It's a hierarchical swarm. Small 'Scout' drones enter buildings or fly low, using SLAM to map without GPS. A larger 'Ranger' drone hovers high above, acting as a comms relay and data hub. Our edge-native software, Aeris OS, runs on the drones themselves, meaning they keep working even if connection to the ground is lost."
     },
-
+    {
+        question: "Do I need technical knowledge to use Aeris?",
+        answer: "No. Aeris is designed to be operator-friendly. Once deployed, the drones handle navigation, obstacle avoidance, and data fusion autonomously. Operators see a simple unified map with visual alerts—no piloting or technical expertise required. Training takes hours, not weeks."
+    },
+    {
+        question: "Can you integrate with our existing systems?",
+        answer: "Yes. Aeris is built to complement your current tools, not replace them. We provide standard data outputs (video feeds, GPS coordinates, thermal overlays) that plug into existing command center software. Our API allows custom integrations for larger organizations."
+    },
+    {
+        question: "Is Aeris secure and reliable?",
+        answer: "Absolutely. All communications are encrypted end-to-end. The drones operate on a private mesh network, not public internet. If one drone goes down, the swarm automatically redistributes tasks. Aeris OS is designed for GPS-denied and offline scenarios—reliability in chaos is our core promise."
+    },
 ];
+
 
 const FAQ: React.FC = () => {
     const [openIndex, setOpenIndex] = useState<number | null>(null);

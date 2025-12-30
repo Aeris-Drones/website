@@ -1,5 +1,5 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Routes, Route, useLocation } from 'react-router-dom';
 import Navbar from './components/Navbar';
 import Hero from './components/Hero';
 import ScrollyTelling from './components/ScrollyTelling';
@@ -19,6 +19,17 @@ import ProblemLab from './components/ProblemLab';
 import FAQ from './components/FAQ';
 import AboutPage from './components/AboutPage';
 
+// Scroll to top on route change
+function ScrollToTop() {
+  const { pathname } = useLocation();
+
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+}
+
 function MainPage() {
   return (
     <>
@@ -32,7 +43,6 @@ function MainPage() {
         <Comparison />
         <UseCases />
         <Video />
-        <FAQ />
         <Contact />
       </main>
     </>
@@ -42,6 +52,7 @@ function MainPage() {
 function App() {
   return (
     <Router>
+      <ScrollToTop />
       <Routes>
         <Route path="/" element={<MainPage />} />
         <Route path="/about" element={<AboutPage />} />

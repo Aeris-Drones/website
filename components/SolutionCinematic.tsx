@@ -1,4 +1,4 @@
-import React, { useLayoutEffect, useRef, Suspense, useState } from 'react';
+import React, { useLayoutEffect, useRef, Suspense, useState, useEffect } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Canvas, useFrame } from '@react-three/fiber';
@@ -129,15 +129,50 @@ const SolutionCinematic: React.FC = () => {
   const [hoveredDrone, setHoveredDrone] = useState<string | null>(null);
   const [activeDrone, setActiveDrone] = useState<string | null>(null);
 
+  // Custom cursor for drone hover
+  const cursorRef = useRef<HTMLDivElement>(null);
+  const xTo = useRef<gsap.QuickToFunc>();
+  const yTo = useRef<gsap.QuickToFunc>();
+
+  // Setup cursor movement
+  useEffect(() => {
+    if (!cursorRef.current) return;
+
+    gsap.set(cursorRef.current, { xPercent: -50, yPercent: -50 });
+    xTo.current = gsap.quickTo(cursorRef.current, "x", { duration: 0.15, ease: "power2.out" });
+    yTo.current = gsap.quickTo(cursorRef.current, "y", { duration: 0.15, ease: "power2.out" });
+
+    const moveCursor = (e: MouseEvent) => {
+      if (xTo.current && yTo.current) {
+        xTo.current(e.clientX);
+        yTo.current(e.clientY);
+      }
+    };
+
+    window.addEventListener('mousemove', moveCursor);
+    return () => window.removeEventListener('mousemove', moveCursor);
+  }, []);
+
+  // Handle cursor visibility
+  useEffect(() => {
+    if (!cursorRef.current) return;
+
+    if (hoveredDrone) {
+      gsap.to(cursorRef.current, { opacity: 1, scale: 1, duration: 0.3, ease: "power2.out" });
+    } else {
+      gsap.to(cursorRef.current, { opacity: 0, scale: 0.5, duration: 0.3, ease: "power2.out" });
+    }
+  }, [hoveredDrone]);
+
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Main timeline - 900% scroll for 8+ scenes
+      // Main timeline - normalized scroll for consistent feel
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: componentRef.current,
           start: "top top",
-          end: "+=1800%",
-          scrub: 2.5,
+          end: "+=1200%",
+          scrub: 1.5,
           pin: true,
           anticipatePin: 1,
         }
@@ -302,7 +337,7 @@ const SolutionCinematic: React.FC = () => {
         "<+0.1"
       );
 
-      // Ranger (top) flies in from left
+      // Ranger flies in from left WITH its label
       tl.fromTo('.drone-ranger',
         {
           opacity: 0,
@@ -336,18 +371,18 @@ const SolutionCinematic: React.FC = () => {
         "<+0.4"
       );
 
+      // Drone labels appear AT THE SAME TIME as drones (not delayed)
+      tl.fromTo('.drone-label',
+        { opacity: 0, y: 20 },
+        { opacity: 1, y: 0, duration: 1.2, ease: "expo.out" },
+        "<"
+      );
+
       // Connection lines draw between drones
       tl.fromTo('.connection-line',
         { scaleY: 0, transformOrigin: "top" },
         { scaleY: 1, duration: 0.6, stagger: 0.1, ease: "power2.out" },
         ">+0.2"
-      );
-
-      // Drone labels appear
-      tl.fromTo('.drone-label',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "expo.out" },
-        "<+0.2"
       );
 
       // Hold the showcase
@@ -591,6 +626,19 @@ const SolutionCinematic: React.FC = () => {
   return (
     <div ref={componentRef} className="relative h-screen bg-brutal-bg text-brutal-fg overflow-hidden">
 
+      {/* Custom cursor for drone hover */}
+      <div
+        ref={cursorRef}
+        className="fixed top-0 left-0 w-28 h-28 bg-[#FF2A00] rounded-full z-[60] pointer-events-none flex items-center justify-center opacity-0 scale-50"
+      >
+        <div className="flex flex-col items-center justify-center gap-1 text-center">
+          <svg className="w-6 h-6 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 15l-2 5L9 9l11 4-5 2z" />
+          </svg>
+          <span className="text-white font-mono font-bold text-[10px] tracking-wider">EXPLORE</span>
+        </div>
+      </div>
+
       {/* ========================================
           SCENE 1: OUR SOLUTION?
           ======================================== */}
@@ -647,26 +695,26 @@ const SolutionCinematic: React.FC = () => {
         </div>
 
         {/* Header */}
-        <div className="scene3-header absolute top-16 md:top-20 left-1/2 -translate-x-1/2 text-center z-20 px-4">
+        <div className="scene3-header absolute top-16 md:top-20 left-1/2 -translate-x-1/2 w-full text-center z-20 px-4">
           <span className="font-mono text-xs text-brutal-accent uppercase tracking-[0.3em]">
             // SYSTEM ARCHITECTURE
           </span>
-          <h3 className="font-sans font-black text-4xl md:text-5xl mt-2 tracking-tight">
+          <h3 className="font-sans font-black text-4xl md:text-5xl mt-2 tracking-tight text-center">
             THE SWARM
           </h3>
         </div>
 
         {/* Drone Layout Container */}
-        <div className="relative h-full flex flex-col md:flex-row items-center justify-center px-8 pt-32 md:pt-40 pb-12 gap-8 md:gap-12">
+        <div className="relative h-full flex flex-col md:flex-row items-center justify-center px-16 lg:px-24 pt-32 md:pt-40 pb-12 gap-12 md:gap-24">
 
           {/* RANGER (Left) */}
           <div
-            className="drone-ranger relative w-full md:w-1/2 max-w-xl h-80 md:h-[500px] group cursor-pointer flex-1"
+            className="drone-ranger relative w-full md:w-[45%] max-w-2xl h-80 md:h-[550px] group cursor-pointer"
             onMouseEnter={() => setHoveredDrone('ranger')}
             onMouseLeave={() => setHoveredDrone(null)}
             onClick={() => setActiveDrone(activeDrone === 'ranger' ? null : 'ranger')}
           >
-            <div className={`absolute inset-0 transition-all duration-300 ${hoveredDrone === 'ranger' ? 'ring-4 ring-brutal-accent/50 rounded-lg' : ''}`} style={{ pointerEvents: 'none' }}>
+            <div className="absolute inset-0" style={{ pointerEvents: 'none' }}>
               <Canvas camera={{ position: [0, 2, 7], fov: 45 }}>
                 <ambientLight intensity={0.5} />
                 <directionalLight position={[-5, 10, -5]} intensity={2} />
@@ -689,12 +737,12 @@ const SolutionCinematic: React.FC = () => {
 
           {/* SCOUT (Right) */}
           <div
-            className="drone-scout-left relative w-full md:w-1/2 max-w-xl h-80 md:h-[500px] group cursor-pointer flex-1"
+            className="drone-scout-left relative w-full md:w-[45%] max-w-2xl h-80 md:h-[550px] group cursor-pointer"
             onMouseEnter={() => setHoveredDrone('scout')}
             onMouseLeave={() => setHoveredDrone(null)}
             onClick={() => setActiveDrone(activeDrone === 'scout' ? null : 'scout')}
           >
-            <div className={`absolute inset-0 transition-all duration-300 ${hoveredDrone === 'scout' ? 'ring-4 ring-white/50 rounded-lg' : ''}`} style={{ pointerEvents: 'none' }}>
+            <div className="absolute inset-0" style={{ pointerEvents: 'none' }}>
               <Canvas camera={{ position: [0, 2, 5], fov: 45 }}>
                 <ambientLight intensity={0.5} />
                 <directionalLight position={[5, 10, 5]} intensity={2} />
@@ -712,17 +760,7 @@ const SolutionCinematic: React.FC = () => {
             </div>
           </div>
 
-          {/* Info Panels (sides) */}
-          <div className="absolute left-4 md:left-12 top-1/2 -translate-y-1/2 font-mono text-xs text-gray-500 space-y-2 hidden lg:block">
-            <p className="text-brutal-accent">&gt; INTERACT</p>
-            <p>&gt; Click to explore</p>
-            <p>&gt; Drag to rotate</p>
-          </div>
-          <div className="absolute right-4 md:right-12 top-1/2 -translate-y-1/2 font-mono text-xs text-gray-500 space-y-2 text-right hidden lg:block">
-            <p>&gt; Mesh Network</p>
-            <p>&gt; 1:N Pilot Ratio</p>
-            <p className="text-brutal-accent">&gt; SWARM READY</p>
-          </div>
+
         </div>
 
       </div>

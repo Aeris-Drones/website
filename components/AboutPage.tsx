@@ -11,6 +11,7 @@ import {
 gsap.registerPlugin(ScrollTrigger);
 import Navbar from './Navbar';
 import Contact from './Contact';
+import FAQ from './FAQ';
 
 // --- MILESTONES DATA ---
 const MILESTONES = [
@@ -133,7 +134,9 @@ const ADVISORS = [
         name: 'Jin Abe',
         role: 'Honorary Advisor',
         image: '/Mr. Jin Abe.png',
-        note: 'If such a system had existed—if that kind of information had been available—we could have been far better prepared. The drone can enter rubble, create maps, and provide vital information to rescue teams.'
+        bio: 'Mr. Jin Abe is a renowned speaker with the 3/11 Memorial Network who travels across Japan sharing his experience of surviving the March 11 earthquake and tsunami. Born in Iwate Prefecture, he was nine years old when he and his grandmother were found alive beneath the rubble nine days after the tsunami. Committed to ensuring these events are not forgotten and to promoting disaster resilience, Jin is currently working on a graphic novel titled 「あの時、子どもだった私たちから伝えたいこと」 ("What We Want to Tell You, from Those of Us Who Were Children at That Time").',
+        note: 'If such a system had existed—if that kind of information had been available—we could have been far better prepared. The drone can enter rubble, create maps, and provide vital information to rescue teams.',
+        link: 'https://www.asahi.com/ajw/articles/15459577'
     },
     {
         id: 'A-02',
@@ -390,11 +393,11 @@ const AboutPage: React.FC = () => {
                 {/* 5. Custom Cursor (Z-30) */}
                 <div
                     ref={cursorRef}
-                    className="fixed top-0 left-0 w-32 h-32 bg-[#FF2A00] rounded-full z-30 pointer-events-none mix-blend-difference flex items-center justify-center opacity-0 scale-50"
+                    className="fixed top-0 left-0 w-32 h-32 bg-[#FF2A00] rounded-full z-30 pointer-events-none flex items-center justify-center opacity-0 scale-50"
                 >
                     <div className="flex flex-col items-center justify-center gap-1">
                         <Play size={24} fill="white" className="text-white" />
-                        <span className="text-white font-mono font-bold text-xs tracking-widest pl-1">INITIATE</span>
+                        <span className="text-white font-mono font-bold text-xs tracking-widest pl-1">PLAY</span>
                     </div>
                 </div>
 
@@ -403,9 +406,9 @@ const AboutPage: React.FC = () => {
                     <div className="fixed inset-0 z-[100] bg-black/95 backdrop-blur-md flex items-center justify-center animate-in fade-in duration-300">
                         <button
                             onClick={handleCloseVideo}
-                            className="absolute top-8 right-8 text-white/50 hover:text-[#FF2A00] transition-colors z-50 p-2"
+                            className="absolute top-8 right-8 text-white hover:text-[#FF2A00] transition-all z-50 p-3 bg-black/80 border-2 border-white/30 hover:border-[#FF2A00] rounded-sm backdrop-blur-sm"
                         >
-                            <X size={48} strokeWidth={1} />
+                            <X size={32} strokeWidth={2.5} />
                         </button>
 
                         <div className="w-full h-full p-4 md:p-12 flex items-center justify-center">
@@ -450,6 +453,9 @@ const AboutPage: React.FC = () => {
 
             {/* Testimonials Section */}
             <TestimonialsSection />
+
+            {/* FAQ Section */}
+            <FAQ />
 
             {/* Contact Section */}
             <Contact />
@@ -628,8 +634,8 @@ const TimelineConsole: React.FC = () => {
     const [isPlayingTimeline, setIsPlayingTimeline] = useState(false);
     const [modalOpen, setModalOpen] = useState(false);
     const [isTransitioning, setIsTransitioning] = useState(false);
+    const sectionRef = useRef<HTMLDivElement>(null);
     const currentData = MILESTONES[currentIndex];
-    const timerRef = useRef<NodeJS.Timeout | null>(null);
     const progress = ((currentIndex + 1) / MILESTONES.length) * 100;
 
     useEffect(() => {
@@ -659,24 +665,36 @@ const TimelineConsole: React.FC = () => {
     }, []);
 
     const togglePlay = useCallback(() => {
-        if (isPlayingTimeline) {
-            if (timerRef.current) clearInterval(timerRef.current);
-            setIsPlayingTimeline(false);
-        } else {
-            setIsPlayingTimeline(true);
-            timerRef.current = setInterval(() => {
-                setIsTransitioning(true);
-                setTimeout(() => {
-                    setCurrentIndex((prev) => (prev + 1) % MILESTONES.length);
-                    setIsTransitioning(false);
-                }, 150);
+        setIsPlayingTimeline(prev => !prev);
+    }, []);
+
+    // ScrollTrigger to start playing automatically
+    useLayoutEffect(() => {
+        const ctx = gsap.context(() => {
+            ScrollTrigger.create({
+                trigger: sectionRef.current,
+                start: "top 60%",
+                onEnter: () => setIsPlayingTimeline(true),
+                once: true
+            });
+        }, sectionRef);
+        return () => ctx.revert();
+    }, []);
+
+    // Handle auto-play interval
+    useEffect(() => {
+        let interval: NodeJS.Timeout | null = null;
+
+        if (isPlayingTimeline && !modalOpen) {
+            interval = setInterval(() => {
+                nextStep();
             }, 5000);
         }
-    }, [isPlayingTimeline]);
 
-    useEffect(() => {
-        return () => { if (timerRef.current) clearInterval(timerRef.current); };
-    }, []);
+        return () => {
+            if (interval) clearInterval(interval);
+        };
+    }, [isPlayingTimeline, modalOpen, nextStep]);
 
     const jumpTo = (idx: number) => {
         if (idx === currentIndex) return;
@@ -688,7 +706,7 @@ const TimelineConsole: React.FC = () => {
     };
 
     return (
-        <section className="relative min-h-screen bg-[#030303] border-y border-white/5 overflow-hidden">
+        <section ref={sectionRef} className="relative min-h-screen bg-[#030303] border-y border-white/5 overflow-hidden">
 
             {/* Ambient Background */}
             <div className="absolute inset-0">
@@ -845,7 +863,7 @@ const TimelineConsole: React.FC = () => {
                                         whileHover={{ scale: 1.02 }}
                                         whileTap={{ scale: 0.98 }}
                                     >
-                                        <span className="font-mono text-xs uppercase text-white group-hover:text-black tracking-widest">Access Briefing</span>
+                                        <span className="font-mono text-xs uppercase text-white group-hover:text-black tracking-widest">Read More</span>
                                         <BoxSelect className="w-4 h-4 text-[#ff3b00] group-hover:text-black" />
                                     </motion.button>
                                 </motion.div>
@@ -916,7 +934,7 @@ const TimelineConsole: React.FC = () => {
                                             />
                                             <span className={cn(
                                                 "absolute top-6 font-mono text-[9px] uppercase tracking-wider whitespace-nowrap transition-all",
-                                                idx === currentIndex ? "text-[#ff3b00] opacity-100" : "text-white/30 opacity-0 group-hover:opacity-100"
+                                                idx === currentIndex ? "text-[#ff3b00] opacity-100" : "text-white/40 opacity-40 group-hover:opacity-100"
                                             )}>
                                                 {m.date}
                                             </span>
@@ -951,7 +969,7 @@ const TimelineConsole: React.FC = () => {
                                 <button onClick={() => setModalOpen(false)} className="absolute top-4 right-4 p-2 text-white/40 hover:text-[#ff3b00] transition-colors"><X className="w-5 h-5" /></button>
                                 <div className="flex items-center gap-3 mb-2">
                                     <motion.div className="w-2 h-2 bg-[#ff3b00] rounded-full" animate={{ opacity: [1, 0.3, 1] }} transition={{ duration: 1, repeat: Infinity }} />
-                                    <span className="font-mono text-[10px] text-[#ff3b00] uppercase tracking-[0.2em]">Classified // {currentData.id}</span>
+                                    <span className="font-mono text-[10px] text-[#ff3b00] uppercase tracking-[0.2em]">Story // {currentData.id}</span>
                                 </div>
                                 <h3 className="text-3xl font-black text-white uppercase tracking-tight">{currentData.title}</h3>
                                 <p className="font-mono text-xs text-white/40 mt-1">{currentData.date} • {currentData.subtitle}</p>
@@ -962,7 +980,7 @@ const TimelineConsole: React.FC = () => {
                             </div>
 
                             <div className="px-6 py-4 border-t border-white/10 flex justify-end items-center bg-black/50">
-                                <span className="font-mono text-[10px] text-[#ff3b00] uppercase tracking-widest">Authorized Access</span>
+                                <span className="font-mono text-[10px] text-[#ff3b00] uppercase tracking-widest">✓ Complete</span>
                             </div>
                         </motion.div>
                     </motion.div>
@@ -1135,6 +1153,20 @@ const TeamSection: React.FC = () => {
                                             </div>
                                         </div>
                                     )}
+
+                                    {selectedMember.link && (
+                                        <div className="border-t border-white/10 pt-6 mt-6">
+                                            <a
+                                                href={selectedMember.link}
+                                                target="_blank"
+                                                rel="noopener noreferrer"
+                                                className="inline-flex items-center gap-2 px-4 py-2 bg-[#ff3b00] text-black font-mono text-xs uppercase tracking-wider hover:bg-[#ff3b00]/80 transition-colors"
+                                            >
+                                                <ExternalLink className="w-4 h-4" />
+                                                Learn More
+                                            </a>
+                                        </div>
+                                    )}
                                 </div>
                             </div>
                         </motion.div>
@@ -1158,7 +1190,7 @@ const ValuesSection: React.FC = () => (
                 viewport={{ once: true }}
             >
                 <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter">
-                    CORE <span className="text-[#ff3b00]">DOCTRINE</span>
+                    CORE <span className="text-[#ff3b00]">VALUES</span>
                 </h2>
                 <p className="font-mono text-sm text-white/40 mt-4 uppercase tracking-widest">Operating Principles</p>
             </motion.div>

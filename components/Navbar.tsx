@@ -8,10 +8,7 @@ const Navbar: React.FC = () => {
   const handleLogoClick = (e: React.MouseEvent<HTMLAnchorElement>) => {
     if (location.pathname === '/') {
       e.preventDefault();
-      const hero = document.getElementById('hero');
-      if (hero) {
-        hero.scrollIntoView({ behavior: 'smooth' });
-      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
     }
   };
 

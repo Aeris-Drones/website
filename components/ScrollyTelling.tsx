@@ -38,8 +38,8 @@ const ScrollyTelling: React.FC = () => {
         scrollTrigger: {
           trigger: componentRef.current,
           start: "top top",
-          end: "+=600%",
-          scrub: 1,
+          end: "+=800%",
+          scrub: 1.5,
           pin: true,
           anticipatePin: 1,
         }

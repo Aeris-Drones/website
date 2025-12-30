@@ -1,4 +1,5 @@
 import React, { useLayoutEffect, useRef, Suspense, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 import { Canvas, useFrame } from '@react-three/fiber';
@@ -128,6 +129,9 @@ const SolutionCinematic: React.FC = () => {
   // Hover states for drones
   const [hoveredDrone, setHoveredDrone] = useState<string | null>(null);
   const [activeDrone, setActiveDrone] = useState<string | null>(null);
+
+  // Navigation
+  const navigate = useNavigate();
 
   // Custom cursor for drone hover
   const cursorRef = useRef<HTMLDivElement>(null);
@@ -419,6 +423,13 @@ const SolutionCinematic: React.FC = () => {
         ">+0.2"
       );
 
+      // Features Header appears with Scene 4
+      tl.fromTo('.features-header',
+        { opacity: 0, y: -20 },
+        { opacity: 1, y: 0, duration: 0.8, ease: "expo.out" },
+        "<"
+      );
+
       tl.fromTo('.feature1-tag',
         { opacity: 0, x: -30 },
         { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" },
@@ -630,6 +641,9 @@ const SolutionCinematic: React.FC = () => {
       // Final hold - extra long
       tl.to({}, { duration: 2.0 });
 
+      // Fade out features header at the very end
+      tl.to('.features-header', { opacity: 0, duration: 0.5 }, ">-0.5");
+
     }, componentRef);
 
     return () => ctx.revert();
@@ -785,6 +799,16 @@ const SolutionCinematic: React.FC = () => {
         />
       )}
 
+      {/* Features Header (Persistent for Scenes 4-7) */}
+      <div className="features-header absolute top-16 md:top-20 left-0 right-0 flex flex-col items-center justify-center z-30 px-4 pointer-events-none" style={{ opacity: 0 }}>
+        <span className="font-mono text-xs text-brutal-accent uppercase tracking-[0.3em]">
+          // CAPABILITIES
+        </span>
+        <h3 className="font-sans font-black text-4xl md:text-5xl mt-2 tracking-tight text-brutal-fg">
+          FEATURES
+        </h3>
+      </div>
+
       {/* ========================================
           SCENE 4: ONE MAP
           ======================================== */}
@@ -807,7 +831,10 @@ const SolutionCinematic: React.FC = () => {
             <p className="feature1-desc font-inter text-xl md:text-2xl text-gray-400 max-w-2xl">
               {FEATURES[0].description}
             </p>
-            <button className="feature1-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors">
+            <button
+              onClick={() => navigate('/one-map')}
+              className="feature1-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors"
+            >
               Learn More
             </button>
           </div>
@@ -836,7 +863,10 @@ const SolutionCinematic: React.FC = () => {
             <p className="feature2-desc font-inter text-xl md:text-2xl text-gray-400 max-w-2xl ml-auto">
               {FEATURES[1].description}
             </p>
-            <button className="feature2-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors">
+            <button
+              onClick={() => navigate('/no-cloud')}
+              className="feature2-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors"
+            >
               Learn More
             </button>
           </div>
@@ -865,7 +895,10 @@ const SolutionCinematic: React.FC = () => {
             <p className="feature3-desc font-inter text-xl md:text-2xl text-gray-400 max-w-2xl">
               {FEATURES[2].description}
             </p>
-            <button className="feature3-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors">
+            <button
+              onClick={() => navigate('/swarm-iq')}
+              className="feature3-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors"
+            >
               Learn More
             </button>
           </div>
@@ -895,7 +928,10 @@ const SolutionCinematic: React.FC = () => {
                 <p className="feature4-desc font-inter text-xl md:text-2xl text-gray-400 max-w-2xl ml-auto">
                   {FEATURES[3].description}
                 </p>
-                <button className="feature4-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors">
+                <button
+                  onClick={() => navigate('/modular-pods')}
+                  className="feature4-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors"
+                >
                   Learn More
                 </button>
               </div>

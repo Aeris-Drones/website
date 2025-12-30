@@ -18,6 +18,10 @@ import KineticLab from './components/KineticLab';
 import ProblemLab from './components/ProblemLab';
 import FAQ from './components/FAQ';
 import AboutPage from './components/AboutPage';
+import OneMapPage from './components/features/OneMapPage';
+import NoCloudPage from './components/features/NoCloudPage';
+import SwarmIQPage from './components/features/SwarmIQPage';
+import ModularPodsPage from './components/features/ModularPodsPage';
 
 // Scroll to top on route change
 function ScrollToTop() {
@@ -59,6 +63,10 @@ function App() {
         <Route path="/timeline" element={<Timeline />} />
         <Route path="/design-lab" element={<KineticLab />} />
         <Route path="/problem-lab" element={<ProblemLab />} />
+        <Route path="/one-map" element={<OneMapPage />} />
+        <Route path="/no-cloud" element={<NoCloudPage />} />
+        <Route path="/swarm-iq" element={<SwarmIQPage />} />
+        <Route path="/modular-pods" element={<ModularPodsPage />} />
       </Routes>
     </Router>
   );

@@ -1196,7 +1196,7 @@ const TestimonialsSection: React.FC = () => (
                 viewport={{ once: true }}
             >
                 <h2 className="text-5xl md:text-7xl font-black text-white uppercase tracking-tighter">
-                    FIELD <span className="text-[#ff3b00]">NOTES</span>
+                    TESTI<span className="text-[#ff3b00]">MONIALS</span>
                 </h2>
                 <p className="font-mono text-sm text-white/40 mt-4 uppercase tracking-widest">What They Said</p>
             </motion.div>

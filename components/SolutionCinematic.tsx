@@ -136,8 +136,8 @@ const SolutionCinematic: React.FC = () => {
         scrollTrigger: {
           trigger: componentRef.current,
           start: "top top",
-          end: "+=1200%",
-          scrub: 1,
+          end: "+=1800%",
+          scrub: 2.5,
           pin: true,
           anticipatePin: 1,
         }
@@ -242,6 +242,24 @@ const SolutionCinematic: React.FC = () => {
         2.4
       );
 
+      // Description fades in
+      tl.fromTo('.scene2-desc',
+        {
+          opacity: 0,
+          y: 20,
+        },
+        {
+          opacity: 1,
+          y: 0,
+          duration: 0.8,
+          ease: "expo.out",
+        },
+        2.8
+      );
+
+      // Hold for reading
+      tl.to({}, { duration: 1.0 });
+
       // Hold then exit
       tl.to(scene2Ref.current, {
         scale: 1.05,
@@ -249,24 +267,24 @@ const SolutionCinematic: React.FC = () => {
         opacity: 0,
         duration: 0.8,
         ease: "expo.in",
-      }, 3.2);
+      }, ">");
 
       // ========================================
       // SCENE 3: DRONE SHOWCASE (3.0 - 5.5)
       // ========================================
 
-      // Scene 3 fades in
+      // Scene 3 fades in after Scene 2 exits
       tl.fromTo(scene3Ref.current,
         { autoAlpha: 0 },
         { autoAlpha: 1, duration: 0.5 },
-        3.2
+        ">+0.2"
       );
 
       // Technical grid appears
       tl.fromTo('.scene3-grid',
         { opacity: 0 },
         { opacity: 0.3, duration: 0.8, ease: "power2.out" },
-        3.4
+        "<+0.2"
       );
 
       // "THE SYSTEM" header
@@ -281,7 +299,7 @@ const SolutionCinematic: React.FC = () => {
           duration: 0.8,
           ease: "expo.out",
         },
-        3.5
+        "<+0.1"
       );
 
       // Ranger (top) flies in from left
@@ -298,7 +316,7 @@ const SolutionCinematic: React.FC = () => {
           duration: 1.2,
           ease: "expo.out",
         },
-        3.8
+        ">+0.3"
       );
 
       // Scout flies in from right
@@ -315,25 +333,25 @@ const SolutionCinematic: React.FC = () => {
           duration: 1.2,
           ease: "expo.out",
         },
-        4.2
+        "<+0.4"
       );
 
       // Connection lines draw between drones
       tl.fromTo('.connection-line',
         { scaleY: 0, transformOrigin: "top" },
         { scaleY: 1, duration: 0.6, stagger: 0.1, ease: "power2.out" },
-        4.6
+        ">+0.2"
       );
 
       // Drone labels appear
       tl.fromTo('.drone-label',
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.6, stagger: 0.15, ease: "expo.out" },
-        4.8
+        "<+0.2"
       );
 
       // Hold the showcase
-      tl.to({}, { duration: 0.8 });
+      tl.to({}, { duration: 1.5 });
 
       // Scene 3 exits
       tl.to(scene3Ref.current, {
@@ -341,7 +359,7 @@ const SolutionCinematic: React.FC = () => {
         scale: 0.95,
         duration: 0.6,
         ease: "power2.in",
-      }, 5.8);
+      }, ">");
 
       // ========================================
       // SCENES 4-7: FEATURES CASCADE (5.5 - 8.5)
@@ -351,13 +369,13 @@ const SolutionCinematic: React.FC = () => {
       tl.fromTo(scene4Ref.current,
         { autoAlpha: 0 },
         { autoAlpha: 1, duration: 0.4 },
-        5.8
+        ">+0.2"
       );
 
       tl.fromTo('.feature1-tag',
         { opacity: 0, x: -30 },
         { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" },
-        6.0
+        "<+0.2"
       );
 
       tl.fromTo('.feature1-title',
@@ -373,25 +391,25 @@ const SolutionCinematic: React.FC = () => {
           duration: 1.0,
           ease: "expo.out",
         },
-        6.1
+        "<+0.1"
       );
 
       tl.fromTo('.feature1-desc',
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
-        6.4
+        "<+0.3"
       );
 
       tl.fromTo('.feature1-btn',
         { opacity: 0, y: 20 },
         { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
-        6.4
+        "<"
       );
 
       tl.fromTo('.feature1-accent',
         { scaleX: 0, transformOrigin: "left" },
         { scaleX: 1, duration: 0.6, ease: "expo.inOut" },
-        6.2
+        "<"
       );
 
       // Hold Scene 4
@@ -593,14 +611,17 @@ const SolutionCinematic: React.FC = () => {
         className="absolute inset-0 flex flex-col items-center justify-center z-30 pointer-events-none"
         style={{ opacity: 0, visibility: 'hidden' }}
       >
-        <div className="text-center">
+        <div className="text-center max-w-4xl px-8">
           <div className="scene2-line w-24 h-[2px] bg-brutal-accent mx-auto mb-8" />
           <h2 className="scene2-title font-sans font-black text-7xl md:text-9xl lg:text-[14vw] leading-none tracking-tighter mb-6">
             AERIS<br />
             <span className="text-brutal-accent">ALPHA</span>
           </h2>
-          <p className="scene2-tagline font-mono text-lg md:text-xl text-gray-400 uppercase tracking-[0.3em]">
+          <p className="scene2-tagline font-mono text-lg md:text-xl text-gray-400 uppercase tracking-[0.3em] mb-8">
             Autonomous Drone Swarm System
+          </p>
+          <p className="scene2-desc font-inter text-base md:text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
+            A coordinated drone swarm for rapid field operations. Scout and Ranger drones work together—fusing thermal and video feeds into a single live map, turning scattered footage into prioritized, actionable alerts.
           </p>
         </div>
       </div>

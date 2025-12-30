@@ -4,10 +4,6 @@ import { Plus, Minus } from 'lucide-react';
 
 const FAQ_DATA = [
     {
-        question: "What is Aeris?",
-        answer: "Aeris is a coordinated drone swarm system for rapid field operations. We deploy Scout (indoor/agile) and Ranger (outdoor/relay) drones that work together. A modular Ground Control Unit fuses their thermal and video feeds into a single live map, turning scattered footage into prioritized, actionable alerts."
-    },
-    {
         question: "What problem does it solve?",
         answer: "In disasters, decisions are often made with incomplete, delayed, and fragmented info. Teams lose time stitching together partial views. Aeris solves this 'coordination gap' by using multiple drones for multipoint coverage and a unified map, reducing wasted time and lowering human risk."
     },

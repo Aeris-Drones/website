@@ -14,19 +14,19 @@ const Contact: React.FC = () => {
               Get in touch with our team. We're here to answer questions and discuss how Aeris can support your mission.
             </p>
           </div>
-          
-          <form className="space-y-0 border border-black" onSubmit={(e) => e.preventDefault()}>
-            <input 
-              type="email" 
-              placeholder="EMAIL ADDRESS" 
-              className="w-full bg-transparent border-b border-black p-6 placeholder-black font-mono focus:outline-none focus:bg-white/10" 
+
+          <form className="border border-black" onSubmit={(e) => e.preventDefault()}>
+            <input
+              type="email"
+              placeholder="EMAIL ADDRESS"
+              className="w-full bg-transparent border-b border-black p-6 placeholder-black font-mono focus:outline-none focus:bg-white/10"
             />
-            <textarea 
-              rows={3} 
-              placeholder="MISSION BRIEF" 
+            <textarea
+              rows={3}
+              placeholder="MISSION BRIEF"
               className="w-full bg-transparent border-b border-black p-6 placeholder-black font-mono focus:outline-none focus:bg-white/10"
             ></textarea>
-            <button className="w-full p-6 text-left font-sans font-bold text-xl hover:bg-black hover:text-white transition-colors flex justify-between items-center group">
+            <button className="w-full p-6 text-left font-sans font-bold text-xl bg-transparent text-black hover:bg-black hover:text-white duration-150 flex justify-between items-center group">
               TRANSMIT
               <ArrowRight className="w-6 h-6 group-hover:translate-x-2 transition-transform" />
             </button>

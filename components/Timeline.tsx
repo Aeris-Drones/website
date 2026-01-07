@@ -775,6 +775,33 @@ const Timeline: React.FC = () => {
             </h2>
           </div>
 
+          {/* Future Plans Notice */}
+          <div style={{
+            background: 'rgba(255, 77, 0, 0.05)',
+            border: '1px solid rgba(255, 77, 0, 0.3)',
+            padding: '1rem 1.5rem',
+            marginBottom: '2rem',
+            fontFamily: 'var(--aeris-font-mono)',
+            fontSize: '0.85rem',
+            color: 'var(--aeris-text-main)',
+            lineHeight: '1.6'
+          }}>
+            <div style={{
+              color: 'var(--aeris-accent)',
+              fontWeight: 'bold',
+              marginBottom: '0.5rem',
+              textTransform: 'uppercase',
+              letterSpacing: '0.05em',
+              fontSize: '0.75rem'
+            }}>
+              ⚠ Current Focus: Disaster Response
+            </div>
+            <div style={{ color: 'var(--aeris-text-muted)' }}>
+              Infrastructure Inspection and Precision Agriculture represent future expansion opportunities.
+              Our current development and go-to-market strategy is focused exclusively on <strong style={{ color: 'var(--aeris-text-main)' }}>Disaster Response and Search & Rescue operations</strong>.
+            </div>
+          </div>
+
           <div className="timeline-grid">
 
             {/* LANE LABELS */}

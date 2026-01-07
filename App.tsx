@@ -10,7 +10,6 @@ import SolutionCinematic from './components/SolutionCinematic';
 // import Architecture from './components/Architecture';
 import MissionKinetic from './components/MissionKinetic';
 import UseCases from './components/UseCases';
-import Comparison from './components/Comparison';
 import Video from './components/Video';
 import Team from './components/Team';
 import Contact from './components/Contact';
@@ -71,7 +70,6 @@ function MainPage() {
         <ScrollyTelling />
         <SolutionCinematic />
         <MissionKinetic />
-        <Comparison />
         <UseCases />
         <Video />
         <Contact />

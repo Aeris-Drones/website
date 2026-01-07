@@ -23,7 +23,7 @@ const MissionKinetic: React.FC = () => {
           start: "top top",
           end: "+=150%",
           pin: true,
-          scrub: 0.8,
+          scrub: 2, // Increased from 0.8 for smoother, less sensitive scrolling
         }
       });
 

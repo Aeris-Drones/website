@@ -19,6 +19,7 @@ import KineticLab from './components/KineticLab';
 import ProblemLab from './components/ProblemLab';
 import FAQ from './components/FAQ';
 import AboutPage from './components/AboutPage';
+import ScrollProgress from './components/ScrollProgress';
 import OneMapPage from './components/features/OneMapPage';
 import NoCloudPage from './components/features/NoCloudPage';
 import SwarmIQPage from './components/features/SwarmIQPage';
@@ -63,6 +64,7 @@ function MainPage() {
   return (
     <>
       <Navbar />
+      <ScrollProgress />
       <main className="pt-14">
         <Hero />
         {/* PlainMission removed from here */}

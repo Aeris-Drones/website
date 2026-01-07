@@ -121,10 +121,7 @@ const SolutionCinematic: React.FC = () => {
   const scene1Ref = useRef<HTMLDivElement>(null);
   const scene2Ref = useRef<HTMLDivElement>(null);
   const scene3Ref = useRef<HTMLDivElement>(null);
-  const scene4Ref = useRef<HTMLDivElement>(null);
-  const scene5Ref = useRef<HTMLDivElement>(null);
-  const scene6Ref = useRef<HTMLDivElement>(null);
-  const scene7Ref = useRef<HTMLDivElement>(null);
+  const scene4Ref = useRef<HTMLDivElement>(null); // Features grid scene
 
   // Hover states for drones
   const [hoveredDrone, setHoveredDrone] = useState<string | null>(null);
@@ -141,8 +138,8 @@ const SolutionCinematic: React.FC = () => {
 
   // Custom cursor for drone hover
   const cursorRef = useRef<HTMLDivElement>(null);
-  const xTo = useRef<gsap.QuickToFunc>();
-  const yTo = useRef<gsap.QuickToFunc>();
+  const xTo = useRef<gsap.QuickToFunc | null>(null);
+  const yTo = useRef<gsap.QuickToFunc | null>(null);
 
   // Setup cursor movement
   useEffect(() => {
@@ -194,7 +191,7 @@ const SolutionCinematic: React.FC = () => {
           trigger: componentRef.current,
           start: "top top",
           end: scrollEnd,
-          scrub: 1.5,
+          scrub: 3, // Increased from 1.5 for smoother, less sensitive scrolling
           pin: true,
           anticipatePin: 1,
         }
@@ -419,236 +416,34 @@ const SolutionCinematic: React.FC = () => {
       }, ">");
 
       // ========================================
-      // SCENES 4-7: FEATURES CASCADE (5.5 - 8.5)
+      // SCENE 4: ALL FEATURES (Original Stacked Layout)
       // ========================================
 
-      // --- SCENE 4: ONE MAP ---
+      // Scene 4 fades in
       tl.fromTo(scene4Ref.current,
         { autoAlpha: 0 },
         { autoAlpha: 1, duration: 0.4 },
-        ">+0.2"
+        ">"
       );
 
-      // Features Header appears with Scene 4
-      tl.fromTo('.features-header',
-        { opacity: 0, y: -20 },
-        { opacity: 1, y: 0, duration: 0.8, ease: "expo.out" },
-        "<"
-      );
-
-      tl.fromTo('.feature1-tag',
-        { opacity: 0, x: -30 },
-        { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" },
-        "<+0.2"
-      );
-
-      tl.fromTo('.feature1-title',
+      // All feature cards (including sidebar) animate in simultaneously with slight stagger
+      tl.fromTo('.feature-card',
         {
-          filter: 'blur(20px)',
-          scale: 0.9,
           opacity: 0,
+          y: 30,
         },
         {
-          filter: 'blur(0px)',
-          scale: 1,
           opacity: 1,
-          duration: 1.0,
+          y: 0,
+          duration: 0.6,
+          stagger: 0.08,
           ease: "expo.out",
         },
         "<+0.1"
       );
 
-      tl.fromTo('.feature1-desc',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
-        "<+0.3"
-      );
-
-      tl.fromTo('.feature1-btn',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
-        "<"
-      );
-
-      tl.fromTo('.feature1-accent',
-        { scaleX: 0, transformOrigin: "left" },
-        { scaleX: 1, duration: 0.6, ease: "expo.inOut" },
-        "<"
-      );
-
-      // Hold Scene 4
-      tl.to({}, { duration: 0.8 });
-
-      tl.to(scene4Ref.current, {
-        x: '-100%',
-        autoAlpha: 0,
-        duration: 0.6,
-        ease: "power2.in",
-      }, ">"); // Append relative to end of hold
-
-      // --- SCENE 5: NO CLOUD ---
-      // Start after Scene 4 exit
-      tl.fromTo(scene5Ref.current,
-        { autoAlpha: 0, x: '50%' },
-        { autoAlpha: 1, x: 0, duration: 0.6, ease: "expo.out" },
-        ">-=0.2" // Overlap slightly with S4 exit
-      );
-
-      tl.fromTo('.feature2-tag',
-        { opacity: 0, x: 30 },
-        { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" },
-        "<+0.2"
-      );
-
-      tl.fromTo('.feature2-title',
-        {
-          filter: 'blur(20px)',
-          scale: 0.9,
-          opacity: 0,
-        },
-        {
-          filter: 'blur(0px)',
-          scale: 1,
-          opacity: 1,
-          duration: 1.0,
-          ease: "expo.out",
-        },
-        "<+0.1"
-      );
-
-      tl.fromTo('.feature2-desc',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
-        "<+0.3"
-      );
-
-      tl.fromTo('.feature2-btn',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
-        "<"
-      );
-
-      // Hold Scene 5
-      tl.to({}, { duration: 0.8 });
-
-      tl.to(scene5Ref.current, {
-        scale: 1.1,
-        filter: "blur(10px)",
-        autoAlpha: 0,
-        duration: 0.5,
-        ease: "power2.in",
-      }, ">");
-
-      // --- SCENE 6: SWARM IQ ---
-      tl.fromTo(scene6Ref.current,
-        { autoAlpha: 0, scale: 0.9 },
-        { autoAlpha: 1, scale: 1, duration: 0.5, ease: "expo.out" },
-        ">-=0.2"
-      );
-
-      tl.fromTo('.feature3-tag',
-        { opacity: 0, x: -30 },
-        { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" },
-        "<+0.2"
-      );
-
-      tl.fromTo('.feature3-title',
-        {
-          filter: 'blur(20px)',
-          scale: 0.9,
-          opacity: 0,
-        },
-        {
-          filter: 'blur(0px)',
-          scale: 1,
-          opacity: 1,
-          duration: 1.0,
-          ease: "expo.out",
-        },
-        "<+0.1"
-      );
-
-      tl.fromTo('.feature3-desc',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
-        "<+0.3"
-      );
-
-      tl.fromTo('.feature3-btn',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
-        "<"
-      );
-
-      // Hold Scene 6
-      tl.to({}, { duration: 0.8 });
-
-      tl.to(scene6Ref.current, {
-        y: '-50%',
-        autoAlpha: 0,
-        duration: 0.5,
-        ease: "power2.in",
-      }, ">");
-
-      // --- SCENE 7: MODULAR PODS (Final, holds longer) ---
-      tl.fromTo(scene7Ref.current,
-        { autoAlpha: 0, y: '30%' },
-        { autoAlpha: 1, y: 0, duration: 0.6, ease: "expo.out" },
-        ">-=0.2"
-      );
-
-      tl.fromTo('.feature4-tag',
-        { opacity: 0, x: 30 },
-        { opacity: 1, x: 0, duration: 0.6, ease: "expo.out" },
-        "<+0.2"
-      );
-
-      tl.fromTo('.feature4-title',
-        {
-          filter: 'blur(25px)',
-          scale: 0.85,
-          opacity: 0,
-        },
-        {
-          filter: 'blur(0px)',
-          scale: 1,
-          opacity: 1,
-          duration: 1.2,
-          ease: "expo.out",
-        },
-        "<+0.1"
-      );
-
-      // Title color shift to accent for emphasis
-      tl.to('.feature4-title', {
-        color: '#FF2A00',
-        duration: 0.4,
-        ease: "power2.inOut",
-      }, ">+0.5");
-
-      tl.fromTo('.feature4-desc',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
-        "<"
-      );
-
-      tl.fromTo('.feature4-btn',
-        { opacity: 0, y: 20 },
-        { opacity: 1, y: 0, duration: 0.6, ease: "expo.out" },
-        "<"
-      );
-
-      tl.fromTo('.feature4-accent',
-        { scaleY: 0, transformOrigin: "top" },
-        { scaleY: 1, duration: 0.8, ease: "expo.inOut" },
-        "<"
-      );
-
-      // Final hold - extra long
-      tl.to({}, { duration: 2.0 });
-
-      // Fade out features header at the very end
-      tl.to('.features-header', { opacity: 0, duration: 0.5 }, ">-0.5");
+      // Hold for reading - extra long since all content is visible
+      tl.to({}, { duration: 2.5 });
 
     }, componentRef);
 
@@ -805,144 +600,100 @@ const SolutionCinematic: React.FC = () => {
         />
       )}
 
-      {/* Features Header (Persistent for Scenes 4-7) */}
-      <div className="features-header absolute top-16 md:top-20 left-0 right-0 flex flex-col items-center justify-center z-30 px-4 pointer-events-none" style={{ opacity: 0 }}>
-        <span className="font-mono text-xs text-brutal-accent uppercase tracking-[0.3em]">
-          // CAPABILITIES
-        </span>
-        <h3 className="font-sans font-black text-4xl md:text-5xl mt-2 tracking-tight text-brutal-fg">
-          FEATURES
-        </h3>
-      </div>
-
       {/* ========================================
-          SCENE 4: ONE MAP
+          SCENE 4: ALL FEATURES (Original Stacked Layout)
           ======================================== */}
       <div
         ref={scene4Ref}
-        className="absolute inset-0 z-10 flex items-center pointer-events-auto"
+        className="absolute inset-0 z-10 pointer-events-auto"
         style={{ opacity: 0, visibility: 'hidden' }}
       >
-        <div className="w-full px-8 md:px-16 lg:px-24">
-          <div className="max-w-4xl">
-            <div className="feature1-tag flex items-center gap-4 mb-6">
-              <div className="feature1-accent w-12 h-[2px] bg-brutal-accent" />
-              <span className="font-mono text-xs text-brutal-accent uppercase tracking-[0.2em]">
-                {FEATURES[0].tag}
-              </span>
+        <div className="grid grid-cols-1 lg:grid-cols-4 h-full w-full">
+          {/* Sidebar Header Column */}
+          <div className="feature-card col-span-1 lg:col-span-1 p-6 sm:p-8 md:p-10 lg:p-12 border-b lg:border-b-0 lg:border-r border-brutal-line flex flex-col justify-center bg-brutal-bg">
+            <div className="w-full">
+              <h3 className="font-sans font-black text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl uppercase tracking-tighter leading-tight sm:leading-none mb-4 sm:mb-6">
+                Features<span className="text-brutal-accent">.</span>
+              </h3>
+              <p className="font-mono text-gray-400 text-sm sm:text-base leading-relaxed border-l-2 border-brutal-accent pl-3 sm:pl-4">
+                Aeris gives you the full picture. All your drone feeds combined into one simple map.
+              </p>
             </div>
-            <h2 className="feature1-title font-sans font-black text-6xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tighter mb-6">
-              {FEATURES[0].title}
-            </h2>
-            <p className="feature1-desc font-inter text-xl md:text-2xl text-gray-400 max-w-2xl">
-              {FEATURES[0].description}
-            </p>
+          </div>
+
+          {/* Features Column */}
+          <div className="col-span-1 lg:col-span-3 relative flex flex-col h-full">
+            {/* Feature 1: ONE MAP */}
             <button
               onClick={() => navigateToFeature('/one-map')}
-              className="feature1-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors"
+              className="feature-card group border-b border-brutal-line flex-1 flex flex-col justify-center transition-colors cursor-pointer hover:bg-white hover:text-black relative text-left"
             >
-              Learn More
+              <div className="p-6 sm:p-8 lg:p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6 relative z-10">
+                <h3 className="font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl uppercase group-hover:text-black transition-colors">
+                  {FEATURES[0].title}
+                </h3>
+                <div className="flex flex-col items-start md:items-end md:text-right">
+                  <span className="feature-accent font-mono text-xs uppercase tracking-widest mb-2 text-brutal-accent">{FEATURES[0].tag}</span>
+                  <p className="font-mono text-sm sm:text-base max-w-md text-gray-400 group-hover:text-black transition-colors">
+                    {FEATURES[0].description}
+                  </p>
+                </div>
+              </div>
             </button>
-          </div>
-        </div>
-      </div>
 
-      {/* ========================================
-          SCENE 5: NO CLOUD
-          ======================================== */}
-      <div
-        ref={scene5Ref}
-        className="absolute inset-0 z-10 flex items-center justify-end pointer-events-auto"
-        style={{ opacity: 0, visibility: 'hidden' }}
-      >
-        <div className="w-full px-8 md:px-16 lg:px-24 text-right">
-          <div className="max-w-4xl ml-auto">
-            <div className="feature2-tag flex items-center justify-end gap-4 mb-6">
-              <span className="font-mono text-xs text-brutal-accent uppercase tracking-[0.2em]">
-                {FEATURES[1].tag}
-              </span>
-              <div className="w-12 h-[2px] bg-brutal-accent" />
-            </div>
-            <h2 className="feature2-title font-sans font-black text-6xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tighter mb-6">
-              {FEATURES[1].title}
-            </h2>
-            <p className="feature2-desc font-inter text-xl md:text-2xl text-gray-400 max-w-2xl ml-auto">
-              {FEATURES[1].description}
-            </p>
+            {/* Feature 2: NO CLOUD */}
             <button
               onClick={() => navigateToFeature('/no-cloud')}
-              className="feature2-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors"
+              className="feature-card group border-b border-brutal-line flex-1 flex flex-col justify-center transition-colors cursor-pointer hover:bg-white hover:text-black relative text-left"
             >
-              Learn More
+              <div className="p-6 sm:p-8 lg:p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6 relative z-10">
+                <h3 className="font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl uppercase group-hover:text-black transition-colors">
+                  {FEATURES[1].title}
+                </h3>
+                <div className="flex flex-col items-start md:items-end md:text-right">
+                  <span className="feature-accent font-mono text-xs uppercase tracking-widest mb-2 text-brutal-accent">{FEATURES[1].tag}</span>
+                  <p className="font-mono text-sm sm:text-base max-w-md text-gray-400 group-hover:text-black transition-colors">
+                    {FEATURES[1].description}
+                  </p>
+                </div>
+              </div>
             </button>
-          </div>
-        </div>
-      </div>
 
-      {/* ========================================
-          SCENE 6: SWARM IQ (No image - centered)
-          ======================================== */}
-      <div
-        ref={scene6Ref}
-        className="absolute inset-0 z-10 flex items-center pointer-events-auto"
-        style={{ opacity: 0, visibility: 'hidden' }}
-      >
-        <div className="w-full px-8 md:px-16 lg:px-24">
-          <div className="max-w-4xl">
-            <div className="feature3-tag flex items-center gap-4 mb-6">
-              <div className="w-12 h-[2px] bg-brutal-accent" />
-              <span className="font-mono text-xs text-brutal-accent uppercase tracking-[0.2em]">
-                {FEATURES[2].tag}
-              </span>
-            </div>
-            <h2 className="feature3-title font-sans font-black text-6xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tighter mb-6">
-              {FEATURES[2].title}
-            </h2>
-            <p className="feature3-desc font-inter text-xl md:text-2xl text-gray-400 max-w-2xl">
-              {FEATURES[2].description}
-            </p>
+            {/* Feature 3: SWARM IQ */}
             <button
               onClick={() => navigateToFeature('/swarm-iq')}
-              className="feature3-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors"
+              className="feature-card group border-b border-brutal-line flex-1 flex flex-col justify-center transition-colors cursor-pointer hover:bg-white hover:text-black relative text-left"
             >
-              Learn More
-            </button>
-          </div>
-        </div>
-      </div>
-
-      {/* ========================================
-          SCENE 7: MODULAR PODS (Final)
-          ======================================== */}
-      <div
-        ref={scene7Ref}
-        className="absolute inset-0 z-10 flex items-center justify-end pointer-events-auto"
-        style={{ opacity: 0, visibility: 'hidden' }}
-      >
-        <div className="w-full px-8 md:px-16 lg:px-24 text-right">
-          <div className="max-w-4xl ml-auto">
-            <div className="flex items-start justify-end gap-6">
-              <div>
-                <div className="feature4-tag mb-4">
-                  <span className="font-mono text-xs text-brutal-accent uppercase tracking-[0.2em]">
-                    {FEATURES[3].tag}
-                  </span>
+              <div className="p-6 sm:p-8 lg:p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6 relative z-10">
+                <h3 className="font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl uppercase group-hover:text-black transition-colors">
+                  {FEATURES[2].title}
+                </h3>
+                <div className="flex flex-col items-start md:items-end md:text-right">
+                  <span className="feature-accent font-mono text-xs uppercase tracking-widest mb-2 text-brutal-accent">{FEATURES[2].tag}</span>
+                  <p className="font-mono text-sm sm:text-base max-w-md text-gray-400 group-hover:text-black transition-colors">
+                    {FEATURES[2].description}
+                  </p>
                 </div>
-                <h2 className="feature4-title font-sans font-black text-6xl md:text-8xl lg:text-9xl leading-[0.9] tracking-tighter mb-6 text-brutal-fg">
-                  {FEATURES[3].title}
-                </h2>
-                <p className="feature4-desc font-inter text-xl md:text-2xl text-gray-400 max-w-2xl ml-auto">
-                  {FEATURES[3].description}
-                </p>
-                <button
-                  onClick={() => navigateToFeature('/modular-pods')}
-                  className="feature4-btn mt-8 px-8 py-4 border border-brutal-accent text-brutal-accent font-mono text-sm uppercase tracking-widest hover:bg-brutal-accent hover:text-black transition-colors"
-                >
-                  Learn More
-                </button>
               </div>
-              <div className="feature4-accent w-[2px] h-32 bg-brutal-accent mt-2" />
-            </div>
+            </button>
+
+            {/* Feature 4: MODULAR PODS */}
+            <button
+              onClick={() => navigateToFeature('/modular-pods')}
+              className="feature-card group flex-1 flex flex-col justify-center transition-colors cursor-pointer hover:bg-white hover:text-black relative text-left"
+            >
+              <div className="p-6 sm:p-8 lg:p-12 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 sm:gap-6 relative z-10">
+                <h3 className="font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl uppercase group-hover:text-black transition-colors">
+                  {FEATURES[3].title}
+                </h3>
+                <div className="flex flex-col items-start md:items-end md:text-right">
+                  <span className="feature-accent font-mono text-xs uppercase tracking-widest mb-2 text-brutal-accent">{FEATURES[3].tag}</span>
+                  <p className="font-mono text-sm sm:text-base max-w-md text-gray-400 group-hover:text-black transition-colors">
+                    {FEATURES[3].description}
+                  </p>
+                </div>
+              </div>
+            </button>
           </div>
         </div>
       </div>

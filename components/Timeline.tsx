@@ -782,10 +782,10 @@ const Timeline: React.FC = () => {
               <div className="lane-badge">Disaster Response</div>
             </div>
             <div className="lane-label-col lane-row-2">
-              <div className="lane-badge">Infrastructure</div>
+              <div className="lane-badge" style={{ opacity: 0.5 }}>Infrastructure <span style={{ fontSize: '0.6rem', marginLeft: '0.5rem', color: 'var(--aeris-accent)', opacity: 0.8 }}>FUTURE</span></div>
             </div>
             <div className="lane-label-col lane-row-3">
-              <div className="lane-badge">Agriculture</div>
+              <div className="lane-badge" style={{ opacity: 0.5 }}>Agriculture <span style={{ fontSize: '0.6rem', marginLeft: '0.5rem', color: 'var(--aeris-accent)', opacity: 0.8 }}>FUTURE</span></div>
             </div>
 
             {/* PHASE I */}

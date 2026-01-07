@@ -39,7 +39,7 @@ const Navbar: React.FC = () => {
   return (
     <>
       <nav className="fixed top-0 w-full z-50 border-b border-brutal-line bg-brutal-bg/80 backdrop-blur-md">
-        <div className="flex h-14 items-center justify-between px-4 md:grid md:grid-cols-12">
+        <div className="flex h-14 items-center justify-between pl-4 pr-0 md:grid md:grid-cols-12">
           <Link
             to="/"
             onClick={handleLogoClick}
@@ -50,11 +50,11 @@ const Navbar: React.FC = () => {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex md:col-span-8 items-center justify-end">
-            {navLinks.map((link) => (
+            {navLinks.map((link, index) => (
               <Link
                 key={link.to}
                 to={link.to}
-                className="h-14 px-6 border-l border-brutal-line flex items-center font-mono text-xs hover:bg-white hover:text-black transition-colors uppercase"
+                className={`h-14 px-6 border-l border-brutal-line flex items-center font-mono text-xs hover:bg-white hover:text-black transition-colors uppercase ${index === navLinks.length - 1 ? 'border-r border-r-brutal-line' : ''}`}
               >
                 {link.label}
               </Link>

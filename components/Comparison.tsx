@@ -1,34 +1,8 @@
-import React, { useLayoutEffect, useRef } from 'react';
-import gsap from 'gsap';
-import { ScrollTrigger } from 'gsap/ScrollTrigger';
-
-gsap.registerPlugin(ScrollTrigger);
+import React from 'react';
 
 const Comparison: React.FC = () => {
-  const componentRef = useRef<HTMLElement>(null);
-
-  useLayoutEffect(() => {
-    const ctx = gsap.context(() => {
-      const mm = gsap.matchMedia();
-
-      // Desktop: Pin the section
-      mm.add("(min-width: 1024px)", () => {
-        ScrollTrigger.create({
-          trigger: componentRef.current,
-          start: "top top",
-          end: "+=50%", // Hold for 50% of viewport height
-          pin: true,
-          pinSpacing: true,
-        });
-      });
-
-    }, componentRef);
-
-    return () => ctx.revert();
-  }, []);
-
   return (
-    <section ref={componentRef} className="lg:min-h-screen p-6 md:p-12 lg:p-24 border-b border-brutal-line bg-brutal-bg flex flex-col justify-center">
+    <section className="lg:min-h-screen p-6 md:p-12 lg:p-24 border-b border-brutal-line bg-brutal-bg flex flex-col justify-center">
       <h2 className="font-sans font-black text-3xl md:text-4xl mb-8 md:mb-12 uppercase">The Stark Reality</h2>
 
       <div className="relative w-full">

@@ -50,7 +50,7 @@ const ScrollyTelling: React.FC = () => {
           trigger: componentRef.current,
           start: "top top",
           end: scrollEnd,
-          scrub: 1.5,
+          scrub: 3, // Increased from 1.5 for smoother, less sensitive scrolling
           pin: true,
           anticipatePin: 1,
         }

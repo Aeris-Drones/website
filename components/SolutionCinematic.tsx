@@ -632,9 +632,9 @@ const SolutionCinematic: React.FC = () => {
                 <h3 className="font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl uppercase group-hover:text-black transition-colors">
                   {FEATURES[0].title}
                 </h3>
-                <div className="flex flex-col items-start md:items-end md:text-right">
+                <div className="flex flex-col items-start md:items-end md:text-right opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <span className="feature-accent font-mono text-xs uppercase tracking-widest mb-2 text-brutal-accent">{FEATURES[0].tag}</span>
-                  <p className="font-mono text-sm sm:text-base max-w-md text-gray-400 group-hover:text-black transition-colors">
+                  <p className="font-inter text-sm sm:text-base max-w-md text-gray-400 group-hover:text-black transition-colors">
                     {FEATURES[0].description}
                   </p>
                 </div>
@@ -650,9 +650,9 @@ const SolutionCinematic: React.FC = () => {
                 <h3 className="font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl uppercase group-hover:text-black transition-colors">
                   {FEATURES[1].title}
                 </h3>
-                <div className="flex flex-col items-start md:items-end md:text-right">
+                <div className="flex flex-col items-start md:items-end md:text-right opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <span className="feature-accent font-mono text-xs uppercase tracking-widest mb-2 text-brutal-accent">{FEATURES[1].tag}</span>
-                  <p className="font-mono text-sm sm:text-base max-w-md text-gray-400 group-hover:text-black transition-colors">
+                  <p className="font-inter text-sm sm:text-base max-w-md text-gray-400 group-hover:text-black transition-colors">
                     {FEATURES[1].description}
                   </p>
                 </div>
@@ -668,9 +668,9 @@ const SolutionCinematic: React.FC = () => {
                 <h3 className="font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl uppercase group-hover:text-black transition-colors">
                   {FEATURES[2].title}
                 </h3>
-                <div className="flex flex-col items-start md:items-end md:text-right">
+                <div className="flex flex-col items-start md:items-end md:text-right opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <span className="feature-accent font-mono text-xs uppercase tracking-widest mb-2 text-brutal-accent">{FEATURES[2].tag}</span>
-                  <p className="font-mono text-sm sm:text-base max-w-md text-gray-400 group-hover:text-black transition-colors">
+                  <p className="font-inter text-sm sm:text-base max-w-md text-gray-400 group-hover:text-black transition-colors">
                     {FEATURES[2].description}
                   </p>
                 </div>
@@ -686,9 +686,9 @@ const SolutionCinematic: React.FC = () => {
                 <h3 className="font-sans font-black text-2xl sm:text-3xl md:text-4xl lg:text-4xl xl:text-5xl uppercase group-hover:text-black transition-colors">
                   {FEATURES[3].title}
                 </h3>
-                <div className="flex flex-col items-start md:items-end md:text-right">
+                <div className="flex flex-col items-start md:items-end md:text-right opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                   <span className="feature-accent font-mono text-xs uppercase tracking-widest mb-2 text-brutal-accent">{FEATURES[3].tag}</span>
-                  <p className="font-mono text-sm sm:text-base max-w-md text-gray-400 group-hover:text-black transition-colors">
+                  <p className="font-inter text-sm sm:text-base max-w-md text-gray-400 group-hover:text-black transition-colors">
                     {FEATURES[3].description}
                   </p>
                 </div>

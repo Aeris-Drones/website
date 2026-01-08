@@ -488,7 +488,7 @@ const SolutionCinematic: React.FC = () => {
       >
         <div className="text-center max-w-4xl px-4 md:px-8">
           <div className="scene2-line w-16 md:w-24 h-[2px] bg-brutal-accent mx-auto mb-6 md:mb-8" />
-          <h2 className="scene2-title font-sans font-black text-5xl md:text-9xl lg:text-[14vw] leading-none tracking-tighter mb-4 md:mb-6">
+          <h2 className="scene2-title font-sans font-black text-5xl md:text-9xl lg:text-[14vw] leading-none tracking-tighter mb-4 md:mb-6 text-center">
             AERIS<br />
             <span className="text-brutal-accent">ALPHA</span>
           </h2>

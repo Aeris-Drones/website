@@ -488,7 +488,7 @@ const SolutionCinematic: React.FC = () => {
       >
         <div className="text-center max-w-4xl px-4 md:px-8">
           <div className="scene2-line w-16 md:w-24 h-[2px] bg-brutal-accent mx-auto mb-6 md:mb-8" />
-          <h2 className="scene2-title font-sans font-black text-5xl md:text-9xl lg:text-[14vw] leading-none tracking-tighter mb-4 md:mb-6 text-center">
+          <h2 className="scene2-title font-sans font-black text-5xl md:text-9xl lg:text-[14vw] leading-none tracking-tighter mb-4 md:mb-6 text-left mx-auto">
             AERIS<br />
             <span className="text-brutal-accent">ALPHA</span>
           </h2>
@@ -615,7 +615,7 @@ const SolutionCinematic: React.FC = () => {
               <h3 className="font-sans font-black text-3xl sm:text-4xl md:text-5xl lg:text-5xl xl:text-6xl uppercase tracking-tighter leading-tight sm:leading-none mb-4 sm:mb-6">
                 Features<span className="text-brutal-accent">.</span>
               </h3>
-              <p className="font-mono text-gray-400 text-sm sm:text-base leading-relaxed border-l-2 border-brutal-accent pl-3 sm:pl-4">
+              <p className="font-inter text-gray-400 text-sm sm:text-base leading-relaxed border-l-2 border-brutal-accent pl-3 sm:pl-4">
                 Aeris gives you the full picture. All your drone feeds combined into one simple map.
               </p>
             </div>

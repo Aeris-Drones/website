@@ -30,13 +30,15 @@ const Video: React.FC = () => {
           {/* Dark overlay */}
           <div className="absolute inset-0 bg-black/40 group-hover:bg-black/20 transition-all duration-300"></div>
 
+          {/* Top caption */}
+
           <div className="absolute inset-0 flex items-center justify-center">
             <div className="relative">
               <div className="w-20 h-20 md:w-32 md:h-32 border border-white rounded-full flex items-center justify-center group-hover:bg-brutal-accent group-hover:border-brutal-accent transition-all duration-300">
                 <Play className="w-8 h-8 md:w-10 md:h-10 fill-current text-white group-hover:text-black" />
               </div>
-              <div className="absolute -bottom-12 left-1/2 -translate-x-1/2 font-mono text-xs uppercase tracking-widest text-center whitespace-nowrap">
-                Initialize Briefing
+              <div className="absolute -bottom-16 md:-bottom-20 left-1/2 -translate-x-1/2 font-mono text-xs md:text-sm text-center whitespace-nowrap">
+                Watch our recent video for the 2026 Conrad Challenge!
               </div>
             </div>
           </div>

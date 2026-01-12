@@ -1,0 +1,12 @@
+ User-agent: *
+ Allow: /
+ 
+ # Sitemap
+ Sitemap: https://aerisdrones.org/sitemap.xml
+ 
+ # Crawl-delay (optional, for polite crawlers)
+ Crawl-delay: 1
+ 
+ # Disallow admin or private paths if any
+ Disallow: /design-lab
+ Disallow: /problem-lab

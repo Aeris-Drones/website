@@ -72,7 +72,7 @@ const MILESTONES = [
         subtitle: '1517 Fund / Medici',
         desc: 'Grant secured: $1,000 + Lambda credits. Resources allocated to prototype fabrication and propulsion testing.',
         lambdaCredits: '$50k in Lambda credits',
-        details: 'Validated by 1517 Fund\'s rigorous "sci-fi to reality" criteria. Not just money—operational validation.',
+        details: 'Validated by 1517 Fund\'s rigorous "sci-fi to reality" criteria. Not just money-operational validation.',
         visual: 'chart',
         coords: '34.052, -118.2'
     },
@@ -136,7 +136,7 @@ const ADVISORS = [
         role: 'Honorary Advisor',
         image: '/Mr. Jin Abe.png',
         bio: 'Mr. Jin Abe is a renowned speaker with the 3/11 Memorial Network who travels across Japan sharing his experience of surviving the March 11 earthquake and tsunami. Born in Iwate Prefecture, he was nine years old when he and his grandmother were found alive beneath the rubble nine days after the tsunami. Committed to ensuring these events are not forgotten and to promoting disaster resilience, Jin is currently working on a graphic novel titled 「あの時、子どもだった私たちから伝えたいこと」 ("What We Want to Tell You, from Those of Us Who Were Children at That Time").',
-        note: 'If such a system had existed—if that kind of information had been available—we could have been far better prepared. The drone can enter rubble, create maps, and provide vital information to rescue teams.',
+        note: 'If such a system had existed-if that kind of information had been available-we could have been far better prepared. The drone can enter rubble, create maps, and provide vital information to rescue teams.',
         link: 'https://www.asahi.com/ajw/articles/15459577'
     },
     {
@@ -158,7 +158,7 @@ const ADVISORS = [
         name: 'Alex Schwarzkopf',
         role: 'Venture Partner, 1517 Fund',
         image: '/Mr. Alex Schwarzkopf.jpg',
-        bio: 'Venture Partner at 1517 Fund, backing early-stage founders. Co-founded Pillar Technologies (construction sensors). Facilitated AERIS Drones\' first investment—a grant from the 1517 Medici Fund.'
+        bio: 'Venture Partner at 1517 Fund, backing early-stage founders. Co-founded Pillar Technologies (construction sensors). Facilitated AERIS Drones\' first investment-a grant from the 1517 Medici Fund.'
     },
     {
         id: 'A-05',
@@ -180,13 +180,13 @@ const ADVISORS = [
 const QUOTES = [
     {
         id: 'Q-01',
-        text: '"AERIS can make things safer for everyone—the public, because we can reach them faster, and the fire department, because we know exactly what we’re walking into."',
+        text: '"AERIS can make things safer for everyone-the public, because we can reach them faster, and the fire department, because we know exactly what we’re walking into."',
         author: 'Jeremy Wilkinson',
         context: 'Chief of USAR, Iowa'
     },
     {
         id: 'Q-02',
-        text: '"If such a system had existed—if that kind of information had been available—we could have been far better prepared."',
+        text: '"If such a system had existed-if that kind of information had been available-we could have been far better prepared."',
         author: 'Jin Abe',
         context: 'March 11th Tsunami Survivor'
     },

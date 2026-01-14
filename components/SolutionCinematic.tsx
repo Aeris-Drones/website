@@ -498,7 +498,7 @@ const SolutionCinematic: React.FC = () => {
             Autonomous Drone Swarm System
           </p>
           <p className="scene2-desc font-inter text-base md:text-lg text-gray-500 max-w-2xl leading-relaxed text-center">
-            A coordinated drone swarm for rapid field operations. Scout and Ranger drones work together—fusing thermal and video feeds into a single live map, turning scattered footage into prioritized, actionable alerts.
+            A coordinated drone swarm for rapid field operations. Scout and Ranger drones work together-fusing thermal and video feeds into a single live map, turning scattered footage into prioritized, actionable alerts.
           </p>
         </div>
       </div>

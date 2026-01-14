@@ -9,7 +9,7 @@ const FAQ_DATA = [
     },
     {
         question: "Do I need technical knowledge to use Aeris?",
-        answer: "No. Aeris is designed to be operator-friendly. Once deployed, the drones handle navigation, obstacle avoidance, and data fusion autonomously. Operators see a simple unified map with visual alerts—no piloting or technical expertise required. Training takes hours, not weeks."
+        answer: "No. Aeris is designed to be operator-friendly. Once deployed, the drones handle navigation, obstacle avoidance, and data fusion autonomously. Operators see a simple unified map with visual alerts-no piloting or technical expertise required. Training takes hours, not weeks."
     },
     {
         question: "Can you integrate with our existing systems?",
@@ -17,7 +17,7 @@ const FAQ_DATA = [
     },
     {
         question: "Is Aeris secure and reliable?",
-        answer: "Absolutely. All communications are encrypted end-to-end. The drones operate on a private mesh network, not public internet. If one drone goes down, the swarm automatically redistributes tasks. Aeris OS is designed for GPS-denied and offline scenarios—reliability in chaos is our core promise."
+        answer: "Absolutely. All communications are encrypted end-to-end. The drones operate on a private mesh network, not public internet. If one drone goes down, the swarm automatically redistributes tasks. Aeris OS is designed for GPS-denied and offline scenarios-reliability in chaos is our core promise."
     },
 ];
 

@@ -25,6 +25,9 @@ const Video: React.FC = () => {
             src="https://img.youtube.com/vi/yvtbelz4szg/maxresdefault.jpg"
             alt="Video thumbnail"
             className="absolute inset-0 w-full h-full object-cover"
+            width={1280}
+            height={720}
+            loading="eager"
           />
           
           {/* Dark overlay */}

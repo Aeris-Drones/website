@@ -59,6 +59,9 @@ const Team: React.FC = () => {
                 src={advisor.image} 
                 alt={advisor.name}
                 className="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-500 group-hover:scale-105"
+                width={400}
+                height={400}
+                loading="lazy"
               />
             </div>
             {/* Info */}

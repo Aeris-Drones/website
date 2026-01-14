@@ -486,16 +486,18 @@ const SolutionCinematic: React.FC = () => {
         className="absolute inset-0 flex flex-col items-center justify-center z-30 pointer-events-none"
         style={{ opacity: 0, visibility: 'hidden' }}
       >
-        <div className="text-center max-w-4xl px-4 md:px-8">
-          <div className="scene2-line w-16 md:w-24 h-[2px] bg-brutal-accent mx-auto mb-6 md:mb-8" />
-          <h2 className="scene2-title font-sans font-black text-5xl md:text-9xl lg:text-[14vw] leading-none tracking-tighter mb-4 md:mb-6 text-left mx-auto">
-            AERIS<br />
-            <span className="text-brutal-accent">ALPHA</span>
+        <div className="flex flex-col items-center px-4 md:px-8">
+          <div className="scene2-line w-16 md:w-24 h-[2px] bg-brutal-accent mb-6 md:mb-8" />
+          <h2 className="scene2-title font-sans font-black text-5xl md:text-9xl lg:text-[14vw] leading-none mb-4 md:mb-6">
+            <div className="text-left">
+              <span className="block tracking-[0.05em]">AERIS</span>
+              <span className="block text-brutal-accent tracking-tighter">ALPHA</span>
+            </div>
           </h2>
-          <p className="scene2-tagline font-mono text-lg md:text-xl text-gray-400 uppercase tracking-[0.3em] mb-8">
+          <p className="scene2-tagline font-mono text-lg md:text-xl text-gray-400 uppercase tracking-[0.3em] mb-8 text-center">
             Autonomous Drone Swarm System
           </p>
-          <p className="scene2-desc font-inter text-base md:text-lg text-gray-500 max-w-2xl mx-auto leading-relaxed">
+          <p className="scene2-desc font-inter text-base md:text-lg text-gray-500 max-w-2xl leading-relaxed text-center">
             A coordinated drone swarm for rapid field operations. Scout and Ranger drones work together—fusing thermal and video feeds into a single live map, turning scattered footage into prioritized, actionable alerts.
           </p>
         </div>

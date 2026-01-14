@@ -378,6 +378,9 @@ const ScrollyTelling: React.FC = () => {
             src="/date_dark.jpg"
             alt="Data in the dark"
             className="w-full h-full object-cover grayscale"
+            width={1920}
+            height={1080}
+            loading="eager"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-black via-black/70 to-black/40" />
           {/* Image Source */}
@@ -424,6 +427,9 @@ const ScrollyTelling: React.FC = () => {
             src="/mistake.jpg"
             alt="Preventable failure"
             className="w-full h-full object-cover grayscale"
+            width={1920}
+            height={1080}
+            loading="eager"
           />
           <div className="absolute inset-0 bg-gradient-to-b from-black via-black/70 to-black/40" />
           {/* Image Source */}

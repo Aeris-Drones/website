@@ -182,7 +182,7 @@ const QUOTES = [
         id: 'Q-01',
         text: '"AERIS can make things safer for everyone-the public, because we can reach them faster, and the fire department, because we know exactly what we’re walking into."',
         author: 'Jeremy Wilkinson',
-        context: 'Chief of USAR, Iowa'
+        context: 'Firefighter/Paramedic, Plano Fire Department'
     },
     {
         id: 'Q-02',

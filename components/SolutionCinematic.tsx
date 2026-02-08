@@ -35,7 +35,7 @@ function ScoutModel({ isHovered }: { isHovered: boolean }) {
 // Ranger 3D Model (Fixed-Wing)
 function RangerModel({ isHovered }: { isHovered: boolean }) {
   const meshRef = useRef<THREE.Group>(null);
-  const { scene } = useGLTF('/80-followers-iranian-shahed-136-drone/source/scene.gltf');
+  const { scene } = useGLTF('/Rangeraahahah.gltf');
   // Clone scene to avoid sharing with DroneExplorer
   const clonedScene = React.useMemo(() => scene.clone(), [scene]);
 

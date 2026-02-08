@@ -5,7 +5,7 @@ const advisors = [
   { name: 'Brandon Turk', image: '/Mr. Brandon Turk.jpg' },
   { name: 'Jin Abe', image: '/Mr. Jin Abe.png' },
   { name: 'Joe Cieslik', image: '/Mr. Joe Cieslik.png' },
-  { name: 'Jeremy Wilkinson', image: '/Mr. Jeremy Wilkinson.jpg' },
+  { name: 'Jeremy Wilkinson', image: '/FullSizeRender.jpeg' },
 ];
 
 const Team: React.FC = () => {

@@ -21,7 +21,7 @@ function ScoutModel() {
 // Ranger 3D Model (Shahed-136)
 function RangerModel() {
   const meshRef = useRef<THREE.Group>(null);
-  const { scene } = useGLTF('/80-followers-iranian-shahed-136-drone/source/scene.gltf');
+  const { scene } = useGLTF('/Rangeraahahah.gltf');
 
   useFrame((state) => {
     if (meshRef.current) {

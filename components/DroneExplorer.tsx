@@ -195,7 +195,7 @@ interface InteractiveRangerProps {
 
 function InteractiveRanger({ activeHotspot, onHotspotClick }: InteractiveRangerProps) {
   const meshRef = useRef<THREE.Group>(null);
-  const { scene } = useGLTF('/80-followers-iranian-shahed-136-drone/source/scene.gltf');
+  const { scene } = useGLTF('/Rangeraahahah.gltf');
   // Clone scene to avoid conflicts with SolutionCinematic
   const clonedScene = React.useMemo(() => scene.clone(), [scene]);
 

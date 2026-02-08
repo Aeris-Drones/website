@@ -142,8 +142,8 @@ const ADVISORS = [
     {
         id: 'A-02',
         name: 'Jeremy Wilkinson',
-        role: 'Firefighter / Paramedic',
-        image: '/Mr. Jeremy Wilkinson.jpg',
+        role: 'Lieutenant',
+        image: '/FullSizeRender.jpeg',
         bio: 'Firefighter/Paramedic at the Plano Fire Department in Plano, Texas. Brings direct field experience in rapid response and emergency operations to the AERIS mission.'
     },
     {

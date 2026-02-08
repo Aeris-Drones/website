@@ -173,27 +173,14 @@ const SolutionCinematic: React.FC = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Use matchMedia to set different scroll lengths for mobile vs desktop
-      const mm = gsap.matchMedia();
-      let scrollEnd = "+=1200%";
-
-      // Reduce scroll length on mobile for snappier experience
-      mm.add("(max-width: 768px)", () => {
-        scrollEnd = "+=700%";
-      });
-      mm.add("(min-width: 769px)", () => {
-        scrollEnd = "+=1200%";
-      });
-
-      // Main timeline - normalized scroll for consistent feel
+      // Main timeline
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: componentRef.current,
           start: "top top",
-          end: scrollEnd,
-          scrub: 3, // Increased from 1.5 for smoother, less sensitive scrolling
-          pin: true,
-          anticipatePin: 1,
+          end: "bottom bottom",
+          scrub: 3,
+          invalidateOnRefresh: true,
         }
       });
 
@@ -451,7 +438,8 @@ const SolutionCinematic: React.FC = () => {
   }, []);
 
   return (
-    <div id="features" ref={componentRef} className="relative h-screen bg-brutal-bg text-brutal-fg overflow-hidden">
+    <div id="features" ref={componentRef} className="relative h-[750svh] md:h-[1300svh] bg-brutal-bg text-brutal-fg">
+      <div className="sticky top-0 h-[100svh] overflow-hidden">
 
       {/* Custom cursor for drone hover - hidden on touch devices */}
       <div
@@ -700,6 +688,7 @@ const SolutionCinematic: React.FC = () => {
         </div>
       </div>
 
+      </div>
     </div>
   );
 };

@@ -21,9 +21,9 @@ const MissionKinetic: React.FC = () => {
         scrollTrigger: {
           trigger: containerRef.current,
           start: "top top",
-          end: "+=150%",
-          pin: true,
-          scrub: 2, // Increased from 0.8 for smoother, less sensitive scrolling
+          end: "bottom bottom",
+          scrub: 2,
+          invalidateOnRefresh: true,
         }
       });
 
@@ -52,8 +52,8 @@ const MissionKinetic: React.FC = () => {
   }, []);
 
   return (
-    <section id="about" ref={containerRef} className="bg-white text-black min-h-screen relative overflow-hidden flex flex-col justify-center py-24">
-
+    <div id="about" ref={containerRef} className="bg-white text-black relative h-[250svh]">
+      <div className="sticky top-0 flex min-h-[100svh] flex-col justify-center overflow-hidden py-24">
       <div className="container mx-auto px-6 md:px-12 relative z-10">
         {MISSION.headline.map((word, i) => (
           <div key={i} className="relative">
@@ -81,7 +81,8 @@ const MissionKinetic: React.FC = () => {
           </div>
         </div>
       </div>
-    </section>
+      </div>
+    </div>
   );
 };
 

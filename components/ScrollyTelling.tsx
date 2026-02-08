@@ -33,26 +33,13 @@ const ScrollyTelling: React.FC = () => {
 
   useLayoutEffect(() => {
     const ctx = gsap.context(() => {
-      // Use matchMedia to set different scroll lengths for mobile vs desktop
-      const mm = gsap.matchMedia();
-      let scrollEnd = "+=800%";
-
-      // Reduce scroll length on mobile for snappier experience
-      mm.add("(max-width: 768px)", () => {
-        scrollEnd = "+=500%";
-      });
-      mm.add("(min-width: 769px)", () => {
-        scrollEnd = "+=800%";
-      });
-
       const tl = gsap.timeline({
         scrollTrigger: {
           trigger: componentRef.current,
           start: "top top",
-          end: scrollEnd,
-          scrub: 3, // Increased from 1.5 for smoother, less sensitive scrolling
-          pin: true,
-          anticipatePin: 1,
+          end: "bottom bottom",
+          scrub: 3,
+          invalidateOnRefresh: true,
         }
       });
 
@@ -291,7 +278,8 @@ const ScrollyTelling: React.FC = () => {
   };
 
   return (
-    <div ref={componentRef} className="relative h-screen bg-brutal-bg text-brutal-fg overflow-hidden">
+    <div ref={componentRef} className="relative h-[550svh] md:h-[850svh] bg-brutal-bg text-brutal-fg">
+      <div className="sticky top-0 h-[100svh] overflow-hidden">
 
       {/* ========================================
           SCENE 1: CHAOS IS THE ENEMY
@@ -463,6 +451,7 @@ const ScrollyTelling: React.FC = () => {
         </div>
       </div>
 
+      </div>
     </div>
   );
 };

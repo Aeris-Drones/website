@@ -2,8 +2,8 @@ import React from 'react';
 
 const Hero: React.FC = () => {
   return (
-    <section id="hero" className="min-h-screen border-b border-brutal-line relative overflow-hidden" aria-label="AERIS Drones - Autonomous Field Intelligence">
-      <div className="grid grid-cols-1 lg:grid-cols-12 h-full min-h-[90vh]">
+    <section id="hero" className="min-h-[100svh] border-b border-brutal-line relative overflow-hidden" aria-label="AERIS Drones - Autonomous Field Intelligence">
+      <div className="grid grid-cols-1 lg:grid-cols-12 h-full min-h-[90svh]">
         {/* Big Type Area */}
         <div className="lg:col-span-12 p-4 md:p-6 flex flex-col justify-end relative">
           <h1 className="font-sans font-black text-[15vw] md:text-giant leading-[0.8] tracking-tighter mb-4 -ml-1 md:-ml-2">

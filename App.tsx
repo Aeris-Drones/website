@@ -11,7 +11,6 @@ import SolutionCinematic from './components/SolutionCinematic';
 // import Architecture from './components/Architecture';
 import MissionKinetic from './components/MissionKinetic';
 import UseCases from './components/UseCases';
-import Video from './components/Video';
 import Team from './components/Team';
 import Contact from './components/Contact';
 import Timeline from './components/Timeline';
@@ -72,7 +71,6 @@ function MainPage() {
         <SolutionCinematic />
         <MissionKinetic />
         <UseCases />
-        <Video />
         <Contact />
       </main>
     </>
